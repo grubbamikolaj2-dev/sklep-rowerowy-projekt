@@ -7,6 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
 ```
 
 
@@ -14,6 +15,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
 head(dane)
+```
+
+# Wstęp
+  
+# Struktura danych 
+Liczba zmiennychjest wypisana w tabeli poniżej:
+```{r struktura danych}
+tabela <- kable(colnames(dane))
 ```
 
 ```{r}
