@@ -9,14 +9,33 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
 ```{r wczytanie danych}
 
 dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
 head(dane)
 ```
 
-## R Markdown
+# Data Wrangling - Dane brakujące
+
+Wcelu przygotowania danych do analizy przeprowadzono nastepujące kroki związane z identyfikacją i obsługą brakujących danych.
+
+1.  Usunięcie duplikatów na podstawie unikalnego identyfikatora klienta (CustomerID).
+2.  Uzupełnienie brakujących wartości w kolumnie 'Income' średnią wartością dochodu dla danej grupy wiekowej.
+3.  Usunięcie obserwacji z brakującymi wartościami w kluczowych
+4.  standardyzacja formatów dat w kolumnach 'JoinDate' i 'LastPurchaseDate'.
+5.  Weryfikacja spójności danych po wprowadzeniu zmian.
+6.  tworzenie nowych zmiennych na podstawie istniejących danych, takich jak 'CustomerTenure' (czas od dołączenia do sklepu) i 'AveragePurchaseValue' (średnia wartość zakupu).
+7.  czyszczenie danych z wartości odstających w kolumnach 'Income' i 'TotalSpent' za pomocą metody IQR.
+8.  czyszczenie brudnych danych
+
+```{r dane_brakujace, message=FALSE}
+
+```
+#przykład wstawiania wzorów matematycznych:
+$|x| = \left\{ \begin{array}{cl}
+x & : \ x \geq 0 \\
+-x & : \ x < 0
+\end{array} \right.$ \## R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
