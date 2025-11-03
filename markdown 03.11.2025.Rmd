@@ -7,22 +7,32 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(tidyverse)
-library(lubridate)
 ```
 
 
 ```{r wczytanie danych}
 
 dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
-dane <- as.data.frame(dane)
 head(dane)
 ```
 
+```{r}
+n_miss(dane)
+#W całej ramce danych znajduje się 31 brakujących wartości
+n_complete(dane)
+#Całkowita liczba kompletnych obserwacji to 12 969
+prop_miss(dane)
+#Proporcja braków wynosi jedynie 0.24%
+pct_miss(dane)
+#Najwięcej brakujących wartości jest w kolumnie Cars (9), następnie Children (8), Age (8) i Income (6). Reszta zmiennych nie ma żadnych braków
 
-```{r prezentacja wstępna danych}
-plot(dane)
+miss_var_summary(dane)
+miss_case_table(dane) 
+#97,1% przypadków (971 obserwacji) nie ma żadnych braków 
+
 ```
+
+
 ## R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
