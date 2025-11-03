@@ -1,6 +1,6 @@
 ---
 title: "Sklep  rowerowy"
-author: "MG, PO, BK"
+author: "MG, PC, BK"
 date: "2025-11-03"
 output: html_document
 ---
