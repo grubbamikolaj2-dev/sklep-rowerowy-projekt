@@ -13,7 +13,6 @@ library(naniar)
 library(ggplot2)
 ```
 
-
 ```{r wczytanie danych}
 
 dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
@@ -21,9 +20,11 @@ head(dane)
 ```
 
 # Wstęp
-  
-# Struktura danych 
-Liczba zmiennychjest wypisana w tabeli poniżej:
+
+# Struktura danych
+
+Liczba zmiennych jest wypisana w tabeli poniżej:
+
 ```{r struktura danych}
 tabela <- kable(colnames(dane))
 ```
