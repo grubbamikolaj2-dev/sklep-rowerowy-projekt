@@ -7,6 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+install.packages("naniar")
 library(knitr)
 library(visdat)
 library(naniar)
@@ -67,6 +68,18 @@ When you click the **Knit** button a document will be generated that includes bo
 ```{r cars}
 summary(cars)
 ```
+## Data Cleansing
+
+```{r}
+sum(complete.cases(dane))
+nrow(dane[complete.cases(dane), ])/nrow(dane)*100
+
+
+
+
+```
+
+
 
 ## Including Plots
 
