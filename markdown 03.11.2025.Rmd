@@ -1,12 +1,16 @@
 ---
 title: "Sklep  rowerowy"
-author: "MG, PC, BK"
+author: "MG, PO, BK"
 date: "2025-11-03"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(visdat)
+library(naniar)
+library(ggplot2)
 ```
 
 ```{r wczytanie danych}
@@ -15,27 +19,46 @@ dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
 head(dane)
 ```
 
-# Data Wrangling - Dane brakujące
+# Wstęp
 
-Wcelu przygotowania danych do analizy przeprowadzono nastepujące kroki związane z identyfikacją i obsługą brakujących danych.
+# Struktura danych
 
-1.  Usunięcie duplikatów na podstawie unikalnego identyfikatora klienta (CustomerID).
-2.  Uzupełnienie brakujących wartości w kolumnie 'Income' średnią wartością dochodu dla danej grupy wiekowej.
-3.  Usunięcie obserwacji z brakującymi wartościami w kluczowych
-4.  standardyzacja formatów dat w kolumnach 'JoinDate' i 'LastPurchaseDate'.
-5.  Weryfikacja spójności danych po wprowadzeniu zmian.
-6.  tworzenie nowych zmiennych na podstawie istniejących danych, takich jak 'CustomerTenure' (czas od dołączenia do sklepu) i 'AveragePurchaseValue' (średnia wartość zakupu).
-7.  czyszczenie danych z wartości odstających w kolumnach 'Income' i 'TotalSpent' za pomocą metody IQR.
-8.  czyszczenie brudnych danych
+Liczba zmiennych jest wypisana w tabeli poniżej:
 
-```{r dane_brakujace, message=FALSE}
+```{r struktura danych}
+tabela <- kable(colnames(dane))
+```
+
+```{r}
+n_miss(dane)
+#W całej ramce danych znajduje się 31 brakujących wartości
+n_complete(dane)
+#Całkowita liczba kompletnych obserwacji to 12 969
+prop_miss(dane)
+#Proporcja braków wynosi jedynie 0.24%
+pct_miss(dane)
+#Najwięcej brakujących wartości jest w kolumnie Cars (9), następnie Children (8), Age (8) i Income (6). Reszta zmiennych nie ma żadnych braków
+
+miss_var_summary(dane)
+miss_case_table(dane) 
+#97,1% przypadków (971 obserwacji) nie ma żadnych braków 
 
 ```
-#przykład wstawiania wzorów matematycznych:
-$|x| = \left\{ \begin{array}{cl}
-x & : \ x \geq 0 \\
--x & : \ x < 0
-\end{array} \right.$ \## R Markdown
+
+```{r wykresy NA}
+wykres1 <- vis_dat(dane) +
+  theme(axis.text.x = element_text(hjust = 1),margin = margin(t = 10))+
+  ggtitle("Wizualizacja danych z użyciem visdat") +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
+wykres1
+wykres2 <- vis_miss(dane)+
+  theme(axis.text.x = element_text(hjust = 1),margin = margin(t = 10))+
+  ggtitle("Liczba brakujących wartości w zmiennych") +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
+wykres2
+```
+
+## R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
