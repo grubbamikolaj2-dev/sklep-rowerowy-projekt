@@ -105,5 +105,38 @@ dane <- dane %>% mutate(across(where(is.character), ~ na_if(., "")))
 dane$marital_status <- as.factor(dane$marital_status)
 dane$gender <- as.factor(dane$gender)
 dane$home_owner <- as.factor(dane$home_owner)
+colSums(is.na(dane))
+```
+## Imputacja danych z użyciem dominanty
+### rozkład miennnych kategorycznych przed imputacją
+```{r imputacja danych}
+cat("Rozkład Marital Status przed imputacją:\n")
+print(table(dane$marital_status))
 
+cat("Rozkład Gender przed imputacją:\n")
+print(table(dane$gender))
+
+cat("Rozkład Home Owner przed imputacją:\n")
+print(table(dane$home_owner))
+```
+## Imputacja danych
+```{r imputacja danych}
+# Przykład dla jednej zmiennej kategorycznej
+dominanta <- names(sort(table(dane$marital_status), decreasing = TRUE))[1]
+dane$marital_status[is.na(dane$marital_status)] <- dominanta
+dominanta_gender <- names(sort(table(dane$gender), decreasing = TRUE))[1]
+dane$gender[is.na(dane$gender)] <- dominanta_gender
+dominanta_home_owner <- names(sort(table(dane$home_owner), decreasing = TRUE))[1]
+dane$home_owner[is.na(dane$home_owner)] <- dominanta_home_owner
+```
+### rozkład miennnych kategorycznych po imputacją 
+```{r imputacja danych}
+cat("Rozkład Marital Status po imputacji:\n")
+print(table(dane$marital_status))
+
+cat("Rozkład Gender po imputacji:\n")
+print(table(dane$gender))
+
+cat("Rozkład Home Owner po imputacji:\n")
+print(table(dane$home_owner))
 ```
