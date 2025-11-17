@@ -107,6 +107,22 @@ dane$home_owner <- as.factor(dane$home_owner)
 
 ```
 
+# Imputacja brakujących danych jakościowych
+
+```{r imputacja danych jakościowych}
+# Przykład dla jednej zmiennej kategorycznej
+dominanta <- names(sort(table(dane$marital_status), decreasing = TRUE))[1]
+dane$marital_status[is.na(dane$marital_status)] <- dominanta
+
+# Powtórz dla pozostałych: gender, home_owner
+dominanta_gender <- names(sort(table(dane$gender), decreasing = TRUE))[1]
+dane$gender[is.na(dane$gender)] <- dominanta_gender
+
+dominanta_home_owner <- names(sort(table(dane$home_owner), decreasing = TRUE))[1]
+dane$home_owner[is.na(dane$home_owner)] <- dominanta_home_owner
+colSums(is.na(dane))
+```
+
 
 ## Definicja metod imputacji
 
