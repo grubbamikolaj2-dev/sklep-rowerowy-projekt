@@ -129,6 +129,36 @@ dane$gender[is.na(dane$gender)] <- dominanta_gender
 dominanta_home_owner <- names(sort(table(dane$home_owner), decreasing = TRUE))[1]
 dane$home_owner[is.na(dane$home_owner)] <- dominanta_home_owner
 ```
+
+
+### rozkład zmiennych ilościowych przed imputacją
+```{r zmienne ilosciowe przed imputacją}
+cat("Rozkład cars przed imputacją:\n")
+print(table(dane$cars))
+
+cat("Rozkład age przed imputacją:\n")
+print(table(dane$age))
+
+cat("Rozkład children przed imputacją:\n")
+print(table(dane$children))
+
+cat("Rozkład income przed impuutacją:\n")
+print(table(dane$income))
+```
+
+## imputacja danych z użyciem średniej
+```{r imputacja danych z używciem średniej}
+dane2<- as.data.frame(dane)
+
+dane2$cars <- ifelse(is.na(dane$cars), mean(dane$cars, na.rm = TRUE), dane$cars)
+dane2$age <- ifelse(is.na(dane$age), mean(dane$age, na.rm = TRUE), dane$age)
+dane2$children <- ifelse(is.na(dane$children), mean(dane$children, na.rm = TRUE), dane$children)
+dane2$income <- ifelse(is.na(dane$income), mean(dane$income, na.rm = TRUE), dane$income)
+
+
+missing_pattern(dane2)
+
+```
 ### rozkład miennnych kategorycznych po imputacją 
 ```{r imputacja danych}
 cat("Rozkład Marital Status po imputacji:\n")
