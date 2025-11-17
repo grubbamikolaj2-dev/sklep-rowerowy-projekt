@@ -20,9 +20,17 @@ head(dane)
 
 library(finalfit)
 
-missing_pattern()
+missing_pattern(dane)
 
 ```
+
+
+```{r}
+
+
+
+```
+
 
 ## R Markdown
 
