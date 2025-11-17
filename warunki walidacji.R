@@ -8,7 +8,7 @@ home_owner - Yes, no
 purchased bike <Yes, No>
 martial_status <married, single>
 gender <male,female>
-#####
-education
-occupation
-region
+##### Kategoryczne
+education "Bachelors"           "Partial College"     "High School"         "Partial High School" "Graduate Degree" 
+occupation "Skilled Manual" "Clerical"       "Professional"   "Manual"         "Management" 
+region "Europe"        "Pacific"       "North America"
