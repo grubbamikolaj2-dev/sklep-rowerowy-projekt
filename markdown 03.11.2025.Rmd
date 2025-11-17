@@ -32,7 +32,9 @@ head(dane)
 ```
 
 # Struktura danych i analiza braków
+
 ## Nazwy kolumn w zbiorze danych:
+
 ```{r struktura danych}
 library(knitr)
 kable(colnames(dane), caption = "Lista nazw kolumn w zbiorze danych")
@@ -79,9 +81,16 @@ wykres2 <- vis_miss(dane) +
   theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
 print(wykres1)
 print(wykres2)
-```
 
+```
+# Badanie wzorców braków danych
+```{r wzorce braków danych}
+install.packages("finalfit")
+library(finalfit)
+missing_pattern(dane)
+```
 # Imputacja brakujących danych
+
 ## Przygotowanie danych do imputacji
 
 ```{r przygotowanie danych do imputacji}
@@ -97,6 +106,7 @@ dane$gender <- as.factor(dane$gender)
 dane$home_owner <- as.factor(dane$home_owner)
 
 ```
+
 
 ## Definicja metod imputacji
 
@@ -125,4 +135,3 @@ colSums(is.na(kompletne_dane))
 ```
 
 ## Analiza wyników imputacji
-
