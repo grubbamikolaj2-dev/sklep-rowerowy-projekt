@@ -84,12 +84,15 @@ print(wykres1)
 print(wykres2)
 
 ```
+
 # Badanie wzorców braków danych
+
 ```{r wzorce braków danych}
 install.packages("finalfit")
 library(finalfit)
 missing_pattern(dane)
 ```
+
 # Imputacja brakujących danych
 
 ## Przygotowanie danych do imputacji
@@ -107,8 +110,11 @@ dane$gender <- as.factor(dane$gender)
 dane$home_owner <- as.factor(dane$home_owner)
 colSums(is.na(dane))
 ```
+
 ## Imputacja danych z użyciem dominanty
+
 ### rozkład miennnych kategorycznych przed imputacją
+
 ```{r imputacja danych}
 cat("Rozkład Marital Status przed imputacją:\n")
 print(table(dane$marital_status))
@@ -119,7 +125,9 @@ print(table(dane$gender))
 cat("Rozkład Home Owner przed imputacją:\n")
 print(table(dane$home_owner))
 ```
+
 ## Imputacja danych
+
 ```{r imputacja danych}
 # Przykład dla jednej zmiennej kategorycznej
 dominanta <- names(sort(table(dane2$marital_status), decreasing = TRUE))[1]
@@ -130,15 +138,14 @@ dominanta_home_owner <- names(sort(table(dane2$home_owner), decreasing = TRUE))[
 dane2$home_owner[is.na(dane2$home_owner)] <- dominanta_home_owner
 ```
 
-
-
 ## imputacja danych z użyciem średniej
+
 ```{r imputacja danych z używciem średniej}
 dane2<- as.data.frame(dane)
 
-dane2$cars <- ifelse(is.na(dane$cars), mean(dane$cars, na.rm = TRUE), dane$cars)
-dane2$age <- ifelse(is.na(dane$age), mean(dane$age, na.rm = TRUE), dane$age)
-dane2$children <- ifelse(is.na(dane$children), mean(dane$children, na.rm = TRUE), dane$children)
+dane2$cars <- ifelse(is.na(dane$cars), median(dane$cars, na.rm = TRUE), dane$cars)
+dane2$age <- ifelse(is.na(dane$age), median(dane$age, na.rm = TRUE), dane$age)
+dane2$children <- ifelse(is.na(dane$children), median(dane$children, na.rm = TRUE), dane$children)
 dane2$income <- ifelse(is.na(dane$income), mean(dane$income, na.rm = TRUE), dane$income)
 
 
