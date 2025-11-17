@@ -39,15 +39,15 @@ dane$home_owner <- as.factor(dane$home_owner)
 ```
 
 ```{r}
-dane<- as.data.frame(dane)
+dane2<- as.data.frame(dane)
 
-dane$cars <- ifelse(is.na(dane$cars), mean(dane$cars, na.rm = TRUE), dane$cars)
-dane$age <- ifelse(is.na(dane$age), mean(dane$age, na.rm = TRUE), dane$age)
-dane$children <- ifelse(is.na(dane$children), mean(dane$children, na.rm = TRUE), dane$children)
-dane$income <- ifelse(is.na(dane$income), mean(dane$income, na.rm = TRUE), dane$income)
+dane2$cars <- ifelse(is.na(dane$cars), mean(dane$cars, na.rm = TRUE), dane$cars)
+dane2$age <- ifelse(is.na(dane$age), mean(dane$age, na.rm = TRUE), dane$age)
+dane2$children <- ifelse(is.na(dane$children), mean(dane$children, na.rm = TRUE), dane$children)
+dane2$income <- ifelse(is.na(dane$income), mean(dane$income, na.rm = TRUE), dane$income)
 
 
-missing_pattern(dane)
+missing_pattern(dane2)
 
 ```
 
