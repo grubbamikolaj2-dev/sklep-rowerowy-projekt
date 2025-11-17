@@ -21,79 +21,89 @@ dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
 head(dane)
 ```
 
+# Wstęp
+
+Projekt **Sklep rowerowy** to analiza danych sklepu rowerowego na potrzeby przedmiotu: Analiza danych w R.\
+Celem jest badanie zależności między cechami klientów a decyzją o zakupie roweru. Analiza obejmuje przetwarzanie danych, imputację braków oraz modelowanie statystyczne.
+
 ```{r wczytanie danych}
 
 dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
 head(dane)
 ```
 
-# Wstęp
+# Struktura danych i analiza braków
 
-# Struktura danych
-
-Liczba zmiennych jest wypisana w tabeli poniżej:
+## Nazwy kolumn w zbiorze danych:
 
 ```{r struktura danych}
-tabela <- kable(colnames(dane))
+library(knitr)
+kable(colnames(dane), caption = "Lista nazw kolumn w zbiorze danych")
 ```
 
-```{r}
-n_miss(dane)
-#W całej ramce danych znajduje się 31 brakujących wartości
-n_complete(dane)
-#Całkowita liczba kompletnych obserwacji to 12 969
-prop_miss(dane)
-#Proporcja braków wynosi jedynie 0.24%
-pct_miss(dane)
-#Najwięcej brakujących wartości jest w kolumnie Cars (9), następnie Children (8), Age (8) i Income (6). Reszta zmiennych nie ma żadnych braków
+## Liczba brakujących wartości, proporcje i kompletność danych:
 
+```{r Liczba brakujących wartości, proporcje i kompletność}
+library(naniar)
+
+cat("Liczba braków w danych:", n_miss(dane), "\n")
+cat("Liczba kompletnych obserwacji:", n_complete(dane), "\n")
+cat("Proporcja braków:", round(prop_miss(dane)*100, 2), "%\n")
+
+```
+
+## Procent brakujących wartości na zmienną:
+
+```{r Procent brakujących wartości na zmienną}
+pct <- pct_miss(dane)
+print(pct)
+
+```
+
+## Podsumowanie braków na poziomie zmiennych i obserwacji:
+
+```{r Podsumowanie braków na poziomie zmiennych i obserwacji}
 miss_var_summary(dane)
-miss_case_table(dane) 
-#97,1% przypadków (971 obserwacji) nie ma żadnych braków 
+miss_case_table(dane)
 
 ```
+
+## Wizualizacji braków danych z użyciem pakietu visdat
 
 ```{r wykresy NA}
 wykres1 <- vis_dat(dane) +
-  theme(axis.text.x = element_text(hjust = 1),margin = margin(t = 10))+
+  theme(axis.text.x = element_text(hjust = 1, margin = margin(t = 10))) +
   ggtitle("Wizualizacja danych z użyciem visdat") +
   theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
-wykres1
-wykres2 <- vis_miss(dane)+
-  theme(axis.text.x = element_text(hjust = 1),margin = margin(t = 10))+
+
+wykres2 <- vis_miss(dane) +
+  theme(axis.text.x = element_text(hjust = 1, margin = margin(t = 10))) +
   ggtitle("Liczba brakujących wartości w zmiennych") +
   theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
-wykres2
-```
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-## Data Cleansing
-
-```{r}
-sum(complete.cases(dane))
-nrow(dane[complete.cases(dane), ])/nrow(dane)*100
-
-
-
+print(wykres1)
+print(wykres2)
 
 ```
-
-
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+# Badanie wzorców braków danych
+```{r wzorce braków danych}
+install.packages("finalfit")
+library(finalfit)
+missing_pattern(dane)
 ```
+# Imputacja brakujących danych
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Przygotowanie danych do imputacji
+
+```{r przygotowanie danych do imputacji}
+dane <- dane %>% janitor::clean_names() %>% select(-id)
+
+summary(dane)
+colSums(is.na(dane))
+
+dane <- dane %>% mutate(across(where(is.character), ~ na_if(., "")))
+
+dane$marital_status <- as.factor(dane$marital_status)
+dane$gender <- as.factor(dane$gender)
+dane$home_owner <- as.factor(dane$home_owner)
+
+```
