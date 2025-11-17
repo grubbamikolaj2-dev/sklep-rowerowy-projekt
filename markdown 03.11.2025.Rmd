@@ -122,29 +122,15 @@ print(table(dane$home_owner))
 ## Imputacja danych
 ```{r imputacja danych}
 # Przykład dla jednej zmiennej kategorycznej
-dominanta <- names(sort(table(dane$marital_status), decreasing = TRUE))[1]
-dane$marital_status[is.na(dane$marital_status)] <- dominanta
-dominanta_gender <- names(sort(table(dane$gender), decreasing = TRUE))[1]
-dane$gender[is.na(dane$gender)] <- dominanta_gender
-dominanta_home_owner <- names(sort(table(dane$home_owner), decreasing = TRUE))[1]
-dane$home_owner[is.na(dane$home_owner)] <- dominanta_home_owner
+dominanta <- names(sort(table(dane2$marital_status), decreasing = TRUE))[1]
+dane2$marital_status[is.na(dane2$marital_status)] <- dominanta
+dominanta_gender <- names(sort(table(dane2$gender), decreasing = TRUE))[1]
+dane2$gender[is.na(dane2$gender)] <- dominanta_gender
+dominanta_home_owner <- names(sort(table(dane2$home_owner), decreasing = TRUE))[1]
+dane2$home_owner[is.na(dane2$home_owner)] <- dominanta_home_owner
 ```
 
 
-### rozkład zmiennych ilościowych przed imputacją
-```{r zmienne ilosciowe przed imputacją}
-cat("Rozkład cars przed imputacją:\n")
-print(table(dane$cars))
-
-cat("Rozkład age przed imputacją:\n")
-print(table(dane$age))
-
-cat("Rozkład children przed imputacją:\n")
-print(table(dane$children))
-
-cat("Rozkład income przed impuutacją:\n")
-print(table(dane$income))
-```
 
 ## imputacja danych z użyciem średniej
 ```{r imputacja danych z używciem średniej}
@@ -158,15 +144,4 @@ dane2$income <- ifelse(is.na(dane$income), mean(dane$income, na.rm = TRUE), dane
 
 missing_pattern(dane2)
 
-```
-### rozkład miennnych kategorycznych po imputacją 
-```{r imputacja danych}
-cat("Rozkład Marital Status po imputacji:\n")
-print(table(dane$marital_status))
-
-cat("Rozkład Gender po imputacji:\n")
-print(table(dane$gender))
-
-cat("Rozkład Home Owner po imputacji:\n")
-print(table(dane$home_owner))
 ```
