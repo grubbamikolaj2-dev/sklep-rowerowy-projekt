@@ -7,11 +7,18 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-install.packages("naniar")
 library(knitr)
 library(visdat)
 library(naniar)
 library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(janitor)
+library(mice)
+library(finalfit)
+dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
+head(dane)
 ```
 
 ```{r wczytanie danych}
