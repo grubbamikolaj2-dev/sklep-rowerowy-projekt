@@ -17,6 +17,10 @@ library(stringr)
 library(janitor)
 library(mice)
 library(finalfit)
+library(kableExtra)
+install.packages("hms")
+install.packages("rlang")
+install.packages("kableExtra", dependencies = TRUE)
 dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
 head(dane)
 ```
@@ -38,7 +42,13 @@ head(dane)
 
 ```{r struktura danych}
 library(knitr)
-kable(colnames(dane), caption = "Lista nazw kolumn w zbiorze danych")
+library(kableExtra)
+kable(colnames(dane), caption = "Lista nazw kolumn w zbiorze danych") %>%
+  kableExtra::kable_styling(font_size = 16, bootstrap_options = "striped") %>%
+  kableExtra::row_spec(0, bold = TRUE, font_size = 18)
+
+
+
 ```
 
 ## Liczba brakujących wartości, proporcje i kompletność danych:
@@ -84,12 +94,15 @@ print(wykres1)
 print(wykres2)
 
 ```
+
 # Badanie wzorców braków danych
+
 ```{r wzorce braków danych}
 install.packages("finalfit")
 library(finalfit)
 missing_pattern(dane)
 ```
+
 # Imputacja brakujących danych
 
 ## Przygotowanie danych do imputacji
@@ -107,8 +120,11 @@ dane$gender <- as.factor(dane$gender)
 dane$home_owner <- as.factor(dane$home_owner)
 colSums(is.na(dane))
 ```
+
 ## Imputacja danych z użyciem dominanty
+
 ### rozkład miennnych kategorycznych przed imputacją
+
 ```{r imputacja danych}
 cat("Rozkład Marital Status przed imputacją:\n")
 print(table(dane$marital_status))
@@ -119,7 +135,9 @@ print(table(dane$gender))
 cat("Rozkład Home Owner przed imputacją:\n")
 print(table(dane$home_owner))
 ```
+
 ## Imputacja danych
+
 ```{r imputacja danych}
 # Przykład dla jednej zmiennej kategorycznej
 dominanta <- names(sort(table(dane2$marital_status), decreasing = TRUE))[1]
@@ -130,9 +148,8 @@ dominanta_home_owner <- names(sort(table(dane2$home_owner), decreasing = TRUE))[
 dane2$home_owner[is.na(dane2$home_owner)] <- dominanta_home_owner
 ```
 
-
-
 ## imputacja danych z użyciem średniej
+
 ```{r imputacja danych z używciem średniej}
 dane2<- as.data.frame(dane)
 
@@ -145,3 +162,5 @@ dane2$income <- ifelse(is.na(dane$income), mean(dane$income, na.rm = TRUE), dane
 missing_pattern(dane2)
 
 ```
+
+#2.2 Walidacja danych
