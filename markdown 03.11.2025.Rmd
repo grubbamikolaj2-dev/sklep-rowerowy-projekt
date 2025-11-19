@@ -153,9 +153,9 @@ dane2$home_owner[is.na(dane2$home_owner)] <- dominanta_home_owner
 ```{r imputacja danych z używciem średniej}
 dane2<- as.data.frame(dane)
 
-dane2$cars <- ifelse(is.na(dane$cars), mean(dane$cars, na.rm = TRUE), dane$cars)
-dane2$age <- ifelse(is.na(dane$age), mean(dane$age, na.rm = TRUE), dane$age)
-dane2$children <- ifelse(is.na(dane$children), mean(dane$children, na.rm = TRUE), dane$children)
+dane2$cars <- ifelse(is.na(dane$cars), median(dane$cars, na.rm = TRUE), dane$cars)
+dane2$age <- ifelse(is.na(dane$age), median(dane$age, na.rm = TRUE), dane$age)
+dane2$children <- ifelse(is.na(dane$children), median(dane$children, na.rm = TRUE), dane$children)
 dane2$income <- ifelse(is.na(dane$income), mean(dane$income, na.rm = TRUE), dane$income)
 
 
