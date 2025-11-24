@@ -6,21 +6,26 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
+# Instalacja pakietów:
+# Lista wymaganych pakietów:
+packages <- c("knitr", "visdat", "naniar", "ggplot2", "dplyr", "tidyr",
+              "stringr", "janitor", "mice", "finalfit", "kableExtra", "hms", "rlang")
+
+# Instalacja brakujących pakietów:
+installed <- packages %in% installed.packages()
+if(any(!installed)) {
+  install.packages(packages[!installed], dependencies = TRUE)
+}
+
+# Ładowanie bibliotek
+for (pkg in packages) {
+  library(pkg, character.only = TRUE)
+}
+
+# Rekomendowane ustawienie opcji knitr w RMarkdown
 knitr::opts_chunk$set(echo = TRUE)
-library(knitr)
-library(visdat)
-library(naniar)
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-library(stringr)
-library(janitor)
-library(mice)
-library(finalfit)
-library(kableExtra)
-install.packages("hms")
-install.packages("rlang")
-install.packages("kableExtra", dependencies = TRUE)
+
+
 dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
 head(dane)
 ```
@@ -98,8 +103,7 @@ print(wykres2)
 # Badanie wzorców braków danych
 
 ```{r wzorce braków danych}
-install.packages("finalfit")
-library(finalfit)
+
 missing_pattern(dane)
 ```
 
@@ -140,27 +144,30 @@ print(table(dane$home_owner))
 
 ```{r imputacja danych}
 # Przykład dla jednej zmiennej kategorycznej
-dominanta <- names(sort(table(dane2$marital_status), decreasing = TRUE))[1]
-dane2$marital_status[is.na(dane2$marital_status)] <- dominanta
-dominanta_gender <- names(sort(table(dane2$gender), decreasing = TRUE))[1]
-dane2$gender[is.na(dane2$gender)] <- dominanta_gender
-dominanta_home_owner <- names(sort(table(dane2$home_owner), decreasing = TRUE))[1]
-dane2$home_owner[is.na(dane2$home_owner)] <- dominanta_home_owner
+dominanta <- names(sort(table(dane$marital_status), decreasing = TRUE))[1]
+dane$marital_status[is.na(dane$marital_status)] <- dominanta
+dominanta_gender <- names(sort(table(dane$gender), decreasing = TRUE))[1]
+dane$gender[is.na(dane2$gender)] <- dominanta_gender
+dominanta_home_owner <- names(sort(table(dane$home_owner), decreasing = TRUE))[1]
+dane$home_owner[is.na(dane2$home_owner)] <- dominanta_home_owner
 ```
 
 ## imputacja danych z użyciem średniej
 
-```{r imputacja danych z używciem średniej}
+```{r imputacja danych z użyciem miediany}
 dane2<- as.data.frame(dane)
 
-dane2$cars <- ifelse(is.na(dane$cars), median(dane$cars, na.rm = TRUE), dane$cars)
-dane2$age <- ifelse(is.na(dane$age), median(dane$age, na.rm = TRUE), dane$age)
-dane2$children <- ifelse(is.na(dane$children), median(dane$children, na.rm = TRUE), dane$children)
-dane2$income <- ifelse(is.na(dane$income), mean(dane$income, na.rm = TRUE), dane$income)
+dane2$cars[is.na(dane2$cars)] <- median(dane2$cars, na.rm = TRUE)
+dane2$age[is.na(dane2$age)] <- median(dane2$age, na.rm = TRUE)
+dane2$children[is.na(dane2$children)] <- median(dane2$children, na.rm = TRUE)
+dane2$income[is.na(dane2$income)] <- mean(dane2$income, na.rm = TRUE)
 
 
-missing_pattern(dane2)
+missing_pattern(kompletne_dane)
 
 ```
 
 #2.2 Walidacja danych
+#sprawdzam czy są duplikaty w zbiorze danych:
+sum(duplicated(kompletne_dane))
+
