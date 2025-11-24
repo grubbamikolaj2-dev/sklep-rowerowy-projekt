@@ -163,7 +163,7 @@ dane2$children[is.na(dane2$children)] <- median(dane2$children, na.rm = TRUE)
 dane2$income[is.na(dane2$income)] <- mean(dane2$income, na.rm = TRUE)
 
 
-missing_pattern(kompletne_dane)
+missing_pattern(dane2)
 
 ```
 
@@ -196,12 +196,12 @@ out <- confront(dane2, rules)
 summary(out)
 ```
 
-sum(duplicated(kompletne_dane))
+sum(duplicated(dane2))
 
 #WIZUALIZACJA DANYCH
 ```{r wizualizacja danych}
 #income one variable  plot
-ggplot(kompletne_dane, aes(x = income)) +
+ggplot(dane2, aes(x = income)) +
   geom_histogram(binwidth = 5000, fill = "green", color = "black") +
   labs(title = "Rozkład dochodów klientów", x = "Dochód", y = "Liczba klientów")
 
