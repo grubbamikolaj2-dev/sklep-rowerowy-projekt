@@ -41,7 +41,12 @@ dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
 head(dane)
 ```
 
-# Struktura danych i analiza braków
+#Pytania badawcze:
+###Jakie cechy klientów (wiek, dochód, region itd.) mają największy wpływ na decyzję o zakupie roweru?
+###Struktura danych i analiza braków
+###Czy posiadanie samochodu lub własnego domu wpływa na prawdopodobieństwo zakupu roweru?
+###Czy styl życia (dojazd do pracy, status zawodowy, wykształcenie) koreluje z zakupem roweru?
+###Czy są różnice w decyzji zakupu roweru między klientami w różnych regionach lub grupach wiekowych?
 
 ## Nazwy kolumn w zbiorze danych:
 
