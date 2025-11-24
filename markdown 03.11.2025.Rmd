@@ -169,5 +169,34 @@ missing_pattern(kompletne_dane)
 
 #2.2 Walidacja danych
 #sprawdzam czy są duplikaty w zbiorze danych:
+```{r walidacja danych}
+# Najpierw zainstaluj i załaduj pakiet:
+if (!require(validate)) install.packages("validate")
+library(validate)
+
+rules <- validator(
+  cars == as.integer(cars),
+  children == as.integer(children),
+  age == as.integer(age),
+  children >= 0,
+  income >= 0,
+  cars >= 0,
+  age >= 0,
+  commute_distance >= 0,
+  home_owner %in% c("Yes", "No"),
+  purchased_bike %in% c("Yes", "No"),
+  marital_status %in% c("Married", "Single"),
+  gender %in% c("Male", "Female"),
+  education %in% c("Bachelors", "Partial College", "High School", "Partial High School", "Graduate Degree"),
+  occupation %in% c("Skilled Manual", "Clerical", "Professional", "Manual", "Management"),
+  region %in% c("Europe", "Pacific", "North America")
+)
+
+out <- confront(kompletne_dane, rules)
+summary(out)
+```
+
 sum(duplicated(kompletne_dane))
 
+#WIZUALIZACJA DANYCH
+library(ggplot2)
