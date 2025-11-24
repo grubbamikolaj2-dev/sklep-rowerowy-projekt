@@ -147,9 +147,9 @@ print(table(dane$home_owner))
 dominanta <- names(sort(table(dane$marital_status), decreasing = TRUE))[1]
 dane$marital_status[is.na(dane$marital_status)] <- dominanta
 dominanta_gender <- names(sort(table(dane$gender), decreasing = TRUE))[1]
-dane$gender[is.na(dane2$gender)] <- dominanta_gender
+dane$gender[is.na(dane$gender)] <- dominanta_gender
 dominanta_home_owner <- names(sort(table(dane$home_owner), decreasing = TRUE))[1]
-dane$home_owner[is.na(dane2$home_owner)] <- dominanta_home_owner
+dane$home_owner[is.na(dane$home_owner)] <- dominanta_home_owner
 ```
 
 ## imputacja danych z użyciem średniej
