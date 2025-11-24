@@ -151,3 +151,35 @@ colSums(is.na(kompletne_dane))
 ```
 
 ## Analiza wyników imputacji
+
+
+# wizualizacja danych
+```{r wizualizacja danych kompletnych}
+ggplot(kompletne_dane, aes(x=marital_status)) +
+  geom_bar(fill="blue", alpha=0.7) +
+  labs(title="Rozkład Martial Status w kompletnych danych",
+       x="Martial Status",
+       y="Liczba obserwacji") +
+  theme_minimal()
+
+#zależność między maritial a purchased bike
+ggplot(kompletne_dane, aes(x=marital_status, fill=purchased_bike)) +
+  geom_bar(position="dodge") +
+  labs(title="Zależność między Martial Status a Purchased Bike",
+       x="Martial Status",
+       y="Liczba obserwacji") +
+  theme_minimal()
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
