@@ -192,11 +192,18 @@ rules <- validator(
   region %in% c("Europe", "Pacific", "North America")
 )
 
-out <- confront(kompletne_dane, rules)
+out <- confront(dane2, rules)
 summary(out)
 ```
 
 sum(duplicated(kompletne_dane))
 
 #WIZUALIZACJA DANYCH
-library(ggplot2)
+```{r wizualizacja danych}
+#income one variable  plot
+ggplot(kompletne_dane, aes(x = income)) +
+  geom_histogram(binwidth = 5000, fill = "green", color = "black") +
+  labs(title = "Rozkład dochodów klientów", x = "Dochód", y = "Liczba klientów")
+
+
+```
