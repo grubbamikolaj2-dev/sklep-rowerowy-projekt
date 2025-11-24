@@ -128,6 +128,7 @@ dane$marital_status <- as.factor(dane$marital_status)
 dane$gender <- as.factor(dane$gender)
 dane$home_owner <- as.factor(dane$home_owner)
 colSums(is.na(dane))
+
 ```
 
 ## Imputacja danych z użyciem dominanty
@@ -165,8 +166,10 @@ dane2<- as.data.frame(dane)
 dane2$cars[is.na(dane2$cars)] <- median(dane2$cars, na.rm = TRUE)
 dane2$age[is.na(dane2$age)] <- median(dane2$age, na.rm = TRUE)
 dane2$children[is.na(dane2$children)] <- median(dane2$children, na.rm = TRUE)
-dane2$income[is.na(dane2$income)] <- mean(dane2$income, na.rm = TRUE)
+if (!require(VIM)) install.packages("VIM")
+library(VIM)
 
+dane2 <- hotdeck(dane2, variable = "income")
 
 missing_pattern(dane2)
 
