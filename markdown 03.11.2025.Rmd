@@ -1,8 +1,14 @@
 ---
-title: "Sklep  rowerowy"
+title: "CycleInsight – analiza danych"
 author: "MG, PO, BK"
 date: "2025-11-03"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+fontsize: 11pt
+lang: "pl"
 ---
 
 ```{r setup, include=FALSE}
@@ -22,31 +28,26 @@ for (pkg in packages) {
   library(pkg, character.only = TRUE)
 }
 
-# Rekomendowane ustawienie opcji knitr w RMarkdown
-knitr::opts_chunk$set(echo = TRUE)
-
-
+knitr::opts_chunk$set(include = FALSE)
 dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
 head(dane)
 ```
 
 # Wstęp
 
-Projekt **Sklep rowerowy** to analiza danych sklepu rowerowego na potrzeby przedmiotu: Analiza danych w R.\
-Celem jest badanie zależności między cechami klientów a decyzją o zakupie roweru. Analiza obejmuje przetwarzanie danych, imputację braków oraz modelowanie statystyczne.
+Projekt **CycleInsight** stanowi analizę danych klientów sklepu rowerowego przygotowaną na potrzeby przedmiotu „Analiza danych w R”. Jego celem jest zbadanie zależności między cechami klientów a ich decyzją o zakupie roweru.
+
+## Postaramy sie odpowiedzieć na następujące pytania badawcze:
+
+1.  Jakie cechy klientów (wiek, dochód, region, liczba dzieci, wykształcenie itd.) mają największy wpływ na decyzję o zakupie roweru?
+2.  W jakim stopniu stan posiadania (samochód, dom) oraz styl życia wpływają na prawdopodobieństwo zakupu roweru?
+3.  Czy występują różnice w decyzji zakupu roweru między klientami z różnych regionów oraz grup wiekowych?
 
 ```{r wczytanie danych}
 
 dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
 head(dane)
 ```
-
-#Pytania badawcze:
-###Jakie cechy klientów (wiek, dochód, region itd.) mają największy wpływ na decyzję o zakupie roweru?
-###Struktura danych i analiza braków
-###Czy posiadanie samochodu lub własnego domu wpływa na prawdopodobieństwo zakupu roweru?
-###Czy styl życia (dojazd do pracy, status zawodowy, wykształcenie) koreluje z zakupem roweru?
-###Czy są różnice w decyzji zakupu roweru między klientami w różnych regionach lub grupach wiekowych?
 
 ## Nazwy kolumn w zbiorze danych:
 
@@ -60,6 +61,8 @@ kable(colnames(dane), caption = "Lista nazw kolumn w zbiorze danych") %>%
 
 
 ```
+
+# Analiza braków danych
 
 ## Liczba brakujących wartości, proporcje i kompletność danych:
 
@@ -88,7 +91,7 @@ miss_case_table(dane)
 
 ```
 
-## Wizualizacji braków danych z użyciem pakietu visdat
+## Wizualizacja braków danych z użyciem pakietu visdat
 
 ```{r wykresy NA}
 wykres1 <- vis_dat(dane) +
@@ -105,7 +108,7 @@ print(wykres2)
 
 ```
 
-# Badanie wzorców braków danych
+## Badanie wzorców braków danych
 
 ```{r wzorce braków danych}
 
@@ -133,22 +136,7 @@ colSums(is.na(dane))
 
 ## Imputacja danych z użyciem dominanty
 
-### rozkład miennnych kategorycznych przed imputacją
-
-```{r imputacja danych}
-cat("Rozkład Marital Status przed imputacją:\n")
-print(table(dane$marital_status))
-
-cat("Rozkład Gender przed imputacją:\n")
-print(table(dane$gender))
-
-cat("Rozkład Home Owner przed imputacją:\n")
-print(table(dane$home_owner))
-```
-
-## Imputacja danych
-
-```{r imputacja danych}
+```{r imputacja danych ilościowych}
 # Przykład dla jednej zmiennej kategorycznej
 dominanta <- names(sort(table(dane$marital_status), decreasing = TRUE))[1]
 dane$marital_status[is.na(dane$marital_status)] <- dominanta
@@ -158,7 +146,7 @@ dominanta_home_owner <- names(sort(table(dane$home_owner), decreasing = TRUE))[1
 dane$home_owner[is.na(dane$home_owner)] <- dominanta_home_owner
 ```
 
-## imputacja danych z użyciem średniej
+## imputacja danych z użyciem mediany oraz hotdeck
 
 ```{r imputacja danych z użyciem miediany}
 dane2<- as.data.frame(dane)
@@ -175,8 +163,8 @@ missing_pattern(dane2)
 
 ```
 
-#2.2 Walidacja danych
-#sprawdzam czy są duplikaty w zbiorze danych:
+# Walidacja danych
+
 ```{r walidacja danych}
 # Najpierw zainstaluj i załaduj pakiet:
 if (!require(validate)) install.packages("validate")
@@ -203,10 +191,12 @@ rules <- validator(
 out <- confront(dane2, rules)
 summary(out)
 ```
-
+## Sprawdzenie duplikatów
 sum(duplicated(dane2))
+Duplikaty występują, jednak w kontekście naszego zestawu danych nie stanowią one problemu, dlatego je pozostawiamy.
 
-#WIZUALIZACJA DANYCH
+# WIZUALIZACJA DANYCH
+
 ```{r wizualizacja danych}
 #income one variable  plot
 ggplot(dane2, aes(x = income)) +
