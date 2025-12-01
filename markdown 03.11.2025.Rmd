@@ -368,6 +368,6 @@ raport <-
               "Skośność"=~round(skew(income),2),
               "Kurtoza"=~round(kurtosi(income),2)
          ))
-tabela<-summary.table(raport)
+summary(raport)
 ```
 
