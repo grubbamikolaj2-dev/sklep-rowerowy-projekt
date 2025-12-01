@@ -425,4 +425,4 @@ digits = 2,
 caption = "Tabela. Statystyki opisowe dla dochodu (income) i wieku (age) w zbiorze dane2"
 )
 ```
-
+f
