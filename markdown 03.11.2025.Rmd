@@ -371,3 +371,58 @@ raport <-
 summary(raport)
 ```
 
+```{r}
+library(dplyr)
+library(knitr)
+
+# Tworzenie tabeli statystyk opisowych dla income
+
+tabela_stat_income <- dane2 %>%
+summarise(
+Min              = min(income, na.rm = TRUE),
+Q1               = quantile(income, 0.25, na.rm = TRUE),
+Mediana          = median(income, na.rm = TRUE),
+Średnia          = mean(income, na.rm = TRUE),
+Q3               = quantile(income, 0.75, na.rm = TRUE),
+Max              = max(income, na.rm = TRUE),
+Odch_std         = sd(income, na.rm = TRUE),
+Wariancja        = var(income, na.rm = TRUE),
+IQR              = IQR(income, na.rm = TRUE),
+Odch_ćwiartkowe  = IQR(income, na.rm = TRUE) / 2,
+Wsp_zmienności   = sd(income, na.rm = TRUE) / mean(income, na.rm = TRUE),
+Wsp_IQR_zmienn   = (IQR(income, na.rm = TRUE) / 2) / median(income, na.rm = TRUE)
+) %>%
+mutate(Zmienna = "income") %>% select(Zmienna, everything())
+
+# Tworzenie tabeli statystyk opisowych dla age
+
+tabela_stat_age <- dane2 %>%
+summarise(
+Min              = min(age, na.rm = TRUE),
+Q1               = quantile(age, 0.25, na.rm = TRUE),
+Mediana          = median(age, na.rm = TRUE),
+Średnia          = mean(age, na.rm = TRUE),
+Q3               = quantile(age, 0.75, na.rm = TRUE),
+Max              = max(age, na.rm = TRUE),
+Odch_std         = sd(age, na.rm = TRUE),
+Wariancja        = var(age, na.rm = TRUE),
+IQR              = IQR(age, na.rm = TRUE),
+Odch_ćwiartkowe  = IQR(age, na.rm = TRUE) / 2,
+Wsp_zmienności   = sd(age, na.rm = TRUE) / mean(age, na.rm = TRUE),
+Wsp_IQR_zmienn   = (IQR(age, na.rm = TRUE) / 2) / median(age, na.rm = TRUE)
+) %>%
+mutate(Zmienna = "age") %>% select(Zmienna, everything())
+
+# Połączenie obu tabel w jedną
+
+tabela_stat <- bind_rows(tabela_stat_income, tabela_stat_age)
+
+# Wyświetlenie tabeli
+
+kable(
+tabela_stat,
+digits = 2,
+caption = "Tabela. Statystyki opisowe dla dochodu (income) i wieku (age) w zbiorze dane2"
+)
+```
+
