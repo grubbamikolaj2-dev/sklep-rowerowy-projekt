@@ -291,3 +291,4 @@ ggplot(df, aes(x = region, fill = purchased_bike)) +
   my_theme
 ```
 
+ggg
