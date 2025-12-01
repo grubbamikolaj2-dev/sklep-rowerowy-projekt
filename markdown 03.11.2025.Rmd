@@ -191,11 +191,13 @@ rules <- validator(
 out <- confront(dane2, rules)
 summary(out)
 ```
+
 ## Sprawdzenie duplikatów
-sum(duplicated(dane2))
-Duplikaty występują, jednak w kontekście naszego zestawu danych nie stanowią one problemu, dlatego je pozostawiamy.
+
+sum(duplicated(dane2)) Duplikaty występują, jednak w kontekście naszego zestawu danych nie stanowią one problemu, dlatego je pozostawiamy.
 
 # WIZUALIZACJA DANYCH
+
 ```{r ustawienia wykresów, include=FALSE}
 # Ładowanie bibliotek
 library(ggplot2)
@@ -203,7 +205,7 @@ library(dplyr)
 library(tidyr)
 
 # Wczytanie danych (zakładając, że plik jest w katalogu roboczym)
-df <- read.csv("czyste_dane.csv")
+df <- dane2
 
 # Uporządkowanie kolejności zmiennej purchased_bike (żeby "Yes" było kolorem wyróżniającym)
 df$purchased_bike <- factor(df$purchased_bike, levels = c("No", "Yes"))
@@ -215,6 +217,7 @@ my_theme <- theme_minimal() +
     legend.position = "bottom"
   )
 ```
+
 ## Pytanie 1: Wpływ cech demograficznych (Wiek, Dochód, Wykształcenie)
 
 ### Wykształcenie a zakup (Skumulowany wykres słupkowy) To pozwoli zobaczyć procentowy udział kupujących w każdej grupie wykształcenia.
@@ -278,7 +281,7 @@ ggplot(df, aes(x = commute_distance, fill = purchased_bike)) +
 
 ### B. Region a ogólna skuteczność sprzedaży
 
-```{r Region a ogólna skuteczność sprzedaży}
+```{r Region a ogólna skuteczność sprzedaży, echo=FALSE}
 ggplot(df, aes(x = region, fill = purchased_bike)) +
   geom_bar(position = "dodge") +
   scale_fill_manual(values = c("No" = "grey70", "Yes" = "forestgreen")) +
@@ -291,3 +294,55 @@ ggplot(df, aes(x = region, fill = purchased_bike)) +
   my_theme
 ```
 
+# Analiza opisowa
+
+```{r Analiza opisowa}
+mean(dane2$income, na.rm = TRUE)
+median(dane2$income, na.rm = TRUE)
+sd(dane2$income, na.rm = TRUE)          # odchylenie standardowe
+var(dane2$income, na.rm = TRUE)         # wariancja
+
+coeff_var  <- sd(dane2$income, na.rm = TRUE) / mean(dane2$income, na.rm = TRUE)
+coeff_var                               # współczynnik zmienności
+
+IQR(dane2$income, na.rm = TRUE)         # rozstęp ćwiartkowy Q3 - Q1
+sx        <- IQR(dane2$income, na.rm = TRUE) / 2
+coeff_varx <- sx / median(dane2$income, na.rm = TRUE)
+coeff_varx                              # współczynnik zmienności oparty na IQR
+
+min(dane2$income, na.rm = TRUE)
+max(dane2$income, na.rm = TRUE)
+
+quantile(
+  dane2$income,
+  probs = c(0, 0.1, 0.25, 0.5, 0.75, 0.95, 1),
+  na.rm = TRUE
+)
+```
+
+```{r Tabela statystyk opisowych}
+library(dplyr)
+library(knitr)
+
+tabela_stat <- dane2 %>%
+  summarise(
+    Min              = min(income, na.rm = TRUE),
+    Q1               = quantile(income, 0.25, na.rm = TRUE),
+    Mediana          = median(income, na.rm = TRUE),
+    Średnia          = mean(income, na.rm = TRUE),
+    Q3               = quantile(income, 0.75, na.rm = TRUE),
+    Max              = max(income, na.rm = TRUE),
+    Odch_std         = sd(income, na.rm = TRUE),
+    Wariancja        = var(income, na.rm = TRUE),
+    IQR              = IQR(income, na.rm = TRUE),
+    Odch_ćwiartkowe  = IQR(income, na.rm = TRUE) / 2,
+    Wsp_zmienności   = sd(income, na.rm = TRUE) / mean(income, na.rm = TRUE),
+    Wsp_IQR_zmienn   = (IQR(income, na.rm = TRUE) / 2) / median(income, na.rm = TRUE)
+  )
+
+kable(
+  tabela_stat,
+  digits = 2,
+  caption = "Tabela. Statystyki opisowe dla dochodu (income) w zbiorze dane2"
+)
+```
