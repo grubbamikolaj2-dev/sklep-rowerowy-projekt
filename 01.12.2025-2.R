@@ -6,10 +6,10 @@ library(kableExtra)
 
 
 
-# 2. Wybierz zmienne jakościowe
+# Wybieram zmienne jakościowe
 dane_cat <- dane2 %>% select(where(~ is.character(.x) || is.factor(.x)))
 
-# 3. Obliczenie częstości i procentów — wszystko w jednej pętli
+#  Obliczenie częstości i procentów — wszystko w jednej pętli
 wynik <- data.frame()
 
 for (colname in names(dane_cat)) {
@@ -28,10 +28,10 @@ for (colname in names(dane_cat)) {
   wynik <- rbind(wynik, t)
 }
 
-# 4. Uporządkowanie kolumn
+#  Uporządkowanie kolumn
 wynik <- wynik %>% select(zmienna, kategoria, liczba, procent)
 
-# 5. Tabela kableExtra
+#  Tabela kableExtra
 wynik %>%
   kable("html",
         caption = "Statystyki opisowe dla zmiennych jakościowych (częstości)",
