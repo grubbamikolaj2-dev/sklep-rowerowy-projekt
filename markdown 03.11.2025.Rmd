@@ -293,6 +293,7 @@ ggplot(df, aes(x = region, fill = purchased_bike)) +
   ) +
   my_theme
 ```
+<<<<<<< HEAD
 
 # Analiza opisowa
 
@@ -346,3 +347,5 @@ kable(
   caption = "Tabela. Statystyki opisowe dla dochodu (income) w zbiorze dane2"
 )
 ```
+=======
+>>>>>>> 0adc5fa697186ff427b50646add347dc0483b66a
