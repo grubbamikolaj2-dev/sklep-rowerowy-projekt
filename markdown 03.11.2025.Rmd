@@ -555,3 +555,57 @@ corrplot(
 
 ```
 
+```{r}
+# =============================
+# 1. Instalacja i ładowanie pakietów
+# =============================
+if (!require(DescTools)) install.packages("DescTools")  # do Cramér's V
+if (!require(corrplot)) install.packages("corrplot")
+if (!require(dplyr)) install.packages("dplyr")
+
+library(DescTools)
+library(corrplot)
+library(dplyr)
+
+# =============================
+# 2. Wybór zmiennych jakościowych
+# =============================
+qual_vars <- dane2 %>% 
+  select(purchased_bike, gender, marital_status, home_owner, education, occupation, region)
+
+# =============================
+# 3. Obliczenie macierzy Cramér's V
+# =============================
+n <- ncol(qual_vars)
+cramer_matrix <- matrix(NA, nrow = n, ncol = n)
+colnames(cramer_matrix) <- colnames(qual_vars)
+rownames(cramer_matrix) <- colnames(qual_vars)
+
+for (i in 1:n) {
+  for (j in 1:n) {
+    cramer_matrix[i, j] <- if(i==j) 1 else CramerV(table(qual_vars[[i]], qual_vars[[j]]))
+  }
+}
+
+# =============================
+# 4. Wyświetlenie macierzy w konsoli
+# =============================
+cramer_matrix
+
+# =============================
+# 5. Wizualizacja macierzy zależności
+# =============================
+corrplot(
+  cramer_matrix, 
+  method = "color",          # kolorowe kwadraty
+  type = "upper",            # tylko górna trójkątna
+  addCoef.col = "black",     # wartości w kwadratach
+  tl.col = "black",           # kolor etykiet
+  tl.srt = 45,                # obrót etykiet
+  number.cex = 0.8,          # rozmiar współczynników
+  col = colorRampPalette(c("white", "red"))(200), 
+  title = "Macierz zależności zmiennych jakościowych (Cramér's V)"
+)
+
+```
+
