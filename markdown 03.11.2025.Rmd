@@ -452,4 +452,10 @@ wynik %>%
   scroll_box(height = "500px")
 
 ```
+```{r Korelacja między zmiennymi ilościowymi}
+install.packages("corrplot")
+library(corrplot)
+M = cor(dane2$income, dane2$age)
+corrplot(M, method = "circle")
+```
 
