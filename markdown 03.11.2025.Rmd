@@ -521,3 +521,37 @@ prop.table(tab_age_bike, margin = 1)
 
 
 ```
+
+```{r}
+# ----------------------------
+
+if (!require(corrplot)) install.packages("corrplot")
+library(corrplot)
+
+
+# 2. Wybór zmiennych ilościowych
+# ----------------------------
+num_vars <- dane2 %>% 
+  select(age, income, cars, children)
+
+
+# 3. Obliczenie macierzy korelacji Pearsona
+# ----------------------------
+cor_matrix <- cor(num_vars, use = "complete.obs", method = "pearson")
+
+# ----------------------------
+# 4. Wykres korelacji
+# ----------------------------
+corrplot(
+  cor_matrix, 
+  method = "color",       # kolorowe kwadraty
+  type = "upper",         # pokazujemy tylko górną trójkąt
+  addCoef.col = "black",  # dodajemy wartości korelacji
+  tl.col = "black",       # kolor etykiet
+  tl.srt = 45,            # obrót etykiet
+  number.cex = 0.8,       # rozmiar tekstu dla współczynników
+  col = colorRampPalette(c("red", "white", "green"))(200)
+)
+
+```
+
