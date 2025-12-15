@@ -484,3 +484,40 @@ ggplot(dane2, aes(x = income_bin, fill = purchased_bike)) +
   )
 ```
 
+```{r}
+# =========================
+# Zależność wiek – zakup roweru
+# =========================
+
+# 1. Przedziały wieku
+dane2$age_group <- cut(
+  dane2$age,
+  breaks = c(0, 25, 35, 45, 55, 100),
+  labels = c("<=25", "26–35", "36–45", "46–55", "56+"),
+  include.lowest = TRUE
+)
+
+# 2. Tabela kontyngencji (WYŚWIETLENIE!)
+tab_age_bike <- table(dane2$age_group, dane2$purchased_bike)
+tab_age_bike
+
+# 3. Test chi-kwadrat Pearsona
+chi_res <- chisq.test(tab_age_bike)
+chi_res
+
+# 4. Test Fishera – wersja odporna (symulacja p-value)
+fisher.test(tab_age_bike, simulate.p.value = TRUE, B = 10000)
+
+# 5. V Craméra (bez pakietów)
+chi2 <- as.numeric(chi_res$statistic)
+n <- sum(tab_age_bike)
+k <- min(nrow(tab_age_bike) - 1, ncol(tab_age_bike) - 1)
+
+V_cramer <- sqrt(chi2 / (n * k))
+V_cramer
+
+# 6. Proporcje zakupu w grupach wiekowych
+prop.table(tab_age_bike, margin = 1)
+
+
+```
