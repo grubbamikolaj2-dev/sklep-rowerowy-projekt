@@ -608,4 +608,4 @@ corrplot(
 )
 
 ```
-
+Analiza danych pokazuje, że decyzje o zakupie roweru są zależne zarówno od cech demograficznych, jak i statusu społeczno-ekonomicznego klientów. Najwięcej zakupów dokonują osoby w wieku 26–35 i 36–45 lat, a różnice w decyzjach zakupowych między grupami wiekowymi są istotne statystycznie, co potwierdza test chi-kwadrat (p < 0,001) oraz umiarkowana wartość V Craméra (~0,24). W przypadku zmiennych jakościowych najsilniejszy wpływ na zakup roweru mają poziom wykształcenia, status właściciela domu oraz region zamieszkania. Wizualizacja macierzy Cramér’s V pokazuje wyraźnie, które zmienne jakościowe są najbardziej powiązane z decyzją o zakupie, a wnioski te sugerują, że zarówno cechy demograficzne, jak i styl życia oraz pozycja społeczno-ekonomiczna klienta mają istotny wpływ na zachowania zakupowe w sklepie rowerowym.
