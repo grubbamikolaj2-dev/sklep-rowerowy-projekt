@@ -293,117 +293,79 @@ ggplot(df, aes(x = region, fill = purchased_bike)) +
   ) +
   my_theme
 ```
-<<<<<<< HEAD
+```{r REGION x DYSTSNS DO PRACY vs % ZAKUPU - INTERAKTYWNA HEATMAPA}
+library(plotly)
+library(dplyr)
+library(tidyr)
+
+#Przygotowanie danych - tabela krzyżowa % kupujących
+heatmap_data <- dane2%>%
+count(region, commute_distance, purchased_bike) %>%
+pivot_wider(names_from = purchased_bike, values_from = n, values_fill = 0) %>%
+mutate(procent_Yes = Yes / (Yes + No) * 100) %>%
+select(region, commute_distance, procent_Yes) %>%
+pivot_wider(names_from = commute_distance, values_from = procent_Yes) %>%
+as.matrix()
+
+rownames(heatmap_data) <- heatmap_data[,1]
+heatmap_data <- heatmap_data[,-1]
+
+#INTERAKTYWNY HEATMAP
+plot_ly(
+x = colnames(heatmap_data),
+y = rownames(heatmap_data),
+z = heatmap_data,
+type = "heatmap",
+colorscale = "RdYlGn",
+hovertemplate = "<b>Region: %{y}</b>
+Dystans: %{x}
+Procent kupujących: %{z:.1f}%<extra></extra>"
+) %>%
+layout(
+title = list(text = "Zależność: REGION × DYSTANS DO PRACY vs % ZAKUPU ROWERU",
+font = list(size = 16, color = "darkblue")),
+xaxis = list(title = "Dystans do pracy"),
+yaxis = list(title = "Region")
+)
+```
+
 
 # Analiza opisowa
-
-```{r Analiza opisowa}
-mean(dane2$income, na.rm = TRUE)
-median(dane2$income, na.rm = TRUE)
-sd(dane2$income, na.rm = TRUE)          # odchylenie standardowe
-var(dane2$income, na.rm = TRUE)         # wariancja
-
-coeff_var  <- sd(dane2$income, na.rm = TRUE) / mean(dane2$income, na.rm = TRUE)
-coeff_var                               # współczynnik zmienności
-
-IQR(dane2$income, na.rm = TRUE)         # rozstęp ćwiartkowy Q3 - Q1
-sx        <- IQR(dane2$income, na.rm = TRUE) / 2
-coeff_varx <- sx / median(dane2$income, na.rm = TRUE)
-coeff_varx                              # współczynnik zmienności oparty na IQR
-
-min(dane2$income, na.rm = TRUE)
-max(dane2$income, na.rm = TRUE)
-
-quantile(
-  dane2$income,
-  probs = c(0, 0.1, 0.25, 0.5, 0.75, 0.95, 1),
-  na.rm = TRUE
-)
-```
-
-```{r Tabela statystyk opisowych}
-library(dplyr)
-library(knitr)
-
-tabela_stat <- dane2 %>%
-  summarise(
-    Min              = min(income, na.rm = TRUE),
-    Q1               = quantile(income, 0.25, na.rm = TRUE),
-    Mediana          = median(income, na.rm = TRUE),
-    Średnia          = mean(income, na.rm = TRUE),
-    Q3               = quantile(income, 0.75, na.rm = TRUE),
-    Max              = max(income, na.rm = TRUE),
-    Odch_std         = sd(income, na.rm = TRUE),
-    Wariancja        = var(income, na.rm = TRUE),
-    IQR              = IQR(income, na.rm = TRUE),
-    Odch_ćwiartkowe  = IQR(income, na.rm = TRUE) / 2,
-    Wsp_zmienności   = sd(income, na.rm = TRUE) / mean(income, na.rm = TRUE),
-    Wsp_IQR_zmienn   = (IQR(income, na.rm = TRUE) / 2) / median(income, na.rm = TRUE)
-  )
-
-kable(
-  tabela_stat,
-  digits = 2,
-  caption = "Tabela. Statystyki opisowe dla dochodu (income) w zbiorze dane2"
-)
-```
-
 
 ```{r}
 library(dplyr)
 library(knitr)
+library(kableExtra)
 
-# Tworzenie tabeli statystyk opisowych dla income
-
-tabela_stat_income <- dane2 %>%
+stats_opisowe <- function(df, zmienna) {
+df %>%
 summarise(
-Min              = min(income, na.rm = TRUE),
-Q1               = quantile(income, 0.25, na.rm = TRUE),
-Mediana          = median(income, na.rm = TRUE),
-Średnia          = mean(income, na.rm = TRUE),
-Q3               = quantile(income, 0.75, na.rm = TRUE),
-Max              = max(income, na.rm = TRUE),
-Odch_std         = sd(income, na.rm = TRUE),
-Wariancja        = var(income, na.rm = TRUE),
-IQR              = IQR(income, na.rm = TRUE),
-Odch_ćwiartkowe  = IQR(income, na.rm = TRUE) / 2,
-Wsp_zmienności   = sd(income, na.rm = TRUE) / mean(income, na.rm = TRUE),
-Wsp_IQR_zmienn   = (IQR(income, na.rm = TRUE) / 2) / median(income, na.rm = TRUE)
+Min = min(!!sym(zmienna), na.rm = TRUE),
+Q1 = quantile(!!sym(zmienna), 0.25, na.rm = TRUE),
+Mediana = median(!!sym(zmienna), na.rm = TRUE),
+Średnia = mean(!!sym(zmienna), na.rm = TRUE),
+Q3 = quantile(!!sym(zmienna), 0.75, na.rm = TRUE),
+Max = max(!!sym(zmienna), na.rm = TRUE),
+SD = sd(!!sym(zmienna), na.rm = TRUE),
+Wariancja = var(!!sym(zmienna), na.rm = TRUE),
+IQR = IQR(!!sym(zmienna), na.rm = TRUE),
+CV = round(sd(!!sym(zmienna), na.rm = TRUE) / mean(!!sym(zmienna), na.rm = TRUE) * 100, 2)
 ) %>%
-mutate(Zmienna = "income") %>% select(Zmienna, everything())
+mutate(Zmienna = zmienna) %>%
+select(Zmienna, everything())
+}
 
-# Tworzenie tabeli statystyk opisowych dla age
+zmienne_num <- c("age", "income", "cars", "children")
+tabela_stat <- do.call(rbind, lapply(zmienne_num, function(x) stats_opisowe(dane2, x)))
 
-tabela_stat_age <- dane2 %>%
-summarise(
-Min              = min(age, na.rm = TRUE),
-Q1               = quantile(age, 0.25, na.rm = TRUE),
-Mediana          = median(age, na.rm = TRUE),
-Średnia          = mean(age, na.rm = TRUE),
-Q3               = quantile(age, 0.75, na.rm = TRUE),
-Max              = max(age, na.rm = TRUE),
-Odch_std         = sd(age, na.rm = TRUE),
-Wariancja        = var(age, na.rm = TRUE),
-IQR              = IQR(age, na.rm = TRUE),
-Odch_ćwiartkowe  = IQR(age, na.rm = TRUE) / 2,
-Wsp_zmienności   = sd(age, na.rm = TRUE) / mean(age, na.rm = TRUE),
-Wsp_IQR_zmienn   = (IQR(age, na.rm = TRUE) / 2) / median(age, na.rm = TRUE)
-) %>%
-mutate(Zmienna = "age") %>% select(Zmienna, everything())
-
-# Połączenie obu tabel w jedną
-
-tabela_stat <- bind_rows(tabela_stat_income, tabela_stat_age)
-
-# Wyświetlenie tabeli
-
-kable(
-tabela_stat,
-digits = 2,
-caption = "Tabela. Statystyki opisowe dla dochodu (income) i wieku (age) w zbiorze dane2"
-)
+tabela_stat %>%
+kable("html", digits = 2,
+caption = "Statystyki opisowe zmiennych numerycznych") %>%
+kable_styling(bootstrap_options = c("striped", "hover")) %>%
+scroll_box(height = "400px")
 ```
-f
+
+
 
 ```{r}
 
@@ -452,11 +414,20 @@ wynik %>%
   scroll_box(height = "500px")
 
 ```
+
 ```{r Korelacja między zmiennymi ilościowymi}
-install.packages("corrplot")
+if (!require(corrplot)) install.packages("corrplot")
 library(corrplot)
-M = cor(dane2$income, dane2$age)
-corrplot(M, method = "circle")
+library(dplyr)
+
+zmienne_ilosc <- dane2%>% select(where(is.numeric))
+M <- cor(zmienne_ilosc, use = "complete.obs")
+
+corrplot(M, method = "circle", type = "upper",
+addCoef.col = "black", tl.col = "black",
+tl.srt = 45, number.cex = 0.8,
+col = colorRampPalette(c("blue", "white", "red"))(200),
+title = "Korelacja zmiennych numerycznych")
 ```
 
 ```{r}
