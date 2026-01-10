@@ -338,31 +338,36 @@ library(knitr)
 library(kableExtra)
 
 stats_opisowe <- function(df, zmienna) {
-df %>%
-summarise(
-Min = min(!!sym(zmienna), na.rm = TRUE),
-Q1 = quantile(!!sym(zmienna), 0.25, na.rm = TRUE),
-Mediana = median(!!sym(zmienna), na.rm = TRUE),
-Średnia = mean(!!sym(zmienna), na.rm = TRUE),
-Q3 = quantile(!!sym(zmienna), 0.75, na.rm = TRUE),
-Max = max(!!sym(zmienna), na.rm = TRUE),
-SD = sd(!!sym(zmienna), na.rm = TRUE),
-Wariancja = var(!!sym(zmienna), na.rm = TRUE),
-IQR = IQR(!!sym(zmienna), na.rm = TRUE),
-CV = round(sd(!!sym(zmienna), na.rm = TRUE) / mean(!!sym(zmienna), na.rm = TRUE) * 100, 2)
-) %>%
-mutate(Zmienna = zmienna) %>%
-select(Zmienna, everything())
+  df %>%
+    summarise(
+      Min = min(!!sym(zmienna), na.rm = TRUE),
+      Q1 = quantile(!!sym(zmienna), 0.25, na.rm = TRUE),
+      Mediana = median(!!sym(zmienna), na.rm = TRUE),
+      Średnia = mean(!!sym(zmienna), na.rm = TRUE),
+      Q3 = quantile(!!sym(zmienna), 0.75, na.rm = TRUE),
+      Max = max(!!sym(zmienna), na.rm = TRUE),
+      SD = sd(!!sym(zmienna), na.rm = TRUE),
+      Wariancja = var(!!sym(zmienna), na.rm = TRUE),
+      IQR = IQR(!!sym(zmienna), na.rm = TRUE),
+      CV = round(sd(!!sym(zmienna), na.rm = TRUE) / mean(!!sym(zmienna), na.rm = TRUE) * 100, 2)
+    ) %>%
+    mutate(
+      across(where(is.numeric), ~ round(.x, 2)),
+      Zmienna = zmienna
+    ) %>%
+    select(Zmienna, everything())
 }
 
 zmienne_num <- c("age", "income", "cars", "children")
 tabela_stat <- do.call(rbind, lapply(zmienne_num, function(x) stats_opisowe(dane2, x)))
 
 tabela_stat %>%
-kable("html", digits = 2,
-caption = "Statystyki opisowe zmiennych numerycznych") %>%
-kable_styling(bootstrap_options = c("striped", "hover")) %>%
-scroll_box(height = "400px")
+  kable("html", digits = 2,
+        format.args = list(scientific = FALSE),
+        caption = "Statystyki opisowe zmiennych numerycznych") %>%
+  kable_styling(bootstrap_options = c("striped", "hover")) %>%
+  scroll_box(height = "400px")
+
 ```
 
 
@@ -582,20 +587,24 @@ corrplot(
 Analiza danych pokazuje, że decyzje o zakupie roweru są zależne zarówno od cech demograficznych, jak i statusu społeczno-ekonomicznego klientów. Najwięcej zakupów dokonują osoby w wieku 26–35 i 36–45 lat, a różnice w decyzjach zakupowych między grupami wiekowymi są istotne statystycznie, co potwierdza test chi-kwadrat (p < 0,001) oraz umiarkowana wartość V Craméra (~0,24). W przypadku zmiennych jakościowych najsilniejszy wpływ na zakup roweru mają poziom wykształcenia, status właściciela domu oraz region zamieszkania. Wizualizacja macierzy Cramér’s V pokazuje wyraźnie, które zmienne jakościowe są najbardziej powiązane z decyzją o zakupie, a wnioski te sugerują, że zarówno cechy demograficzne, jak i styl życia oraz pozycja społeczno-ekonomiczna klienta mają istotny wpływ na zachowania zakupowe w sklepie rowerowym.
 
 ```{r}
-# ==========================================
-# Profil klienta kupującego (Persona)
-# ==========================================
+library(dplyr)
+library(knitr)
+library(kableExtra)
+
 profil_klienta <- dane2 %>%
   filter(purchased_bike == "Yes") %>%
   summarise(
-    Sredni_Wiek = mean(age),
-    Mediana_Dochodow = median(income),
-    Srednia_Liczba_Aut = mean(cars),
-    Najczestszy_Region = names(sort(table(region), decreasing=TRUE))[1],
-    Najczestsze_Wyksztalcenie = names(sort(table(education), decreasing=TRUE))[1]
+    Sredni_Wiek = ceiling(mean(age, na.rm = TRUE)),
+    Mediana_Dochodow = median(income, na.rm = TRUE),
+    Srednia_Liczba_Aut = round(mean(cars, na.rm = TRUE), 2),
+    Najczestszy_Region = names(sort(table(region), decreasing = TRUE))[1],
+    Najczestsze_Wyksztalcenie = names(sort(table(education), decreasing = TRUE))[1]
   )
 
-kable(profil_klienta, caption = "Profil przeciętnego klienta kupującego rower") %>%
+profil_klienta %>%
+  kable("html", digits = 2, format.args = list(scientific = FALSE),
+        caption = "Profil przeciętnego klienta kupującego rower") %>%
   kable_styling(font_size = 14)
+
 ```
 
