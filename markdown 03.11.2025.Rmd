@@ -1,7 +1,7 @@
 ---
 title: "CycleInsight – analiza danych"
-author: "MG, PO, BK"
-date: "2025-11-03"
+author: "MG, PC, BK"
+date: "2026-01-30"
 output:
   html_document:
     toc: true
@@ -608,3 +608,74 @@ profil_klienta %>%
 
 ```
 
+# Testowanie statystyczne
+##ZMIENNE ILOŚCIOWE vs ZAKUP ROWERU
+```{r testowanie statystyczne, message=FALSE, warning=FALSE}
+# ===========================
+# INSTALACJA I ŁADOWANIE ggstatsplot
+# ===========================
+if (!require(ggstatsplot)) install.packages("ggstatsplot")
+if (!require(dplyr)) install.packages("dplyr")
+library(ggstatsplot)
+library(dplyr)
+library(ggplot2)
+
+# Ustawienie danych - purchased_bike jako factor z Yes na górze
+dane2$purchased_bike <- factor(dane2$purchased_bike, levels = c("Yes", "No"))
+dane2$education <- factor(dane2$education, 
+                         levels = c("Bachelors", "Partial College", "High School", 
+                                  "Partial High School", "Graduate Degree"))
+
+# Wiek vs Zakup - automatycznie test t/Wilcoxon + efekt wielkości
+ggbetweenstats(
+  data = dane2,
+  x = purchased_bike,
+  y = age,
+  type = "nonparametric",  # Wilcoxon dla cen (bezpieczny wybór)
+  title = "Rozkład wieku: Kupujący vs Niekupujący",
+  xlab = "Czy kupił rower?",
+  ylab = "Wiek",
+  pairwise.comparisons = TRUE,
+  centrality.plotting = TRUE
+) + theme_minimal()
+
+# Dochód vs Zakup
+ggbetweenstats(
+  data = dane2,
+  x = purchased_bike,
+  y = income,
+  type = "nonparametric",
+  title = "Rozkład dochodów: Kupujący vs Niekupujący",
+  xlab = "Czy kupił rower?", 
+  ylab = "Dochód roczny ($)",
+  pairwise.comparisons = TRUE
+)
+
+```
+## analiza dla wszystkich poziomów zmiennej 'cars'
+```{r analiza dla wszystkich poziomów zmiennej 'cars'}
+# Automatyczna analiza dla wszystkich poziomów zmiennej 'cars'
+grouped_ggbetweenstats(
+  data = dane2,
+  x = purchased_bike,
+  y = age,
+  grouping.var = cars,
+  type = "nonparametric",
+  title.prefix = "Wiek klientów wg liczby samochodów",
+  nrow = 2,
+  ncol = 2
+)
+
+```
+```{r}
+# Rozkład punktowy z linią regresji + test korelacji
+ggscatterstats(
+  data = dane2,
+  x = age,
+  y = income,
+  type = "nonparametric",  # Spearman
+  conf.level = 0.95,
+  marginal = "histogram",  # histogramy na marginesach
+  title = "Korelacja wieku i dochodu z decyzją o zakupie"
+) + facet_wrap(~purchased_bike)
+```
