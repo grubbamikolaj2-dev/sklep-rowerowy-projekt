@@ -642,7 +642,7 @@ ggbetweenstats(
 #Dlaczego wybraliśmy testy nie wymagają normalnosci rozkładu?
 test_norm<- shapiro.test(dane2$income)
 test_norm$p.value
-
+print(test_norm)
 
 # Dochód vs Zakup
 ggbetweenstats(
