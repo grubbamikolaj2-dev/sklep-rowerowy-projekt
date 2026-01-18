@@ -639,6 +639,11 @@ ggbetweenstats(
   centrality.plotting = TRUE
 ) + theme_minimal()
 
+#Dlaczego wybraliśmy testy nie wymagają normalnosci rozkładu?
+test_norm<- shapiro.test(dane2$income)
+test_norm$p.value
+
+
 # Dochód vs Zakup
 ggbetweenstats(
   data = dane2,
