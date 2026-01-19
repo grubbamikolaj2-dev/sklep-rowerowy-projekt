@@ -30,8 +30,18 @@ if(any(!installed)) {
 for (pkg in packages) {
   library(pkg, character.only = TRUE)
 }
-
-knitr::opts_chunk$set(include = FALSE)
+# KLUCZOWE USTAWIENIA - TYLKO WYNIKI, BEZ KODU!
+knitr::opts_chunk$set(
+  echo = FALSE,       # ❌ UKRYJ KOD
+  eval = TRUE,        # ✅ WYKONUJ
+  include = TRUE,     # ✅ POKAZUJ WYNIKI
+  warning = FALSE,    # ❌ UKRYJ ostrzeżenia
+  message = FALSE,    # ❌ UKRYJ komunikaty
+  results = 'asis',   # ✅ Tabele HTML
+  fig.width = 10,     # Rozmiar wykresów
+  fig.height = 6,
+  dpi = 300
+)
 dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
 head(dane)
 ```
