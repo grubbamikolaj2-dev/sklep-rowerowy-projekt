@@ -311,40 +311,52 @@ ggplot(df, aes(x = region, fill = purchased_bike)) +
   my_theme
 ```
 
-```{r REGION x DYSTSNS DO PRACY vs % ZAKUPU - INTERAKTYWNA HEATMAPA}
-library(plotly)
+
+## REGIoN A DYSTANS
+
+```{r region-dystans-gimnastyczna, fig.width=12, fig.height=7}
+library(ggplot2)
 library(dplyr)
 library(tidyr)
+library(scales)
 
-#Przygotowanie danych - tabela krzyżowa % kupujących
-heatmap_data <- dane2%>%
-count(region, commute_distance, purchased_bike) %>%
-pivot_wider(names_from = purchased_bike, values_from = n, values_fill = 0) %>%
-mutate(procent_Yes = Yes / (Yes + No) * 100) %>%
-select(region, commute_distance, procent_Yes) %>%
-pivot_wider(names_from = commute_distance, values_from = procent_Yes) %>%
-as.matrix()
+# Tabela % kupujących
+heat_data <- dane2%>%
+  count(region, commute_distance, purchased_bike) %>%
+  pivot_wider(names_from = purchased_bike, values_from = n, values_fill = 0) %>%
+  mutate(procent_Yes = Yes / (Yes + No) * 100) %>%
+  select(region, commute_distance, procent_Yes) %>%
+  mutate(
+    region = factor(region, levels = rev(unique(region))),  # Odwrócone regiony
+    procent_Yes = round(procent_Yes, 1)
+  )
 
-rownames(heatmap_data) <- heatmap_data[,1]
-heatmap_data <- heatmap_data[,-1]
-
-#INTERAKTYWNY HEATMAP
-plot_ly(
-x = colnames(heatmap_data),
-y = rownames(heatmap_data),
-z = heatmap_data,
-type = "heatmap",
-colorscale = "RdYlGn",
-hovertemplate = "<b>Region: %{y}</b>
-Dystans: %{x}
-Procent kupujących: %{z:.1f}%<extra></extra>"
-) %>%
-layout(
-title = list(text = "Zależność: REGION × DYSTANS DO PRACY vs % ZAKUPU ROWERU",
-font = list(size = 16, color = "darkblue")),
-xaxis = list(title = "Dystans do pracy"),
-yaxis = list(title = "Region")
-)
+# GIMNASTYCZNA + ETYKIETY
+ggplot(heat_data, aes(x = commute_distance, y = region, fill = procent_Yes)) +
+  geom_tile(color = "white", size = 0.5) +
+  geom_text(aes(label = paste0(procent_Yes, "%")), 
+            color = "white", fontface = "bold", size = 4) +
+  scale_fill_gradient2(
+    low = "#ffeda0", mid = "#f03b20", high = "#bd0026",
+    midpoint = 50, name = "% Kupujących",
+    limits = c(0, 100),
+    labels = percent_format()
+  ) +
+  labs(
+    title = "REGION × DYSTANS DO PRACY vs % ZAKUPU ROWERU",
+    subtitle = "Ciemniejszy kolor = wyższy % kupujących",
+    x = "Dystans do pracy (mile)",
+    y = "Region"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(size = 12, hjust = 0.5),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "right",
+    panel.grid = element_blank()
+  ) +
+  coord_fixed(ratio = 1.5)  # Kwadratowe komórki
 ```
 
 # Analiza opisowa
