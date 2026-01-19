@@ -3,15 +3,14 @@ title: "CycleInsight – analiza danych"
 author: "MG, PC, BK"
 date: "2026-01-30"
 output:
-  html_document:
-    toc: true
-    toc_float: true
-    toc_depth: 3
-  pdf_document:
-    toc: true
-    toc_depth: '3'
-fontsize: 11pt
-lang: pl
+ rmdformats::material:
+    highlight: kate          # Kolorowanie składni kodu (inne opcje: tango, pygments, haddock)
+    self_contained: true     # Tworzy jeden plik HTML (łatwy do wysłania)
+    thumbnails: true         # Miniaturki przy obrazkach
+    lightbox: true           # Kliknięcie w obrazek powiększa go
+    gallery: true            # Tworzy galerię z wykresów
+    cards: true              # Sekcje wyglądają jak "karty" (false = ciągły tekst)
+lang: "pl"
 ---
 
 ```{r setup, include=FALSE}
