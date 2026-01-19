@@ -96,7 +96,7 @@ miss_case_table(dane)
 
 ## Wizualizacja braków danych z użyciem pakietu visdat
 
-```{r wykresy NA}
+```{r wykresy NA, echo=FALSE}
 wykres1 <- vis_dat(dane) +
   theme(axis.text.x = element_text(hjust = 1, margin = margin(t = 10))) +
   ggtitle("Wizualizacja danych z użyciem visdat") +
