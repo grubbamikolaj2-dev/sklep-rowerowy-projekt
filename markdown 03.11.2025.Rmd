@@ -4,13 +4,13 @@ author: "MG, PC, BK"
 date: "`r Sys.Date()`"
 output:
   html_document:
-    toc: true              # ✅ SPIS TREŚCI
-    toc_float: true        # ✅ PŁYWAJĄCY SPIS
-    toc_depth: 3           # ✅ DO POZIOMU ###  
-    df_print: paged        # ✅ Piękne tabele
-    theme: flatly          # ✅ Profesjonalny motyw
-    highlight: tango       # ✅ Podświetlenie
-    code_download: true    # ✅ Pobierz kod
+    toc: true           
+    toc_float: true     
+    toc_depth: 3          
+    df_print: paged     
+    theme: flatly       
+    highlight: tango    
+    code_download: true    
   pdf_document:
     toc: true
     toc_depth: 3
