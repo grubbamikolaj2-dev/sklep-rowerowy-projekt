@@ -7,8 +7,11 @@ output:
     toc: true
     toc_float: true
     toc_depth: 3
+  pdf_document:
+    toc: true
+    toc_depth: '3'
 fontsize: 11pt
-lang: "pl"
+lang: pl
 ---
 
 ```{r setup, include=FALSE}
@@ -293,6 +296,7 @@ ggplot(df, aes(x = region, fill = purchased_bike)) +
   ) +
   my_theme
 ```
+
 ```{r REGION x DYSTSNS DO PRACY vs % ZAKUPU - INTERAKTYWNA HEATMAPA}
 library(plotly)
 library(dplyr)
@@ -328,7 +332,6 @@ xaxis = list(title = "Dystans do pracy"),
 yaxis = list(title = "Region")
 )
 ```
-
 
 # Analiza opisowa
 
@@ -369,8 +372,6 @@ tabela_stat %>%
   scroll_box(height = "400px")
 
 ```
-
-
 
 ```{r}
 
@@ -584,7 +585,8 @@ corrplot(
 )
 
 ```
-Analiza danych pokazuje, że decyzje o zakupie roweru są zależne zarówno od cech demograficznych, jak i statusu społeczno-ekonomicznego klientów. Najwięcej zakupów dokonują osoby w wieku 26–35 i 36–45 lat, a różnice w decyzjach zakupowych między grupami wiekowymi są istotne statystycznie, co potwierdza test chi-kwadrat (p < 0,001) oraz umiarkowana wartość V Craméra (~0,24). W przypadku zmiennych jakościowych najsilniejszy wpływ na zakup roweru mają poziom wykształcenia, status właściciela domu oraz region zamieszkania. Wizualizacja macierzy Cramér’s V pokazuje wyraźnie, które zmienne jakościowe są najbardziej powiązane z decyzją o zakupie, a wnioski te sugerują, że zarówno cechy demograficzne, jak i styl życia oraz pozycja społeczno-ekonomiczna klienta mają istotny wpływ na zachowania zakupowe w sklepie rowerowym.
+
+Analiza danych pokazuje, że decyzje o zakupie roweru są zależne zarówno od cech demograficznych, jak i statusu społeczno-ekonomicznego klientów. Najwięcej zakupów dokonują osoby w wieku 26–35 i 36–45 lat, a różnice w decyzjach zakupowych między grupami wiekowymi są istotne statystycznie, co potwierdza test chi-kwadrat (p \< 0,001) oraz umiarkowana wartość V Craméra (\~0,24). W przypadku zmiennych jakościowych najsilniejszy wpływ na zakup roweru mają poziom wykształcenia, status właściciela domu oraz region zamieszkania. Wizualizacja macierzy Cramér’s V pokazuje wyraźnie, które zmienne jakościowe są najbardziej powiązane z decyzją o zakupie, a wnioski te sugerują, że zarówno cechy demograficzne, jak i styl życia oraz pozycja społeczno-ekonomiczna klienta mają istotny wpływ na zachowania zakupowe w sklepie rowerowym.
 
 ```{r}
 library(dplyr)
@@ -609,7 +611,9 @@ profil_klienta %>%
 ```
 
 # Testowanie statystyczne
+
 ##ZMIENNE ILOŚCIOWE vs ZAKUP ROWERU
+
 ```{r testowanie statystyczne, message=FALSE, warning=FALSE}
 # ===========================
 # INSTALACJA I ŁADOWANIE ggstatsplot
@@ -657,8 +661,10 @@ ggbetweenstats(
 )
 
 ```
+
 ## analiza dla wszystkich poziomów zmiennej 'cars'
-```{r analiza dla wszystkich poziomów zmiennej 'cars'}
+
+```{r}
 # Automatyczna analiza dla wszystkich poziomów zmiennej 'cars'
 grouped_ggbetweenstats(
   data = dane2,
@@ -672,6 +678,7 @@ grouped_ggbetweenstats(
 )
 
 ```
+
 ```{r}
 # Rozkład punktowy z linią regresji + test korelacji
 ggscatterstats(
