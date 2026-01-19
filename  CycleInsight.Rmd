@@ -127,7 +127,7 @@ print(wykres2)
 
 ## Badanie wzorców braków danych
 
-```{r wzorce braków danych}
+```{r wzorce braków danych, echo=FALSE}
 
 missing_pattern(dane)
 ```
@@ -310,7 +310,6 @@ ggplot(df, aes(x = region, fill = purchased_bike)) +
   ) +
   my_theme
 ```
-
 
 ## REGIoN A DYSTANS
 
