@@ -46,7 +46,7 @@ Projekt **CycleInsight** stanowi analizę danych klientów sklepu rowerowego prz
 2.  W jakim stopniu stan posiadania (samochód, dom) oraz styl życia wpływają na prawdopodobieństwo zakupu roweru?
 3.  Czy występują różnice w decyzji zakupu roweru między klientami z różnych regionów oraz grup wiekowych?
 
-```{r wczytanie danych}
+```{r wczytanie danych, echo=FALSE}
 
 dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
 head(dane)
@@ -54,7 +54,7 @@ head(dane)
 
 ## Nazwy kolumn w zbiorze danych:
 
-```{r struktura danych}
+```{r struktura danych, echo=FALSE}
 library(knitr)
 library(kableExtra)
 kable(colnames(dane), caption = "Lista nazw kolumn w zbiorze danych") %>%
@@ -69,7 +69,7 @@ kable(colnames(dane), caption = "Lista nazw kolumn w zbiorze danych") %>%
 
 ## Liczba brakujących wartości, proporcje i kompletność danych:
 
-```{r Liczba brakujących wartości, proporcje i kompletność}
+```{r Liczba brakujących wartości, proporcje i kompletność, echo=FALSE}
 library(naniar)
 
 cat("Liczba braków w danych:", n_miss(dane), "\n")
@@ -80,7 +80,7 @@ cat("Proporcja braków:", round(prop_miss(dane)*100, 2), "%\n")
 
 ## Procent brakujących wartości na zmienną:
 
-```{r Procent brakujących wartości na zmienną}
+```{r Procent brakujących wartości na zmienną, echo=FALSE}
 pct <- pct_miss(dane)
 print(pct)
 
@@ -88,7 +88,7 @@ print(pct)
 
 ## Podsumowanie braków na poziomie zmiennych i obserwacji:
 
-```{r Podsumowanie braków na poziomie zmiennych i obserwacji}
+```{r Podsumowanie braków na poziomie zmiennych i obserwacji, echo=FALSE}
 miss_var_summary(dane)
 miss_case_table(dane)
 
