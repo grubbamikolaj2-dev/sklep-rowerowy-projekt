@@ -704,7 +704,9 @@ grouped_ggbetweenstats(
 
 ```
 
-```{r}
+
+# model logitowy, jego ilorazy szans oraz ocena jakości modelu
+```{r model_logitowy}
 # Rozkład punktowy z linią regresji + test korelacji
 ggscatterstats(
   data = dane2,
@@ -716,3 +718,158 @@ ggscatterstats(
   title = "Korelacja wieku i dochodu z decyzją o zakupie"
 ) + facet_wrap(~purchased_bike)
 ```
+
+```{r}
+library(dplyr)
+
+
+# 2. Przygotowanie danych (Preprocessing)
+df_clean <- df %>%
+  mutate(Purchased.Bike = as.factor(purchased_bike))%>%
+  mutate(Education= as.factor(education))%>%
+  mutate(Occupation= as.factor(occupation))
+
+# Sprawdzenie struktury danych przed modelowaniem
+str(df_clean)
+# 3. Budowa Modelu Logitowego
+model <- glm(Purchased.Bike ~ marital_status+gender+income +children +home_owner + cars + age +Education + Occupation, data = df_clean, family = binomial(link = "logit"))
+
+# 4. Wyświetlenie wyników modelu
+summary(model)
+
+# 5. Obliczenie Ilorazu Szans (Odds Ratios)
+or <- exp(coef(model))
+print("Ilorazy Szans (Odds Ratios):")
+print(or)
+
+# 6. (Opcjonalnie) Ocena jakości modelu - Tabela pomyłek (Confusion Matrix)
+prob <- predict(model, type = "response")
+predicted_classes <- ifelse(prob > 0.5, "Yes", "No")
+table(Predicted = predicted_classes, Actual = df_clean$Purchased.Bike)
+```
+
+```{r}
+# Wymagane pakiety
+library(broom)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+
+# 1. Wyciągnięcie uporządkowanych danych z modelu
+
+wyniki_modelu <- tidy(model, conf.int = TRUE, exponentiate = TRUE)
+
+# 2. Filtrowanie i formatowanie tabeli
+tabela_istotne <- wyniki_modelu %>%
+  filter(p.value < 0.05) %>%
+  filter(term != "(Intercept)") %>%
+  mutate(
+    OR_Formatted = round(estimate, 2), # Zaokrąglenie OR
+    CI_Formatted = paste0("[", round(conf.low, 2), " - ", round(conf.high, 2), "]"), # Ładne przedziały ufności
+    p_value_Formatted = format.pval(p.value, digits = 3, eps = 0.001) # Formatowanie p-value (np. <0.001)
+  ) %>%
+  select(term, OR_Formatted, CI_Formatted, p_value_Formatted)
+
+# 3. Generowanie eleganckiej tabeli
+kable(tabela_istotne, 
+      col.names = c("Zmienna", "Iloraz Szans (OR)", "95% Przedział Ufności", "P-value"),
+      align = "lccc",
+      caption = "Istotne statystycznie determinanty zakupu roweru (Model Logitowy)") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>%
+  column_spec(2, bold = TRUE, color = "darkblue") %>% # Wyróżnienie kolumny z OR
+  footnote(general = "OR > 1 oznacza wzrost szansy na zakup, OR < 1 oznacza spadek szansy.")
+```
+
+##Wyniki modelu logitowego
+1. Kluczowe determinanty zakupu 
+Model regresji logistycznej pozwolił wyodrębnić zmienne, które mają realny wpływ na decyzję zakupową, eliminując zakłócenia wynikające ze współzależności cech.
+
+Status cywilny (Marital Status): Jest to jeden z najsilniejszych predyktorów. Osoby samotne (Single) są znacznie bardziej skłonne do zakupu roweru niż osoby w związkach małżeńskich. Iloraz szans (Odds Ratio) wynosi ok. 1.73, co oznacza, że szansa na zakup u singla jest o 73% wyższa niż u osoby zamężnej/żonatej, przy zachowaniu pozostałych cech na stałym poziomie.
+
+Samochody (Cars): Liczba posiadanych samochodów jest silną barierą zakupową. Każdy dodatkowy samochód w gospodarstwie domowym drastycznie obniża szansę na zakup roweru (OR ≈ 0.64, p < 0.001). Potwierdza to hipotezę, że dla badanej grupy rower jest często alternatywą transportową, a nie tylko rekreacyjną.
+
+Dzieci (Children): Zmienna ta wpływa negatywnie na decyzję zakupową (p = 0.035). Większa liczba dzieci w gospodarstwie domowym wiąże się z niższą skłonnością do zakupu roweru dla siebie przez klienta (prawdopodobnie ze względu na ograniczenia budżetowe lub czasowe).
+
+Dochód (Income): Istnieje statystycznie istotna, dodatnia zależność między dochodem a prawdopodobieństwem zakupu (p < 0.001), co oznacza, że rower w ofercie sklepu jest dobrem normalnym (popyt rośnie wraz z dochodem).
+
+2. Profil demograficzny i społeczny
+Wykształcenie: Klienci z wykształceniem wyższym (Bachelors) stanowią grupę referencyjną o najwyższym potencjale zakupowym. Osoby z wykształceniem częściowym (Partial College/High School) wykazują istotnie niższą szansę na zakup (wyniki ujemne w modelu logitowym).
+
+Region: Test Chi-kwadrat (p < 0.001) oraz analiza opisowa wskazują na silne zróżnicowanie regionalne, z dominacją sprzedaży w Ameryce Północnej.
+
+3. Cechy nieistotne statystycznie (Obalenie hipotez)
+Wbrew pierwotnym przypuszczeniom, analiza wielozmiennowa wykazała brak istotnego wpływu dla:
+
+Płci (Gender): Płeć klienta nie różnicuje szansy na zakup (p = 0.94 w modelu logitowym, p = 0.67 w teście Chi-kwadrat). Oferta sklepu jest uniwersalna.
+
+Posiadania domu (Home Owner): Zarówno test niezależności (p = 0.63), jak i model (p = 0.46) wskazują, że status własności nieruchomości nie ma związku z zakupem roweru. Jest to ważna korekta względem wstępnych obserwacji opartych wyłącznie na liczebnościach.
+
+Zawodu (Occupation): Poza pewnymi różnicami w dochodach, sam typ wykonywanej pracy nie jest istotnym predyktorem w modelu.
+
+4. Ocena jakości modelu
+Zbudowany model logitowy charakteryzuje się trafnością (Accuracy) na poziomie ok. 62.6%.
+
+Macierz pomyłek pokazuje, że model lepiej radzi sobie z przewidywaniem braku zakupu (346 trafień) niż zakupu (280 trafień).
+
+Sugeruje to, że w danych istnieją inne, nieuchwycone zmienne (np. zainteresowania, styl życia, odległość do ścieżek rowerowych), które mogłyby poprawić predykcję.
+
+
+```{r}
+library(dplyr)
+library(broom)
+library(knitr)
+library(kableExtra)
+library(purrr) # Do łatwego iterowania (mapowania)
+
+# 1. Lista zmiennych kategorialnych, które chcemy sprawdzić
+zmienne_do_analizy <- c("region", "home_owner", "gender", "marital_status", 
+                        "education", "occupation", "commute_distance")
+
+# 2. Funkcja wykonująca test i czyszcząca wynik dla jednej zmiennej
+oblicz_chi <- function(zmienna, dane) {
+  # Tworzymy tabelę krzyżową
+  tabela <- table(dane[[zmienna]], dane$purchased_bike)
+  
+  # Liczymy test
+  test <- chisq.test(tabela)
+  
+  # Zamieniamy na ładny format i dodajemy nazwę zmiennej
+  tidy(test) %>%
+    mutate(Cecha = zmienna) %>%
+    select(Cecha, statistic, parameter, p.value)
+}
+
+# 3. Wykonanie pętli po wszystkich zmiennych i połączenie wyników
+wyniki_zbiorcze <- map_df(zmienne_do_analizy, oblicz_chi, dane = dane2)
+
+# 4. Formatowanie tabeli końcowej
+wyniki_zbiorcze %>%
+  # Dodajemy interpretację gwiazdkową (opcjonalnie)
+  mutate(Istotnosc = case_when(
+    p.value < 0.001 ~ "***",
+    p.value < 0.01  ~ "**",
+    p.value < 0.05  ~ "*",
+    TRUE ~ "brak"
+  )) %>%
+  # Formatowanie p-value na ładny tekst (np. <0.001)
+  mutate(p.value = format.pval(p.value, digits = 3, eps = 0.001)) %>%
+  # Tworzenie tabeli
+  kable(
+    col.names = c("Badana Cecha", "Chi-kwadrat", "Stopnie swobody (df)", "P-value", "Istotność"),
+    digits = 2,
+    escape = FALSE, # Ważne dla kolorowania cell_spec
+    caption = "Ranking czynników wpływających na zakup roweru (Test niezależności Chi-kwadrat)"
+  ) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>%
+  column_spec(1, bold = TRUE) # Pogrubienie nazw zmiennych
+```
+
+##Podsumowanie i wnioski końcowe
+Projekt CycleInsight pozwolił na kompleksową analizę czynników wpływających na decyzje zakupowe klientów sklepu rowerowego. Proces badawczy objął przygotowanie danych (Data Wrangling), imputację braków, wizualizację oraz weryfikację hipotez za pomocą testów statystycznych. Na podstawie przeprowadzonych prac sformułowano następujące wnioski:
+
+1 opcja
+Wnioski biznesowe
+Idealnym klientem ("Target Persona") dla sklepu jest singiel z wyższym wykształceniem (licencjat), o ponadprzeciętnych dochodach, nieposiadający samochodu lub posiadający tylko jeden, zamieszkujący Amerykę Północną. Kampanie marketingowe nie powinny być segmentowane ze względu na płeć czy posiadanie nieruchomości, gdyż cechy te nie wpływają na konwersję. Zamiast tego, przekaz powinien skupiać się na korzyściach dla osób niezmotoryzowanych (transport) oraz osób z wyższym dochodem (jakość/prestiż).
+
+2 opcja
+Konkluzja ogólna. Analiza dowodzi, że zakup roweru w badanym sklepie nie jest zdarzeniem losowym, lecz wynikiem splotu konkretnych cech demograficznych i stylu życia. "Idealny klient" to osoba w średnim wieku, z wyższym wykształceniem, posiadająca własny dom, zamieszkująca Amerykę Północną i traktująca rower prawdopodobnie jako element rekreacji lub alternatywę dla jednego samochodu. Zrozumienie tych zależności pozwala na optymalizację działań biznesowych opisanych w sekcji rekomendacji.
