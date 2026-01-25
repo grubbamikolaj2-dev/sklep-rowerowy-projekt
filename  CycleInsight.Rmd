@@ -748,6 +748,43 @@ predicted_classes <- ifelse(prob > 0.5, "Yes", "No")
 table(Predicted = predicted_classes, Actual = df_clean$Purchased.Bike)
 ```
 
+#
+Podsumowanie i wnioski końcowe
+
+Wyniki modelu logitowego
+1. Kluczowe determinanty zakupu 
+Model regresji logistycznej pozwolił wyodrębnić zmienne, które mają realny wpływ na decyzję zakupową, eliminując zakłócenia wynikające ze współzależności cech.
+
+Status cywilny (Marital Status): Jest to jeden z najsilniejszych predyktorów. Osoby samotne (Single) są znacznie bardziej skłonne do zakupu roweru niż osoby w związkach małżeńskich. Iloraz szans (Odds Ratio) wynosi ok. 1.73, co oznacza, że szansa na zakup u singla jest o 73% wyższa niż u osoby zamężnej/żonatej, przy zachowaniu pozostałych cech na stałym poziomie.
+
+Samochody (Cars): Liczba posiadanych samochodów jest silną barierą zakupową. Każdy dodatkowy samochód w gospodarstwie domowym drastycznie obniża szansę na zakup roweru (OR ≈ 0.64, p < 0.001). Potwierdza to hipotezę, że dla badanej grupy rower jest często alternatywą transportową, a nie tylko rekreacyjną.
+
+Dzieci (Children): Zmienna ta wpływa negatywnie na decyzję zakupową (p = 0.035). Większa liczba dzieci w gospodarstwie domowym wiąże się z niższą skłonnością do zakupu roweru dla siebie przez klienta (prawdopodobnie ze względu na ograniczenia budżetowe lub czasowe).
+
+Dochód (Income): Istnieje statystycznie istotna, dodatnia zależność między dochodem a prawdopodobieństwem zakupu (p < 0.001), co oznacza, że rower w ofercie sklepu jest dobrem normalnym (popyt rośnie wraz z dochodem).
+
+2. Profil demograficzny i społeczny
+Wykształcenie: Klienci z wykształceniem wyższym (Bachelors) stanowią grupę referencyjną o najwyższym potencjale zakupowym. Osoby z wykształceniem częściowym (Partial College/High School) wykazują istotnie niższą szansę na zakup (wyniki ujemne w modelu logitowym).
+
+Region: Test Chi-kwadrat (p < 0.001) oraz analiza opisowa wskazują na silne zróżnicowanie regionalne, z dominacją sprzedaży w Ameryce Północnej.
+
+3. Cechy nieistotne statystycznie (Obalenie hipotez)
+Wbrew pierwotnym przypuszczeniom, analiza wielozmiennowa wykazała brak istotnego wpływu dla:
+
+Płci (Gender): Płeć klienta nie różnicuje szansy na zakup (p = 0.94 w modelu logitowym, p = 0.67 w teście Chi-kwadrat). Oferta sklepu jest uniwersalna.
+
+Posiadania domu (Home Owner): Zarówno test niezależności (p = 0.63), jak i model (p = 0.46) wskazują, że status własności nieruchomości nie ma związku z zakupem roweru. Jest to ważna korekta względem wstępnych obserwacji opartych wyłącznie na liczebnościach.
+
+Zawodu (Occupation): Poza pewnymi różnicami w dochodach, sam typ wykonywanej pracy nie jest istotnym predyktorem w modelu.
+
+4. Ocena jakości modelu
+Zbudowany model logitowy charakteryzuje się trafnością (Accuracy) na poziomie ok. 62.6%.
+
+Macierz pomyłek pokazuje, że model lepiej radzi sobie z przewidywaniem braku zakupu (346 trafień) niż zakupu (280 trafień).
+
+Sugeruje to, że w danych istnieją inne, nieuchwycone zmienne (np. zainteresowania, styl życia, odległość do ścieżek rowerowych), które mogłyby poprawić predykcję.
+
+
 ```{r}
 library(dplyr)
 library(broom)
@@ -801,18 +838,9 @@ wyniki_zbiorcze %>%
 ##Podsumowanie i wnioski końcowe
 Projekt CycleInsight pozwolił na kompleksową analizę czynników wpływających na decyzje zakupowe klientów sklepu rowerowego. Proces badawczy objął przygotowanie danych (Data Wrangling), imputację braków, wizualizację oraz weryfikację hipotez za pomocą testów statystycznych. Na podstawie przeprowadzonych prac sformułowano następujące wnioski:
 
-1. Profil demograficzny nabywcy. Analiza wykazała, że wiek jest jednym z najsilniejszych determinantów zakupu. Najwyższy współczynnik konwersji obserwuje się w grupie wiekowej 26–45 lat, co potwierdził test Chi-kwadrat wskazujący na istotną statystycznie zależność (p < 0.001). Klienci w wieku emerytalnym (56+) oraz bardzo młodzi (poniżej 25 lat) wykazują znacznie mniejszą skłonność do zakupu. Dodatkowo, poziom wykształcenia (szczególnie stopień licencjata/bachelors) jest silnie skorelowany z decyzją o zakupie, co sugeruje, że główną grupą docelową są wykwalifikowani specjaliści.
+1 opcja
+Wnioski biznesowe
+Idealnym klientem ("Target Persona") dla sklepu jest singiel z wyższym wykształceniem (licencjat), o ponadprzeciętnych dochodach, nieposiadający samochodu lub posiadający tylko jeden, zamieszkujący Amerykę Północną. Kampanie marketingowe nie powinny być segmentowane ze względu na płeć czy posiadanie nieruchomości, gdyż cechy te nie wpływają na konwersję. Zamiast tego, przekaz powinien skupiać się na korzyściach dla osób niezmotoryzowanych (transport) oraz osób z wyższym dochodem (jakość/prestiż).
 
-2. Status materialny i stabilizacja życiowa. Decyzja o zakupie roweru jest ściśle powiązana ze stabilizacją majątkową.
-
-Dochód: Choć rozkład dochodów nie jest normalny (potwierdzone testem Shapiro-Wilka), analiza testem nieparametrycznym wskazuje, że wyższe zarobki sprzyjają zakupom, choć nie są jedynym czynnikiem.
-
-Nieruchomości: Istnieje wyraźna przewaga kupujących wśród właścicieli domów (Home Owner: Yes) w porównaniu do osób wynajmujących.
-
-Samochody: Zaobserwowano odwrotną zależność w przypadku liczby posiadanych aut – osoby posiadające 2 lub więcej samochodów rzadziej decydują się na zakup roweru, co może wynikać z preferencji transportowych.
-
-3. Zróżnicowanie regionalne. Region Ameryki Północnej dominuje zarówno pod względem liczby klientów, jak i wolumenu sprzedaży. Analiza macierzy Cramér’s V potwierdziła, że region jest jedną ze zmiennych najsilniej różnicujących zachowania klientów. Rynek europejski i pacyficzny wykazują odmienną specyfikę, co sugeruje konieczność stosowania zróżnicowanych strategii dla każdego obszaru geograficznego.
-
-4. Jakość danych i metodologia. Zbiór danych wymagał wstępnego czyszczenia i imputacji (ok. 24% braków w wybranych zmiennych). Zastosowane metody imputacji (dominanta dla zmiennych kategorialnych, mediana dla liczbowych) pozwoliły na zachowanie spójności rozkładów, co potwierdziła walidacja pakietem visdat. Wykryte braki normalności rozkładu dla zmiennych ilościowych (np. dochód) wymusiły zastosowanie odpowiednich testów nieparametrycznych, co zwiększyło rzetelność wnioskowania statystycznego.
-
+2 opcja
 Konkluzja ogólna. Analiza dowodzi, że zakup roweru w badanym sklepie nie jest zdarzeniem losowym, lecz wynikiem splotu konkretnych cech demograficznych i stylu życia. "Idealny klient" to osoba w średnim wieku, z wyższym wykształceniem, posiadająca własny dom, zamieszkująca Amerykę Północną i traktująca rower prawdopodobnie jako element rekreacji lub alternatywę dla jednego samochodu. Zrozumienie tych zależności pozwala na optymalizację działań biznesowych opisanych w sekcji rekomendacji.
