@@ -127,10 +127,13 @@ print(wykres2)
 
 ## Badanie wzorców braków danych
 
-```{r wzorce braków danych, echo=FALSE}
+```{r wzorce braków danych, results='hide', message=FALSE, warning=FALSE}
 
 missing_pattern(dane)
 ```
+## Podsumowanie braków danych
+
+Braki dotyczyły głównie dochodu i kilku zmiennych demograficznych, a ich udział w zbiorze był niewielki i bez wyraźnego wzorca. Zastosowaliśmy imputację dominantą dla zmiennych kategorycznych oraz medianą i metodą hotdeck (dla dochodu), co pozwoliło uzupełnić dane bez utraty obserwacji.
 
 # Imputacja brakujących danych
 
@@ -154,7 +157,6 @@ colSums(is.na(dane))
 ## Imputacja danych z użyciem dominanty
 
 ```{r imputacja danych ilościowych}
-# Przykład dla jednej zmiennej kategorycznej
 dominanta <- names(sort(table(dane$marital_status), decreasing = TRUE))[1]
 dane$marital_status[is.na(dane$marital_status)] <- dominanta
 dominanta_gender <- names(sort(table(dane$gender), decreasing = TRUE))[1]
@@ -179,11 +181,13 @@ dane2 <- hotdeck(dane2, variable = "income")
 missing_pattern(dane2)
 
 ```
+## Braki po imputacji
+
+Zastosowana procedura imputacji pozwoliła uzupełnić wszystkie brakujące wartości w zbiorze – dane po przekształceniach są w pełni kompletne
 
 # Walidacja danych
 
 ```{r walidacja danych}
-# Najpierw zainstaluj i załaduj pakiet:
 if (!require(validate)) install.packages("validate")
 library(validate)
 
@@ -210,24 +214,22 @@ summary(out)
 ```
 
 ## Sprawdzenie duplikatów
-
-sum(duplicated(dane2)) Duplikaty występują, jednak w kontekście naszego zestawu danych nie stanowią one problemu, dlatego je pozostawiamy.
+```{r sprawdzenie duplikatów}
+sum(duplicated(dane2))
+```
+Duplikaty występują, ale traktujemy je jako powtarzające się profile klientów (np. kolejne wizyty), dlatego je pozostawiamy.
 
 # WIZUALIZACJA DANYCH
 
 ```{r ustawienia wykresów, include=FALSE}
-# Ładowanie bibliotek
 library(ggplot2)
 library(dplyr)
 library(tidyr)
 
-# Wczytanie danych (zakładając, że plik jest w katalogu roboczym)
 df <- dane2
 
-# Uporządkowanie kolejności zmiennej purchased_bike (żeby "Yes" było kolorem wyróżniającym)
 df$purchased_bike <- factor(df$purchased_bike, levels = c("No", "Yes"))
 
-# Ustawienie estetycznego motywu dla wszystkich wykresów
 my_theme <- theme_minimal() +
   theme(
     plot.title = element_text(face = "bold", size = 14),
@@ -241,7 +243,7 @@ my_theme <- theme_minimal() +
 
 ```{r wizualizacja danych}
 ggplot(df, aes(x = education, fill = purchased_bike)) +
-  geom_bar(position = "fill") + # "fill" pokazuje proporcje (do 100%)
+  geom_bar(position = "fill") + 
   scale_fill_manual(values = c("No" = "#999999", "Yes" = "#56B4E9")) +
   labs(
     title = "Prawdopodobieństwo zakupu roweru wg wykształcenia",
@@ -253,6 +255,7 @@ ggplot(df, aes(x = education, fill = purchased_bike)) +
   coord_flip() + 
   my_theme
 ```
+Wykres pokazuje, że najwyższy udział kupujących rower występuje wśród osób z wykształceniem wyższym, natomiast klienci z niższym wykształceniem rzadziej decydują się na zakup.
 
 ## Pytanie 2: Stan posiadania i styl życia (Samochody, Dojazdy)
 
@@ -270,6 +273,7 @@ ggplot(df, aes(x = factor(cars), fill = purchased_bike)) +
   ) +
   my_theme
 ```
+Widzimy, że klienci bez samochodu lub posiadający tylko jeden częściej kupują rower, a wraz ze wzrostem liczby aut w gospodarstwie udział kupujących wyraźnie spada.
 
 ### Dystans do pracy
 
@@ -291,6 +295,7 @@ ggplot(df, aes(x = commute_distance, fill = purchased_bike)) +
   scale_y_continuous(labels = scales::percent) +
   my_theme
 ```
+Krótszy dystans do pracy niekoniecznie wiąże się z wyższym odsetkiem kupujących rower na poziomie ogólnym, natomiast przy dużych odległościach wyraźnie rośnie udział osób, które roweru nie kupują.
 
 ## Pytanie 3: Różnice regionalne i wiekowe
 
@@ -310,6 +315,7 @@ ggplot(df, aes(x = region, fill = purchased_bike)) +
   ) +
   my_theme
 ```
+Między regionami widać wyraźne różnice w sprzedaży – w jednym z regionów liczba klientów kupujących rower jest zdecydowanie wyższa niż w pozostałych.
 
 ## REGIoN A DYSTANS
 
@@ -357,6 +363,7 @@ ggplot(heat_data, aes(x = commute_distance, y = region, fill = procent_Yes)) +
   ) +
   coord_fixed(ratio = 1.5)  # Kwadratowe komórki
 ```
+Heatmapa pokazuje, że zależność między dystansem do pracy a zakupem roweru jest silnie zróżnicowana regionalnie – w niektórych regionach krótkie dojazdy wiążą się z wysokim udziałem kupujących, podczas gdy w innych nawet przy podobnych odległościach odsetek zakupów pozostaje niski.
 
 # Analiza opisowa
 
