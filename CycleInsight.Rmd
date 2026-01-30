@@ -663,12 +663,46 @@ ggbetweenstats(
   pairwise.comparisons = TRUE,
   centrality.plotting = TRUE
 ) + theme_minimal()
+```
 
-#Dlaczego wybraliśmy testy nie wymagają normalnosci rozkładu?
-test_norm<- shapiro.test(dane2$income)
-test_norm$p.value
-print(test_norm)
 
+```{r tabela_shapiro, echo=FALSE, message=FALSE, warning=FALSE}
+# Wymagane pakiety
+library(broom)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+
+# 1. Wykonanie testu (zakładam, że dane2$income istnieje)
+test_norm <- shapiro.test(dane2$income)
+
+# 2. Porządkowanie wyników za pomocą broom::tidy()
+tabela_norm <- tidy(test_norm) %>%
+  mutate(
+    # Formatowanie statystyki W
+    statistic = round(statistic, 3),
+    # Formatowanie p-value (np. <0.001)
+    p.value_formatted = format.pval(p.value, digits = 3, eps = 0.001),
+    # Dodanie interpretacji tekstowej w tabeli
+    Interpretacja = if_else(p.value < 0.05, 
+                            "Rozkład inny niż normalny", 
+                            "Rozkład normalny")
+  ) %>%
+  select(method, statistic, p.value_formatted, Interpretacja)
+
+# 3. Generowanie tabeli
+kable(tabela_norm, 
+      col.names = c("Test", "Statystyka W", "P-value", "Wniosek"),
+      align = "lccc",
+      caption = "Weryfikacja normalności rozkładu zmiennej dochód") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = F) %>%
+  column_spec(3, bold = TRUE, color = ifelse(test_norm$p.value < 0.05, "red", "green")) %>%
+  footnote(general = "P-value < 0.05 oznacza brak rozkładu normalnego.")
+
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Dochód vs Zakup
 ggbetweenstats(
   data = dane2,
@@ -722,36 +756,71 @@ ggscatterstats(
 
 Wykres pokazuje, że rozkłady wieku kupujących ("Yes") i niekupujących ("No") są praktycznie identyczne dla każdego roku życia od 40 do 80 lat – każda grupa wiekowa ma po 1000 obserwacji w obu kategoriach. To potwierdza wcześniejsze wnioski: wiek sam w sobie nie różnicuje silnie kupujących od niekupujących, gdyż proporcje w każdej kohorcie wiekowej są stałe. Różnica w medianach (41 vs 44 lata) wynika z nieznacznych różnic w ogólnej strukturze wiekowej, a nie z odmiennych zachowań w poszczególnych przedziałach wiekowych.
 
-```{r}
+## Wyniki modelu logitowego
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
 
-
-# 2. Przygotowanie danych (Preprocessing)
 df_clean <- df %>%
   mutate(Purchased.Bike = as.factor(purchased_bike))%>%
   mutate(Education= as.factor(education))%>%
   mutate(Occupation= as.factor(occupation))
 
-# Sprawdzenie struktury danych przed modelowaniem
-str(df_clean)
-# 3. Budowa Modelu Logitowego
 model <- glm(Purchased.Bike ~ marital_status+gender+income +children +home_owner + cars + age +Education + Occupation, data = df_clean, family = binomial(link = "logit"))
 
-# 4. Wyświetlenie wyników modelu
-summary(model)
-
-# 5. Obliczenie Ilorazu Szans (Odds Ratios)
 or <- exp(coef(model))
-print("Ilorazy Szans (Odds Ratios):")
-print(or)
 
-# 6. (Opcjonalnie) Ocena jakości modelu - Tabela pomyłek (Confusion Matrix)
 prob <- predict(model, type = "response")
 predicted_classes <- ifelse(prob > 0.5, "Yes", "No")
-table(Predicted = predicted_classes, Actual = df_clean$Purchased.Bike)
 ```
 
-```{r}
+```{r macierz_pomylek_ulepszona, echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(kableExtra)
+library(dplyr) 
+
+
+prob <- predict(model, type = "response")
+predicted_classes <- ifelse(prob > 0.5, "Kupi (Yes)", "Nie kupi (No)")
+
+# Tworzymy tabelę
+tabela_conf <- table(Prognoza = predicted_classes, Rzeczywistosc = df_clean$Purchased.Bike)
+
+# Obliczenie dokładności do stopki
+accuracy <- round(sum(diag(tabela_conf)) / sum(tabela_conf) * 100, 2)
+
+kbl(tabela_conf, 
+    col.names = c("Nie kupił", "Kupił"), 
+    align = "cc",
+    caption = "Macierz Pomyłek: Ocena trafności modelu") %>%
+  
+  # Stylizacja ogólna - full_width = T rozciągnie tabelę
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = TRUE, font_size = 16) %>%
+  
+  # Nagłówek górny (Rzeczywistość)
+  add_header_above(c(" " = 1, "Rzeczywista decyzja klienta" = 2), 
+                   bold = TRUE, background = "#f0f0f0") %>%
+  
+  # Dodanie etykiety dla kolumny z prognozami (Wiersze)
+  pack_rows("Prognoza Modelu", 1, 2, label_row_css = "background-color: #666; color: white;") %>%
+  
+  # Formatowanie pierwszej kolumny (Nazwy wierszy)
+  column_spec(1, bold = TRUE, width = "30%") %>%
+  
+  # KOLOROWANIE TRAFIEN
+  # Zakładając układ: Wiersz 1=Nie, Wiersz 2=Tak
+  # Komórka (1, 2) to True Negative (Dobrze przewidziane "Nie")
+  column_spec(2, background = ifelse(rownames(tabela_conf) == "Nie kupi (No)", "#d1e7dd", "white")) %>%
+  # Komórka (2, 3) to True Positive (Dobrze przewidziane "Tak")
+  column_spec(3, background = ifelse(rownames(tabela_conf) == "Kupi (Yes)", "#d1e7dd", "white")) %>%
+  
+  # Stopka z wynikiem
+  footnote(general = paste0("Całkowita dokładność modelu (Accuracy): ", accuracy, "%"),
+           general_title = "Wniosek: ",
+           footnote_as_chunk = T)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Wymagane pakiety
 library(broom)
 library(dplyr)
@@ -783,7 +852,7 @@ kable(tabela_istotne,
   footnote(general = "OR > 1 oznacza wzrost szansy na zakup, OR < 1 oznacza spadek szansy.")
 ```
 
-## Wyniki modelu logitowego
+
 Model regresji logistycznej wskazał kluczowe czynniki wpływające na decyzję zakupu roweru. Najsilniejszymi predyktorami są: status cywilny (single częściej kupują), liczba posiadanych samochodów (im więcej aut, tym mniejsza skłonność do zakupu), liczba dzieci (wpływ negatywny) oraz dochód (wpływ pozytywny – rower jest dobrem normalnym).
 
 Profil klienta o najwyższym potencjale zakupowym to osoba z wykształceniem wyższym, mieszkająca w Ameryce Północnej. Analiza wykazała natomiast brak istotnego wpływu płci, posiadania domu oraz zawodu na decyzję zakupową.
