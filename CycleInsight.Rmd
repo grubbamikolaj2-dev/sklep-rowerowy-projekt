@@ -783,7 +783,7 @@ kable(tabela_istotne,
   footnote(general = "OR > 1 oznacza wzrost szansy na zakup, OR < 1 oznacza spadek szansy.")
 ```
 
-##Wyniki modelu logitowego
+## Wyniki modelu logitowego
 Model regresji logistycznej wskazał kluczowe czynniki wpływające na decyzję zakupu roweru. Najsilniejszymi predyktorami są: status cywilny (single częściej kupują), liczba posiadanych samochodów (im więcej aut, tym mniejsza skłonność do zakupu), liczba dzieci (wpływ negatywny) oraz dochód (wpływ pozytywny – rower jest dobrem normalnym).
 
 Profil klienta o najwyższym potencjale zakupowym to osoba z wykształceniem wyższym, mieszkająca w Ameryce Północnej. Analiza wykazała natomiast brak istotnego wpływu płci, posiadania domu oraz zawodu na decyzję zakupową.
@@ -841,11 +841,11 @@ wyniki_zbiorcze %>%
 ```
 
 
-Podsumowanie i wnioski końcowe
-Projekt CycleInsight dostarczył pogłębionej, opartej na danych analizy profilu klientów sklepu rowerowego, pozwalając na identyfikację kluczowych determinantów decyzji zakupowych. Przeprowadzony proces badawczy, obejmujący przygotowanie danych, eksploracyjną analizę wizualną oraz zaawansowane modelowanie statystyczne, umożliwił weryfikację postawionych hipotez i sformułowanie praktycznych rekomendacji biznesowych.
+## Podsumowanie i wnioski końcowe
 
-Główne ustalenia analityczne potwierdziły, że zakup roweru nie jest zdarzeniem losowym, lecz wynika z wyraźnego profilu socjodemograficznego i stylu życia. Regresja logistyczna wyodrębniła najsilniejsze predyktory: status cywilny (singiel: +73% szans) i liczbę samochodów (każdy dodatkowy: -36% szans), co wskazuje, że rower stanowi często alternatywę transportową dla osób niezwiązanych i o ograniczonej dostępności do samochodu. Istotny, choć mniejszy, negatywny wpływ ma liczba dzieci, co sugeruje przesunięcie priorytetów budżetowych lub czasowych w rodzinach. Dochód wykazał pozytywną, lecz nieliniową zależność, z największą konwersją w przedziale 80-100 tys. $, pozycjonując rower jako dobro dla zamożnej klasy średniej. Wykształcenie wyższe oraz region Ameryki Północnej również znacząco zwiększały prawdopodobieństwo zakupu.
+Projekt CycleInsight wykazał, że decyzja o zakupie roweru jest silnie uwarunkowana profilem socjodemograficznym i stylem życia klienta. Najważniejsze czynniki zwiększające prawdopodobieństwo zakupu to niższy dochód (szczególnie 20–40 tys. $), wykształcenie wyższe oraz zamieszkanie w Ameryce Północnej. Negatywnie wpływają natomiast liczba posiadanych samochodów i dzieci, co potwierdza rolę roweru jako alternatywnego środka transportu.
 
-Kluczowym wnioskiem metodycznym jest obalenie kilku intuicyjnych założeń. Analiza wielowymiarowa jednoznacznie wykazała brak statystycznie istotnego wpływu płci i posiadania domu na decyzję zakupową, co jest istotną korektą względem wstępnych obserwacji opartych na prostych rozkładach częstości. Podobnie, wiek okazał się czynnikiem istotnym, ale o niewielkim efekcie praktycznym, a zawód nie miał znaczenia po uwzględnieniu dochodu. Pokazuje to wartość zaawansowanych modeli statystycznych w oddzielaniu prawdziwych sygnałów od pozornych korelacji.
+Analiza obaliła kilka intuicyjnych założeń: płeć, posiadanie domu i zawód nie mają istotnego znaczenia po uwzględnieniu innych zmiennych.
 
-Podsumowując, idealny klient sklepu rowerowego ("Target Persona") to singiel w wieku 36-45 lat, z wyższym wykształceniem (licencjat), o dochodach 80-100 tys. $, posiadający maksymalnie jeden samochód i zamieszkujący Amerykę Północną. Dla zarządzających oznacza to konieczność przesunięcia akcentów w strategii marketingowej. Kampanie nie powinny być segmentowane według płci czy statusu mieszkaniowego, lecz koncentrować się na benefitach dla osób poszukujących alternatywnego środka transportu (singli, mieszkańców miast) oraz na jakości i prestiżu produktu, trafiając do zamożniejszych, wykształconych konsumentów. Rekomendowane jest również zróżnicowanie oferty i komunikacji między regionami, z uwzględnieniem lokalnych wzorców dojazdów do pracy. Dalsze badania mogłyby uwzględnić czynniki behawioralne, takie jak zainteresowanie aktywnością fizyczną czy dostępność infrastruktury rowerowej, aby jeszcze bardziej udoskonalić prognozowanie popytu i personalizację oferty.
+Idealny klient to singiel w wieku 36–45 lat, z wyższym wykształceniem, średnio-niskimi dochodami i ograniczonym dostępem do samochodu. Wnioski te sugerują, że strategia marketingowa powinna koncentrować się na korzyściach transportowych, jakości i prestiżu produktu oraz uwzględniać różnice regionalne, zamiast segmentacji według płci czy statusu mieszkaniowego.
+
