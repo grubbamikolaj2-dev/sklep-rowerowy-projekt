@@ -784,38 +784,11 @@ kable(tabela_istotne,
 ```
 
 ##Wyniki modelu logitowego
-1. Kluczowe determinanty zakupu 
-Model regresji logistycznej pozwolił wyodrębnić zmienne, które mają realny wpływ na decyzję zakupową, eliminując zakłócenia wynikające ze współzależności cech.
+Model regresji logistycznej wskazał kluczowe czynniki wpływające na decyzję zakupu roweru. Najsilniejszymi predyktorami są: status cywilny (single częściej kupują), liczba posiadanych samochodów (im więcej aut, tym mniejsza skłonność do zakupu), liczba dzieci (wpływ negatywny) oraz dochód (wpływ pozytywny – rower jest dobrem normalnym).
 
-Status cywilny (Marital Status): Jest to jeden z najsilniejszych predyktorów. Osoby samotne (Single) są znacznie bardziej skłonne do zakupu roweru niż osoby w związkach małżeńskich. Iloraz szans (Odds Ratio) wynosi ok. 1.73, co oznacza, że szansa na zakup u singla jest o 73% wyższa niż u osoby zamężnej/żonatej, przy zachowaniu pozostałych cech na stałym poziomie.
+Profil klienta o najwyższym potencjale zakupowym to osoba z wykształceniem wyższym, mieszkająca w Ameryce Północnej. Analiza wykazała natomiast brak istotnego wpływu płci, posiadania domu oraz zawodu na decyzję zakupową.
 
-Samochody (Cars): Liczba posiadanych samochodów jest silną barierą zakupową. Każdy dodatkowy samochód w gospodarstwie domowym drastycznie obniża szansę na zakup roweru (OR ≈ 0.64, p < 0.001). Potwierdza to hipotezę, że dla badanej grupy rower jest często alternatywą transportową, a nie tylko rekreacyjną.
-
-Dzieci (Children): Zmienna ta wpływa negatywnie na decyzję zakupową (p = 0.035). Większa liczba dzieci w gospodarstwie domowym wiąże się z niższą skłonnością do zakupu roweru dla siebie przez klienta (prawdopodobnie ze względu na ograniczenia budżetowe lub czasowe).
-
-Dochód (Income): Istnieje statystycznie istotna, dodatnia zależność między dochodem a prawdopodobieństwem zakupu (p < 0.001), co oznacza, że rower w ofercie sklepu jest dobrem normalnym (popyt rośnie wraz z dochodem).
-
-2. Profil demograficzny i społeczny
-Wykształcenie: Klienci z wykształceniem wyższym (Bachelors) stanowią grupę referencyjną o najwyższym potencjale zakupowym. Osoby z wykształceniem częściowym (Partial College/High School) wykazują istotnie niższą szansę na zakup (wyniki ujemne w modelu logitowym).
-
-Region: Test Chi-kwadrat (p < 0.001) oraz analiza opisowa wskazują na silne zróżnicowanie regionalne, z dominacją sprzedaży w Ameryce Północnej.
-
-3. Cechy nieistotne statystycznie (Obalenie hipotez)
-Wbrew pierwotnym przypuszczeniom, analiza wielozmiennowa wykazała brak istotnego wpływu dla:
-
-Płci (Gender): Płeć klienta nie różnicuje szansy na zakup (p = 0.94 w modelu logitowym, p = 0.67 w teście Chi-kwadrat). Oferta sklepu jest uniwersalna.
-
-Posiadania domu (Home Owner): Zarówno test niezależności (p = 0.63), jak i model (p = 0.46) wskazują, że status własności nieruchomości nie ma związku z zakupem roweru. Jest to ważna korekta względem wstępnych obserwacji opartych wyłącznie na liczebnościach.
-
-Zawodu (Occupation): Poza pewnymi różnicami w dochodach, sam typ wykonywanej pracy nie jest istotnym predyktorem w modelu.
-
-4. Ocena jakości modelu
-Zbudowany model logitowy charakteryzuje się trafnością (Accuracy) na poziomie ok. 62.6%.
-
-Macierz pomyłek pokazuje, że model lepiej radzi sobie z przewidywaniem braku zakupu (346 trafień) niż zakupu (280 trafień).
-
-Sugeruje to, że w danych istnieją inne, nieuchwycone zmienne (np. zainteresowania, styl życia, odległość do ścieżek rowerowych), które mogłyby poprawić predykcję.
-
+Jakość modelu jest umiarkowana (accuracy ok. 62,6%) – lepiej przewiduje brak zakupu niż zakup. Sugeruje to istnienie dodatkowych, nieujętych w danych czynników (np. styl życia, zainteresowania), które mogłyby poprawić trafność predykcji.
 
 ```{r}
 library(dplyr)
