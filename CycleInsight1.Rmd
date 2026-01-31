@@ -1,0 +1,920 @@
+---
+title: "CycleInsight – analiza danych" 
+author: "MG, PC, BK"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true     
+    toc_float: true 
+    toc_depth: 3
+    df_print: paged
+    theme: flatly
+    highlight: tango
+    code_download: true
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    latex_engine: xelatex  # Polskie znaki
+lang: "pl"
+---
+
+```{r setup, include=FALSE}
+# Lista pakietów
+packages <- c("knitr", "visdat", "naniar", "ggplot2", "dplyr", "tidyr",
+              "stringr", "janitor", "mice", "finalfit", "kableExtra", 
+              "hms", "rlang", "rstatix")
+
+# Instalacja brakujących
+if(any(!(packages %in% installed.packages()[,"Package"]))) {
+  install.packages(packages[!(packages %in% installed.packages()[,"Package"])], 
+                   dependencies = TRUE)
+}
+
+# Ładowanie
+lapply(packages, library, character.only = TRUE)
+
+# USTAWIENIA - TYLKO WYNIKI
+knitr::opts_chunk$set(
+  echo = FALSE,
+  eval = TRUE,
+  include = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  results = 'asis',
+  fig.width = 10,
+  fig.height = 6,
+  dpi = 300
+)
+
+# Dane
+dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
+```
+
+# Wstęp
+
+Projekt **CycleInsight** stanowi analizę danych klientów sklepu rowerowego przygotowaną na potrzeby przedmiotu „Analiza danych w R”. Jego celem jest zbadanie zależności między cechami klientów a ich decyzją o zakupie roweru.
+
+## Postaramy sie odpowiedzieć na następujące pytania badawcze:
+
+1.  Jakie cechy klientów (wiek, dochód, region, liczba dzieci, wykształcenie itd.) mają największy wpływ na decyzję o zakupie roweru?
+2.  W jakim stopniu stan posiadania (samochód, dom) oraz styl życia wpływają na prawdopodobieństwo zakupu roweru?
+3.  Czy występują różnice w decyzji zakupu roweru między klientami z różnych regionów oraz grup wiekowych?
+
+```{r wczytanie danych, echo=FALSE}
+
+dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
+head(dane)
+```
+
+## Nazwy kolumn w zbiorze danych:
+
+```{r struktura danych, echo=FALSE}
+library(knitr)
+library(kableExtra)
+kable(colnames(dane), caption = "Lista nazw kolumn w zbiorze danych") %>%
+  kableExtra::kable_styling(font_size = 16, bootstrap_options = "striped") %>%
+  kableExtra::row_spec(0, bold = TRUE, font_size = 18)
+
+
+
+```
+
+# Analiza braków danych
+
+## Liczba brakujących wartości, proporcje i kompletność danych:
+
+```{r Liczba brakujących wartości, proporcje i kompletność, echo=FALSE}
+library(naniar)
+
+cat("Liczba braków w danych:", n_miss(dane), "\n")
+cat("Liczba kompletnych obserwacji:", n_complete(dane), "\n")
+cat("Proporcja braków:", round(prop_miss(dane)*100, 2), "%\n")
+
+```
+
+## Procent brakujących wartości na zmienną:
+
+```{r Procent brakujących wartości na zmienną, echo=FALSE}
+pct <- pct_miss(dane)
+print(pct)
+
+```
+
+## Podsumowanie braków na poziomie zmiennych i obserwacji:
+
+```{r Podsumowanie braków na poziomie zmiennych i obserwacji, echo=FALSE}
+miss_var_summary(dane)
+miss_case_table(dane)
+
+```
+
+## Wizualizacja braków danych z użyciem pakietu visdat
+
+```{r wykresy NA, echo=FALSE}
+wykres1 <- vis_dat(dane) +
+  theme(axis.text.x = element_text(hjust = 1, margin = margin(t = 10))) +
+  ggtitle("Wizualizacja danych z użyciem visdat") +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
+
+wykres2 <- vis_miss(dane) +
+  theme(axis.text.x = element_text(hjust = 1, margin = margin(t = 10))) +
+  ggtitle("Liczba brakujących wartości w zmiennych") +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
+print(wykres1)
+print(wykres2)
+
+```
+
+## Badanie wzorców braków danych
+
+```{r wzorce braków danych, results='hide', message=FALSE, warning=FALSE}
+
+missing_pattern(dane)
+```
+
+## Podsumowanie braków danych
+
+Braki dotyczyły głównie dochodu i kilku zmiennych demograficznych, a ich udział w zbiorze był niewielki i bez wyraźnego wzorca. Zastosowaliśmy imputację dominantą dla zmiennych kategorycznych oraz medianą i metodą hotdeck (dla dochodu), co pozwoliło uzupełnić dane bez utraty obserwacji.
+
+# Imputacja brakujących danych
+
+## Przygotowanie danych do imputacji
+
+```{r przygotowanie danych do imputacji, include=FALSE}
+dane <- dane %>% janitor::clean_names() %>% select(-id)
+
+summary(dane)
+colSums(is.na(dane))
+
+dane <- dane %>% mutate(across(where(is.character), ~ na_if(., "")))
+
+dane$marital_status <- as.factor(dane$marital_status)
+dane$gender <- as.factor(dane$gender)
+dane$home_owner <- as.factor(dane$home_owner)
+colSums(is.na(dane))
+```
+
+Na tym etapie ujednoliciliśmy nazwy zmiennych, usunęliśmy zbędny identyfikator id, zamieniliśmy puste ciągi znaków na wartości brakujące oraz poprawiliśmy typy danych (np. na faktory), tak aby zestaw był gotowy do imputacji.
+
+## Imputacja danych z użyciem dominanty
+
+```{r imputacja danych ilościowych, include=FALSE}
+dominanta <- names(sort(table(dane$marital_status), decreasing = TRUE))[1]
+dane$marital_status[is.na(dane$marital_status)] <- dominanta
+dominanta_gender <- names(sort(table(dane$gender), decreasing = TRUE))[1]
+dane$gender[is.na(dane$gender)] <- dominanta_gender
+dominanta_home_owner <- names(sort(table(dane$home_owner), decreasing = TRUE))[1]
+dane$home_owner[is.na(dane$home_owner)] <- dominanta_home_owner
+```
+
+Dla zmiennych kategorycznych (stan cywilny, płeć, status właściciela domu) brakujące wartości uzupełniliśmy dominantą. Dzięki temu zachowaliśmy rozkład kategorii, nie usuwając żadnych obserwacji.
+
+## imputacja danych z użyciem mediany oraz hotdeck
+
+```{r imputacja-median-hotdeck, echo=FALSE, include=FALSE}
+dane2 <- as.data.frame(dane)
+
+dane2$cars[is.na(dane2$cars)] <- median(dane2$cars, na.rm = TRUE)
+dane2$age[is.na(dane2$age)] <- median(dane2$age, na.rm = TRUE)
+dane2$children[is.na(dane2$children)] <- median(dane2$children, na.rm = TRUE)
+
+if (!require(VIM)) install.packages("VIM")
+library(VIM)
+
+dane2 <- hotdeck(dane2, variable = "income")
+mp <- missing_pattern(dane2)
+```
+
+W przypadku zmiennych ilościowych zastosowaliśmy imputację medianą (wiek, liczba dzieci, liczba samochodów), a dla dochodu metodę hotdeck, która podstawia wartość z podobnych obserwacji. Pozwoliło to uzupełnić dane bez silnego zniekształcania ich rozkładów.
+
+## Braki po imputacji
+
+```{r braki-po-imputacji, echo=FALSE, message=FALSE, warning=FALSE}
+library(naniar)
+
+miss_var_summary(dane2) %>%
+  gg_miss_var(show_pct = TRUE) +
+  ggtitle("Braki danych po imputacji") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+Zastosowana procedura imputacji pozwoliła uzupełnić wszystkie brakujące wartości w zbiorze – dane po przekształceniach są w pełni kompletne
+
+# Walidacja danych
+
+```{r walidacja danych}
+if (!require(validate)) install.packages("validate")
+library(validate)
+
+rules <- validator(
+  cars == as.integer(cars),
+  children == as.integer(children),
+  age == as.integer(age),
+  children >= 0,
+  income >= 0,
+  cars >= 0,
+  age >= 0,
+  commute_distance >= 0,
+  home_owner %in% c("Yes", "No"),
+  purchased_bike %in% c("Yes", "No"),
+  marital_status %in% c("Married", "Single"),
+  gender %in% c("Male", "Female"),
+  education %in% c("Bachelors", "Partial College", "High School", "Partial High School", "Graduate Degree"),
+  occupation %in% c("Skilled Manual", "Clerical", "Professional", "Manual", "Management"),
+  region %in% c("Europe", "Pacific", "North America")
+)
+
+out <- confront(dane2, rules)
+summary(out)
+```
+
+W etapie walidacji sprawdziliśmy zgodność danych z założeniami merytorycznymi zbioru. Zmiennym ilościowym (cars, children, age, income, commute_distance) narzuciliśmy warunek nieujemności oraz, w przypadku cars, children i age, całkowitoliczbowości. Dla zmiennych jakościowych zweryfikowaliśmy poprawność kategorii – w szczególności wartości binarne (home_owner, purchased_bike, marital_status, gender) oraz pełny zestaw dopuszczalnych poziomów dla education, occupation i region – co potwierdziło brak błędnych lub niespójnych kodowań.
+
+## Sprawdzenie duplikatów
+```{r sprawdzenie duplikatów}
+sum(duplicated(dane2))
+```
+
+Duplikaty występują, ale traktujemy je jako powtarzające się profile klientów (np. kolejne wizyty), dlatego je pozostawiamy.
+
+# WIZUALIZACJA DANYCH
+
+```{r ustawienia wykresów, include=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+df <- dane2
+
+df$purchased_bike <- factor(df$purchased_bike, levels = c("No", "Yes"))
+
+my_theme <- theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    legend.position = "bottom"
+  )
+```
+
+## Pytanie 1: Wpływ cech demograficznych (Wiek, Dochód, Wykształcenie)
+
+```{r wizualizacja danych}
+ggplot(df, aes(x = education, fill = purchased_bike)) +
+  geom_bar(position = "fill") + 
+  scale_fill_manual(values = c("No" = "#999999", "Yes" = "#56B4E9")) +
+  labs(
+    title = "Prawdopodobieństwo zakupu roweru wg wykształcenia",
+    x = "Poziom wykształcenia",
+    y = "Procent klientów",
+    fill = "Kupił rower?"
+  ) +
+  scale_y_continuous(labels = scales::percent) +
+  coord_flip() + 
+  my_theme
+```
+
+Wykres pokazuje, że najwyższy udział kupujących rower występuje wśród osób z wykształceniem wyższym, natomiast klienci z niższym wykształceniem rzadziej decydują się na zakup.
+
+## Pytanie 2: Stan posiadania i styl życia (Samochody, Dojazdy)
+
+```{r Liczba posiadanych samochodów a zakup roweru}
+ggplot(df, aes(x = factor(cars), fill = purchased_bike)) +
+  geom_bar(position = "dodge") + # "dodge" stawia słupki obok siebie
+  scale_fill_manual(values = c("No" = "#E15759", "Yes" = "#76B7B2")) +
+  labs(
+    title = "Liczba posiadanych samochodów a zakup roweru",
+    x = "Liczba samochodów",
+    y = "Liczba klientów",
+    fill = "Kupił rower?"
+  ) +
+  my_theme
+```
+
+Widzimy, że klienci bez samochodu lub posiadający tylko jeden częściej kupują rower, a wraz ze wzrostem liczby aut w gospodarstwie udział kupujących wyraźnie spada.
+
+```{r Dystans do pracy}
+# Ustalenie kolejności dystansów (bo to zmienna tekstowa, a chcemy logiczny porządek)
+df$commute_distance <- factor(df$commute_distance, 
+                              levels = c("0-1 Miles", "1-2 Miles", "2-5 Miles", "5-10 Miles", "10+ Miles"))
+
+ggplot(df, aes(x = commute_distance, fill = purchased_bike)) +
+  geom_bar(position = "fill") +
+  scale_fill_manual(values = c("No" = "#BAB0AC", "Yes" = "#F28E2B")) +
+  labs(
+    title = "Wpływ dystansu do pracy na decyzję o zakupie",
+    subtitle = "Im krótszy dystans, tym większa szansa na zakup?",
+    x = "Dystans do pracy (mile)",
+    y = "Procent klientów",
+    fill = "Kupił rower?"
+  ) +
+  scale_y_continuous(labels = scales::percent) +
+  my_theme
+```
+
+Krótszy dystans do pracy niekoniecznie wiąże się z wyższym odsetkiem kupujących rower na poziomie ogólnym, natomiast przy dużych odległościach wyraźnie rośnie udział osób, które roweru nie kupują.
+
+## Pytanie 3: Różnice regionalne i wiekowe
+
+```{r Region a ogólna skuteczność sprzedaży, echo=FALSE}
+ggplot(df, aes(x = region, fill = purchased_bike)) +
+  geom_bar(position = "dodge") +
+  scale_fill_manual(values = c("No" = "grey70", "Yes" = "forestgreen")) +
+  labs(
+    title = "Liczba sprzedanych rowerów w poszczególnych regionach",
+    x = "Region",
+    y = "Liczba klientów",
+    fill = "Kupił rower?"
+  ) +
+  my_theme
+```
+
+Między regionami widać wyraźne różnice w sprzedaży – w jednym z regionów liczba klientów kupujących rower jest zdecydowanie wyższa niż w pozostałych.
+
+```{r region-dystans-gimnastyczna, fig.width=12, fig.height=7}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(scales)
+
+# Tabela % kupujących
+heat_data <- dane2%>%
+  count(region, commute_distance, purchased_bike) %>%
+  pivot_wider(names_from = purchased_bike, values_from = n, values_fill = 0) %>%
+  mutate(procent_Yes = Yes / (Yes + No) * 100) %>%
+  select(region, commute_distance, procent_Yes) %>%
+  mutate(
+    region = factor(region, levels = rev(unique(region))),  # Odwrócone regiony
+    procent_Yes = round(procent_Yes, 1)
+  )
+
+# GIMNASTYCZNA + ETYKIETY
+ggplot(heat_data, aes(x = commute_distance, y = region, fill = procent_Yes)) +
+  geom_tile(color = "white", size = 0.5) +
+  geom_text(aes(label = paste0(procent_Yes, "%")), 
+            color = "white", fontface = "bold", size = 4) +
+  scale_fill_gradient2(
+    low = "#ffeda0", mid = "#f03b20", high = "#bd0026",
+    midpoint = 50, name = "% Kupujących",
+    limits = c(0, 100),
+    labels = percent_format()
+  ) +
+  labs(
+    title = "REGION × DYSTANS DO PRACY vs % ZAKUPU ROWERU",
+    subtitle = "Ciemniejszy kolor = wyższy % kupujących",
+    x = "Dystans do pracy (mile)",
+    y = "Region"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(size = 12, hjust = 0.5),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "right",
+    panel.grid = element_blank()
+  ) +
+  coord_fixed(ratio = 1.5)  # Kwadratowe komórki
+```
+
+Heatmapa pokazuje, że zależność między dystansem do pracy a zakupem roweru jest silnie zróżnicowana regionalnie – w niektórych regionach krótkie dojazdy wiążą się z wysokim udziałem kupujących, podczas gdy w innych nawet przy podobnych odległościach odsetek zakupów pozostaje niski.
+
+# Analiza opisowa
+
+## Statystyki opisowe zmiennych liczbowych
+
+```{r, echo=FALSE}
+library(dplyr)
+library(knitr)
+library(kableExtra)
+
+stats_opisowe <- function(df, zmienna) {
+  df %>%
+    summarise(
+      Min = min(!!sym(zmienna), na.rm = TRUE),
+      Q1 = quantile(!!sym(zmienna), 0.25, na.rm = TRUE),
+      Mediana = median(!!sym(zmienna), na.rm = TRUE),
+      Średnia = mean(!!sym(zmienna), na.rm = TRUE),
+      Q3 = quantile(!!sym(zmienna), 0.75, na.rm = TRUE),
+      Max = max(!!sym(zmienna), na.rm = TRUE),
+      SD = sd(!!sym(zmienna), na.rm = TRUE),
+      Wariancja = var(!!sym(zmienna), na.rm = TRUE),
+      IQR = IQR(!!sym(zmienna), na.rm = TRUE),
+      CV = round(sd(!!sym(zmienna), na.rm = TRUE) /
+                   mean(!!sym(zmienna), na.rm = TRUE) * 100, 2)
+    ) %>%
+    mutate(
+      across(where(is.numeric), ~ round(.x, 2)),
+      Zmienna = zmienna
+    ) %>%
+    select(Zmienna, everything())
+}
+
+zmienne_num <- c("age", "income", "cars", "children")
+tabela_stat <- do.call(rbind, lapply(zmienne_num, function(x) stats_opisowe(dane2, x)))
+
+tabela_stat %>%
+  kable("html",
+        caption = "Statystyki opisowe zmiennych numerycznych") %>%
+  kable_styling(bootstrap_options = c("striped", "hover")) %>%
+  scroll_box(height = "400px")
+```
+
+Klienci sklepu to osoby średnio 44-letnie (ale z dużym rozrzutem: 25-89 lat), o średnim dochodzie 56 tys. $ przy bardzo wysokim zróżnicowaniu zarobków (CV=55%). Typowe gospodarstwo domowe posiada 1 samochód i 2 dzieci, choć w obu tych zmiennych obserwujemy skrajną niejednorodność (CV >75%) - część klientów nie ma w ogóle aut ani dzieci, podczas gdy inni mają ich po kilka.
+
+## Statystyki opisowe zmiennych jakościowych
+
+```{r}
+
+library(readr)
+library(tidyr)
+library(kableExtra)
+
+dane_cat <- dane2%>% select(where(~ is.character(.x) || is.factor(.x)))
+
+wynik <- data.frame()
+
+for (colname in names(dane_cat)) {
+  t <- as.data.frame(table(dane_cat[[colname]], useNA = "ifany"))
+  colnames(t) <- c("kategoria", "liczba")
+  t$procent <- round(100 * t$liczba / sum(t$liczba), 2)
+  t$zmienna <- colname
+  wynik <- rbind(wynik, t)
+}
+
+wynik <- wynik %>% select(zmienna, kategoria, liczba, procent)
+
+wynik %>%
+  kable("html",
+        caption = "Statystyki opisowe dla zmiennych jakościowych (częstości)",
+        digits = 2) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width = FALSE,
+    position = "center"
+  ) %>%
+  scroll_box(height = "500px")
+
+```
+
+Klienci sklepu są w większości żonaci/zamężni (54%), z niemal idealnym podziałem na płeć (51% mężczyzn). Ponad połowa posiada wykształcenie wyższe (licencjat lub magisterium), a większość (69%) jest właścicielami domów. Co istotne, klienci pochodzą głównie z Ameryki Północnej (51%) i decyzje zakupowe są niemal równo podzielone - 48% kupiło rower, 52% nie dokonało zakupu.
+
+## Korelacje między zmiennymi liczbowymi
+
+```{r Korelacja między zmiennymi ilościowymi}
+if (!require(corrplot)) install.packages("corrplot")
+library(corrplot)
+library(dplyr)
+
+zmienne_ilosc <- dane2%>% select(where(is.numeric))
+M <- cor(zmienne_ilosc, use = "complete.obs")
+
+corrplot(M, method = "circle", type = "upper",
+addCoef.col = "black", tl.col = "black",
+tl.srt = 45, number.cex = 0.8,
+col = colorRampPalette(c("blue", "white", "red"))(200),
+title = "Korelacja zmiennych numerycznych")
+```
+
+Występuje słaba dodatnia korelacja między dochodem a liczbą dzieci (r=0.26) oraz między dochodem a liczbą samochodów (r=0.44), co sugeruje, że wyższe zarobki wiążą się z posiadaniem większej liczby aut i potomstwa. Zaskakująco niska korelacja wieku z dochodem (r=0.17) wskazuje, że w tej populacji starsi klienci nie są znacząco bogatsi od młodszych. Liczba samochodów nie koreluje praktycznie z niczym poza dochodem.
+
+## Dochód a zakup roweru
+
+```{r}
+
+dane2$income_bin <- cut(dane2$income, 
+                        breaks = seq(0, 180000, by = 20000), 
+                        dig.lab = 10,
+                        include.lowest = TRUE)
+
+
+ggplot(dane2, aes(x = income_bin, fill = purchased_bike)) +
+  geom_bar(position = "dodge", color = "white") + 
+  scale_fill_manual(values = c("No" = "#E15759", "Yes" = "#76B7B2")) +
+  labs(
+    title = "Liczba zakupionych rowerów w zależności od przedziału zarobków",
+    subtitle = "Rozkład decyzji zakupowych w grupach dochodowych",
+    x = "Przedział zarobków (Income)",
+    y = "Liczba klientów (Ilość)",
+    fill = "Czy kupił rower?") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(face = "bold", size = 14),
+    legend.position = "bottom"
+  )
+```
+
+Zakupy rowerów są najliczniejsze w przedziale średnich dochodów 20-80 tys. $ (łącznie 340 zakupów), gdzie klienci stanowią większość bazy. W przedziałach skrajnych (<20 tys. i >100 tys.) sprzedaż jest wyraźnie niższa – najbiedniejsi prawdopodobnie nie stać na rower, a najzamożniejsi wybierają inne formy rekreacji lub luksusowe alternatywy. Warto zauważyć, że w przedziale 80-100 tys. proporcja kupujących wzrasta (40 na 75 klientów), co może wskazywać na optymalny próg dochodowy dla tej kategorii produktu.
+
+## Wiek a zakup roweru
+
+```{r}
+dane2$age_group <- cut(
+  dane2$age,
+  breaks = c(0, 25, 35, 45, 55, 100),
+  labels = c("<=25", "26–35", "36–45", "46–55", "56+"),
+  include.lowest = TRUE
+)
+
+tab_age_bike <- table(dane2$age_group, dane2$purchased_bike)
+chi_res <- chisq.test(tab_age_bike)
+chi2 <- as.numeric(chi_res$statistic)
+n <- sum(tab_age_bike)
+k <- min(nrow(tab_age_bike) - 1, ncol(tab_age_bike) - 1)
+V_cramer <- sqrt(chi2 / (n * k))
+prop_age <- prop.table(tab_age_bike, margin = 1)
+```
+
+Wiek klientów ma istotny statystycznie wpływ na decyzję zakupową (p < 0,001, V Craméra = 0,18). Najwyższy odsetek kupujących występuje w grupie 36-45 lat (57%), podczas najmłodsi klienci (≤25 lat) choć kupują najchętniej (60%), stanowią znikomą część bazy. Powyżej 55 roku życia skłonność do zakupu gwałtownie spada (tylko 31% kupujących), co sugeruje, że rower jest produktem skierowanym głównie do osób w średnim wieku.
+
+## Korelacje między zmiennymi jakościowymi
+
+```{r}
+if (!require(DescTools)) install.packages("DescTools")
+if (!require(corrplot)) install.packages("corrplot")
+library(DescTools)
+
+qual_vars <- dane2%>% 
+  select(purchased_bike, gender, marital_status, home_owner,
+         education, occupation, region)
+
+nq <- ncol(qual_vars)
+cramer_matrix <- matrix(NA, nrow = nq, ncol = nq)
+colnames(cramer_matrix) <- colnames(qual_vars)
+rownames(cramer_matrix) <- colnames(qual_vars)
+
+for (i in 1:nq) {
+  for (j in 1:nq) {
+    cramer_matrix[i, j] <- if (i == j) 1 else
+      CramerV(table(qual_vars[[i]], qual_vars[[j]]))
+  }
+}
+
+corrplot(
+  cramer_matrix, 
+  method = "color",
+  type = "upper",
+  addCoef.col = "black",
+  tl.col = "black",
+  tl.srt = 45,
+  number.cex = 0.8,
+  col = colorRampPalette(c("white", "red"))(200),
+  title = "Macierz zależności zmiennych jakościowych (Cramér's V)"
+)
+
+```
+
+Występują słabe dodatnie korelacje między większością zmiennych, co sugeruje ogólną tendencję, że starsi klienci mają wyższe dochody (r=0,17) i więcej dzieci (r=0,53). Najsilniejsza zależność dotyczy liczby samochodów i dochodu (r=0,44) – bogatsi klienci posiadają więcej aut. Interesujące, że wiek ma zaskakująco niską korelację z dochodem, co może wskazywać na zróżnicowaną strukturę zawodową lub regionalną w zbiorze danych.
+
+## Profil klienta kupującego rower
+
+```{r}
+
+if (!require(DescTools)) install.packages("DescTools")  # do Cramér's V
+if (!require(corrplot)) install.packages("corrplot")
+if (!require(dplyr)) install.packages("dplyr")
+
+library(DescTools)
+library(corrplot)
+library(dplyr)
+
+qual_vars <- dane2 %>% 
+  select(purchased_bike, gender, marital_status, home_owner, education, occupation, region)
+
+n <- ncol(qual_vars)
+cramer_matrix <- matrix(NA, nrow = n, ncol = n)
+colnames(cramer_matrix) <- colnames(qual_vars)
+rownames(cramer_matrix) <- colnames(qual_vars)
+
+for (i in 1:n) {
+  for (j in 1:n) {
+    cramer_matrix[i, j] <- if(i==j) 1 else CramerV(table(qual_vars[[i]], qual_vars[[j]]))
+  }
+}
+
+cramer_matrix
+
+corrplot(
+  cramer_matrix, 
+  method = "color",          # kolorowe kwadraty
+  type = "upper",            # tylko górna trójkątna
+  addCoef.col = "black",     # wartości w kwadratach
+  tl.col = "black",           # kolor etykiet
+  tl.srt = 45,                # obrót etykiet
+  number.cex = 0.8,          # rozmiar współczynników
+  col = colorRampPalette(c("white", "red"))(200), 
+  title = "Macierz zależności zmiennych jakościowych (Cramér's V)"
+)
+
+```
+
+Analiza danych pokazuje, że decyzje o zakupie roweru są zależne zarówno od cech demograficznych, jak i statusu społeczno-ekonomicznego klientów. Najwięcej zakupów dokonują osoby w wieku 26–35 i 36–45 lat, a różnice w decyzjach zakupowych między grupami wiekowymi są istotne statystycznie, co potwierdza test chi-kwadrat (p \< 0,001) oraz umiarkowana wartość V Craméra (\~0,24). W przypadku zmiennych jakościowych najsilniejszy wpływ na zakup roweru mają poziom wykształcenia, status właściciela domu oraz region zamieszkania. Wizualizacja macierzy Cramér’s V pokazuje wyraźnie, które zmienne jakościowe są najbardziej powiązane z decyzją o zakupie, a wnioski te sugerują, że zarówno cechy demograficzne, jak i styl życia oraz pozycja społeczno-ekonomiczna klienta mają istotny wpływ na zachowania zakupowe w sklepie rowerowym.
+
+```{r}
+library(dplyr)
+library(knitr)
+library(kableExtra)
+
+profil_klienta <- dane2 %>%
+  filter(purchased_bike == "Yes") %>%
+  summarise(
+    Sredni_Wiek = ceiling(mean(age, na.rm = TRUE)),
+    Mediana_Dochodow = median(income, na.rm = TRUE),
+    Srednia_Liczba_Aut = round(mean(cars, na.rm = TRUE), 2),
+    Najczestszy_Region = names(sort(table(region), decreasing = TRUE))[1],
+    Najczestsze_Wyksztalcenie = names(sort(table(education), decreasing = TRUE))[1]
+  )
+
+profil_klienta %>%
+  kable("html", digits = 2, format.args = list(scientific = FALSE),
+        caption = "Profil przeciętnego klienta kupującego rower") %>%
+  kable_styling(font_size = 14)
+
+```
+
+# Testowanie statystyczne
+
+##ZMIENNE ILOŚCIOWE vs ZAKUP ROWERU
+
+```{r testowanie statystyczne, message=FALSE, warning=FALSE}
+# ===========================
+# INSTALACJA I ŁADOWANIE ggstatsplot
+# ===========================
+if (!require(ggstatsplot)) install.packages("ggstatsplot")
+if (!require(dplyr)) install.packages("dplyr")
+library(ggstatsplot)
+library(dplyr)
+library(ggplot2)
+
+# Ustawienie danych - purchased_bike jako factor z Yes na górze
+dane2$purchased_bike <- factor(dane2$purchased_bike, levels = c("Yes", "No"))
+dane2$education <- factor(dane2$education, 
+                         levels = c("Bachelors", "Partial College", "High School", 
+                                  "Partial High School", "Graduate Degree"))
+
+# Wiek vs Zakup - automatycznie test t/Wilcoxon + efekt wielkości
+ggbetweenstats(
+  data = dane2,
+  x = purchased_bike,
+  y = age,
+  type = "nonparametric",  # Wilcoxon dla cen (bezpieczny wybór)
+  title = "Rozkład wieku: Kupujący vs Niekupujący",
+  xlab = "Czy kupił rower?",
+  ylab = "Wiek",
+  pairwise.comparisons = TRUE,
+  centrality.plotting = TRUE
+) + theme_minimal()
+```
+
+
+```{r tabela_shapiro, echo=FALSE, message=FALSE, warning=FALSE}
+# Wymagane pakiety
+library(broom)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+
+# 1. Wykonanie testu (zakładam, że dane2$income istnieje)
+test_norm <- shapiro.test(dane2$income)
+
+# 2. Porządkowanie wyników za pomocą broom::tidy()
+tabela_norm <- tidy(test_norm) %>%
+  mutate(
+    # Formatowanie statystyki W
+    statistic = round(statistic, 3),
+    # Formatowanie p-value (np. <0.001)
+    p.value_formatted = format.pval(p.value, digits = 3, eps = 0.001),
+    # Dodanie interpretacji tekstowej w tabeli
+    Interpretacja = if_else(p.value < 0.05, 
+                            "Rozkład inny niż normalny", 
+                            "Rozkład normalny")
+  ) %>%
+  select(method, statistic, p.value_formatted, Interpretacja)
+
+# 3. Generowanie tabeli
+kable(tabela_norm, 
+      col.names = c("Test", "Statystyka W", "P-value", "Wniosek"),
+      align = "lccc",
+      caption = "Weryfikacja normalności rozkładu zmiennej dochód") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = F) %>%
+  column_spec(3, bold = TRUE, color = ifelse(test_norm$p.value < 0.05, "red", "green")) %>%
+  footnote(general = "P-value < 0.05 oznacza brak rozkładu normalnego.")
+
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Dochód vs Zakup
+ggbetweenstats(
+  data = dane2,
+  x = purchased_bike,
+  y = income,
+  type = "nonparametric",
+  title = "Rozkład dochodów: Kupujący vs Niekupujący",
+  xlab = "Czy kupił rower?", 
+  ylab = "Dochód roczny ($)",
+  pairwise.comparisons = TRUE
+)
+
+```
+
+Test Manna-Whitneya potwierdza istotną statystycznie różnicę wieku między kupującymi a niekupującymi (p = 0,0038). Kupujący są średnio młodsi – ich mediana wieku to 41 lat, podczas gdy niekupujących 44 lata. Efekt wielkości jest jednak niewielki (r = -0,11), co oznacza, że choć wiek ma znaczenie, nie jest głównym wyznacznikiem decyzji zakupowej. Rozkłady w obu grupach są szerokie i nakładają się, wskazując na istnienie innych ważnych czynników.
+
+Test Manna-Whitneya nie wykazał istotnej statystycznie różnicy w dochodach między kupującymi a niekupującymi (p = 0,18). Obie grupy mają identyczną medianę dochodu (60 tys. $), co sugeruje, że sam poziom zarobków nie determinuje decyzji o zakupie roweru. Rozkłady dochodów w obu grupach są bardzo podobne – zakup zależy raczej od innych czynników (jak stan cywilny, liczba samochodów czy wykształcenie) niż od wysokości wynagrodzenia.
+
+
+## analiza dla wszystkich poziomów zmiennej 'cars'
+
+```{r}
+# Automatyczna analiza dla wszystkich poziomów zmiennej 'cars'
+grouped_ggbetweenstats(
+  data = dane2,
+  x = purchased_bike,
+  y = age,
+  grouping.var = cars,
+  type = "nonparametric",
+  title.prefix = "Wiek klientów wg liczby samochodów",
+  nrow = 2,
+  ncol = 2
+)
+
+```
+
+
+# model logitowy, jego ilorazy szans oraz ocena jakości modelu
+```{r model_logitowy}
+# Rozkład punktowy z linią regresji + test korelacji
+ggscatterstats(
+  data = dane2,
+  x = age,
+  y = income,
+  type = "nonparametric",  # Spearman
+  conf.level = 0.95,
+  marginal = "histogram",  # histogramy na marginesach
+  title = "Korelacja wieku i dochodu z decyzją o zakupie"
+) + facet_wrap(~purchased_bike)
+```
+
+Wykres pokazuje, że rozkłady wieku kupujących ("Yes") i niekupujących ("No") są praktycznie identyczne dla każdego roku życia od 40 do 80 lat – każda grupa wiekowa ma po 1000 obserwacji w obu kategoriach. To potwierdza wcześniejsze wnioski: wiek sam w sobie nie różnicuje silnie kupujących od niekupujących, gdyż proporcje w każdej kohorcie wiekowej są stałe. Różnica w medianach (41 vs 44 lata) wynika z nieznacznych różnic w ogólnej strukturze wiekowej, a nie z odmiennych zachowań w poszczególnych przedziałach wiekowych.
+
+## Wyniki modelu logitowego
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(dplyr)
+
+df_clean <- df %>%
+  mutate(Purchased.Bike = as.factor(purchased_bike))%>%
+  mutate(Education= as.factor(education))%>%
+  mutate(Occupation= as.factor(occupation))
+
+model <- glm(Purchased.Bike ~ marital_status+gender+income +children +home_owner + cars + age +Education + Occupation, data = df_clean, family = binomial(link = "logit"))
+
+or <- exp(coef(model))
+
+prob <- predict(model, type = "response")
+predicted_classes <- ifelse(prob > 0.5, "Yes", "No")
+```
+
+```{r macierz_pomylek_ulepszona, echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(kableExtra)
+library(dplyr) 
+
+
+prob <- predict(model, type = "response")
+predicted_classes <- ifelse(prob > 0.5, "Kupi (Yes)", "Nie kupi (No)")
+
+# Tworzymy tabelę
+tabela_conf <- table(Prognoza = predicted_classes, Rzeczywistosc = df_clean$Purchased.Bike)
+
+# Obliczenie dokładności do stopki
+accuracy <- round(sum(diag(tabela_conf)) / sum(tabela_conf) * 100, 2)
+
+kbl(tabela_conf, 
+    col.names = c("Nie kupił", "Kupił"), 
+    align = "cc",
+    caption = "Macierz Pomyłek: Ocena trafności modelu") %>%
+  
+  # Stylizacja ogólna - full_width = T rozciągnie tabelę
+  kable_styling(bootstrap_options = c("striped", "hover"), full_width = TRUE, font_size = 16) %>%
+  
+  # Nagłówek górny (Rzeczywistość)
+  add_header_above(c(" " = 1, "Rzeczywista decyzja klienta" = 2), 
+                   bold = TRUE, background = "#f0f0f0") %>%
+  
+  # Dodanie etykiety dla kolumny z prognozami (Wiersze)
+  pack_rows("Prognoza Modelu", 1, 2, label_row_css = "background-color: #666; color: white;") %>%
+  
+  # Formatowanie pierwszej kolumny (Nazwy wierszy)
+  column_spec(1, bold = TRUE, width = "30%") %>%
+  
+  # KOLOROWANIE TRAFIEN
+  # Zakładając układ: Wiersz 1=Nie, Wiersz 2=Tak
+  # Komórka (1, 2) to True Negative (Dobrze przewidziane "Nie")
+  column_spec(2, background = ifelse(rownames(tabela_conf) == "Nie kupi (No)", "#d1e7dd", "white")) %>%
+  # Komórka (2, 3) to True Positive (Dobrze przewidziane "Tak")
+  column_spec(3, background = ifelse(rownames(tabela_conf) == "Kupi (Yes)", "#d1e7dd", "white")) %>%
+  
+  # Stopka z wynikiem
+  footnote(general = paste0("Całkowita dokładność modelu (Accuracy): ", accuracy, "%"),
+           general_title = "Wniosek: ",
+           footnote_as_chunk = T)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Wymagane pakiety
+library(broom)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+
+# 1. Wyciągnięcie uporządkowanych danych z modelu
+
+wyniki_modelu <- tidy(model, conf.int = TRUE, exponentiate = TRUE)
+
+# 2. Filtrowanie i formatowanie tabeli
+tabela_istotne <- wyniki_modelu %>%
+  filter(p.value < 0.05) %>%
+  filter(term != "(Intercept)") %>%
+  mutate(
+    OR_Formatted = round(estimate, 2), # Zaokrąglenie OR
+    CI_Formatted = paste0("[", round(conf.low, 2), " - ", round(conf.high, 2), "]"), # Ładne przedziały ufności
+    p_value_Formatted = format.pval(p.value, digits = 3, eps = 0.001) # Formatowanie p-value (np. <0.001)
+  ) %>%
+  select(term, OR_Formatted, CI_Formatted, p_value_Formatted)
+
+# 3. Generowanie eleganckiej tabeli
+kable(tabela_istotne, 
+      col.names = c("Zmienna", "Iloraz Szans (OR)", "95% Przedział Ufności", "P-value"),
+      align = "lccc",
+      caption = "Istotne statystycznie determinanty zakupu roweru (Model Logitowy)") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>%
+  column_spec(2, bold = TRUE, color = "darkblue") %>% # Wyróżnienie kolumny z OR
+  footnote(general = "OR > 1 oznacza wzrost szansy na zakup, OR < 1 oznacza spadek szansy.")
+```
+
+
+Model regresji logistycznej wskazał kluczowe czynniki wpływające na decyzję zakupu roweru. Najsilniejszymi predyktorami są: status cywilny (single częściej kupują), liczba posiadanych samochodów (im więcej aut, tym mniejsza skłonność do zakupu), liczba dzieci (wpływ negatywny) oraz dochód (wpływ pozytywny – rower jest dobrem normalnym).
+
+Profil klienta o najwyższym potencjale zakupowym to osoba z wykształceniem wyższym, mieszkająca w Ameryce Północnej. Analiza wykazała natomiast brak istotnego wpływu płci, posiadania domu oraz zawodu na decyzję zakupową.
+
+Jakość modelu jest umiarkowana (accuracy ok. 62,6%) – lepiej przewiduje brak zakupu niż zakup. Sugeruje to istnienie dodatkowych, nieujętych w danych czynników (np. styl życia, zainteresowania), które mogłyby poprawić trafność predykcji.
+
+```{r}
+library(dplyr)
+library(broom)
+library(knitr)
+library(kableExtra)
+library(purrr) # Do łatwego iterowania (mapowania)
+
+# 1. Lista zmiennych kategorialnych, które chcemy sprawdzić
+zmienne_do_analizy <- c("region", "home_owner", "gender", "marital_status", 
+                        "education", "occupation", "commute_distance")
+
+# 2. Funkcja wykonująca test i czyszcząca wynik dla jednej zmiennej
+oblicz_chi <- function(zmienna, dane) {
+  # Tworzymy tabelę krzyżową
+  tabela <- table(dane[[zmienna]], dane$purchased_bike)
+  
+  # Liczymy test
+  test <- chisq.test(tabela)
+  
+  # Zamieniamy na ładny format i dodajemy nazwę zmiennej
+  tidy(test) %>%
+    mutate(Cecha = zmienna) %>%
+    select(Cecha, statistic, parameter, p.value)
+}
+
+# 3. Wykonanie pętli po wszystkich zmiennych i połączenie wyników
+wyniki_zbiorcze <- map_df(zmienne_do_analizy, oblicz_chi, dane = dane2)
+
+# 4. Formatowanie tabeli końcowej
+wyniki_zbiorcze %>%
+  # Dodajemy interpretację gwiazdkową (opcjonalnie)
+  mutate(Istotnosc = case_when(
+    p.value < 0.001 ~ "***",
+    p.value < 0.01  ~ "**",
+    p.value < 0.05  ~ "*",
+    TRUE ~ "brak"
+  )) %>%
+  # Formatowanie p-value na ładny tekst (np. <0.001)
+  mutate(p.value = format.pval(p.value, digits = 3, eps = 0.001)) %>%
+  # Tworzenie tabeli
+  kable(
+    col.names = c("Badana Cecha", "Chi-kwadrat", "Stopnie swobody (df)", "P-value", "Istotność"),
+    digits = 2,
+    escape = FALSE, # Ważne dla kolorowania cell_spec
+    caption = "Ranking czynników wpływających na zakup roweru (Test niezależności Chi-kwadrat)"
+  ) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>%
+  column_spec(1, bold = TRUE) # Pogrubienie nazw zmiennych
+```
+
+
+## Podsumowanie i wnioski końcowe
+
+Projekt CycleInsight wykazał, że decyzja o zakupie roweru jest silnie uwarunkowana profilem socjodemograficznym i stylem życia klienta. Najważniejsze czynniki zwiększające prawdopodobieństwo zakupu to niższy dochód (szczególnie 20–40 tys. $), wykształcenie wyższe oraz zamieszkanie w Ameryce Północnej. Negatywnie wpływają natomiast liczba posiadanych samochodów i dzieci, co potwierdza rolę roweru jako alternatywnego środka transportu.
+
+Analiza obaliła kilka intuicyjnych założeń: płeć, posiadanie domu i zawód nie mają istotnego znaczenia po uwzględnieniu innych zmiennych.
+
+Idealny klient to singiel w wieku 36–45 lat, z wyższym wykształceniem, średnio-niskimi dochodami i ograniczonym dostępem do samochodu. Wnioski te sugerują, że strategia marketingowa powinna koncentrować się na korzyściach transportowych, jakości i prestiżu produktu oraz uwzględniać różnice regionalne, zamiast segmentacji według płci czy statusu mieszkaniowego.
+
