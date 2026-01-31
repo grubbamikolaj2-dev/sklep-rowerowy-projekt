@@ -24,7 +24,7 @@ packages <- c("knitr", "visdat", "naniar", "ggplot2", "dplyr", "tidyr",
               "stringr", "janitor", "mice", "finalfit", "kableExtra", 
               "hms", "rlang", "rstatix")
 
-# Instalacja brakujacych
+# Instalacja brakujacych pakietów
 if(any(!(packages %in% installed.packages()[,"Package"]))) {
   install.packages(packages[!(packages %in% installed.packages()[,"Package"])], 
                    dependencies = TRUE)
