@@ -1,6 +1,6 @@
 ---
 title: "CycleInsight – analiza danych" 
-author: "MG, PC, BK"
+author: "Mikołaj Grubba, Piotr Czarnecki, Błażej Kujawski"
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -50,7 +50,7 @@ knitr::opts_chunk$set(
 dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
 ```
 
-# Wstęp
+# WSTĘP
 
 Projekt **CycleInsight** stanowi analizę danych klientów sklepu rowerowego przygotowaną na potrzeby przedmiotu „Analiza danych w R”. Jego celem jest zbadanie zależności między cechami klientów a ich decyzją o zakupie roweru.
 
@@ -79,7 +79,7 @@ kable(colnames(dane), caption = "Lista nazw kolumn w zbiorze danych") %>%
 
 ```
 
-# Analiza braków danych
+# ANALIZA BRAKÓW DANYCH
 
 ## Liczba brakujących wartości, proporcje i kompletność danych:
 
@@ -107,6 +107,7 @@ miss_var_summary(dane)
 miss_case_table(dane)
 
 ```
+Braki danych występowały tylko w kilku zmiennych (głównie Cars, Children, Age i Income) i nie przekraczały ok. 1% obserwacji na zmienną. Ponad 97% rekordów było kompletnych, a pojedyncze braki były równomiernie rozłożone w zbiorze, bez wyraźnego wzorca.
 
 ## Wizualizacja braków danych z użyciem pakietu visdat
 
@@ -136,7 +137,7 @@ missing_pattern(dane)
 
 Braki dotyczyły głównie dochodu i kilku zmiennych demograficznych, a ich udział w zbiorze był niewielki i bez wyraźnego wzorca. Zastosowaliśmy imputację dominantą dla zmiennych kategorycznych oraz medianą i metodą hotdeck (dla dochodu), co pozwoliło uzupełnić dane bez utraty obserwacji.
 
-# Imputacja brakujących danych
+# IMPUTACJA BRAKUJĄCYCH DANYCH
 
 ## Przygotowanie danych do imputacji
 
@@ -169,7 +170,7 @@ dane$home_owner[is.na(dane$home_owner)] <- dominanta_home_owner
 
 Dla zmiennych kategorycznych (stan cywilny, płeć, status właściciela domu) brakujące wartości uzupełniliśmy dominantą. Dzięki temu zachowaliśmy rozkład kategorii, nie usuwając żadnych obserwacji.
 
-## imputacja danych z użyciem mediany oraz hotdeck
+## Imputacja danych z użyciem mediany oraz hotdeck
 
 ```{r imputacja-median-hotdeck, echo=FALSE, include=FALSE}
 dane2 <- as.data.frame(dane)
@@ -199,9 +200,9 @@ miss_var_summary(dane2) %>%
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
-Zastosowana procedura imputacji pozwoliła uzupełnić wszystkie brakujące wartości w zbiorze – dane po przekształceniach są w pełni kompletne
+Zastosowana procedura imputacji pozwoliła uzupełnić wszystkie brakujące wartości w zbiorze – dane po przekształceniach są w pełni kompletne.
 
-# Walidacja danych
+# WALIDACJA DANYCH
 
 ```{r walidacja danych}
 if (!require(validate)) install.packages("validate")
@@ -236,7 +237,7 @@ W etapie walidacji sprawdziliśmy zgodność danych z założeniami merytoryczny
 sum(duplicated(dane2))
 ```
 
-Duplikaty występują, ale traktujemy je jako powtarzające się profile klientów (np. kolejne wizyty), dlatego je pozostawiamy.
+Duplikaty występują, ale traktujemy je jako powtarzające się profile klientów (np. kolejne wizyty), dlatego pozostawiamy je bez zmian.
 
 # WIZUALIZACJA DANYCH
 
@@ -377,7 +378,7 @@ ggplot(heat_data, aes(x = commute_distance, y = region, fill = procent_Yes)) +
 
 Heatmapa pokazuje, że zależność między dystansem do pracy a zakupem roweru jest silnie zróżnicowana regionalnie – w niektórych regionach krótkie dojazdy wiążą się z wysokim udziałem kupujących, podczas gdy w innych nawet przy podobnych odległościach odsetek zakupów pozostaje niski.
 
-# Analiza opisowa
+# ANALIZA OPISOWA
 
 ## Statystyki opisowe zmiennych liczbowych
 
@@ -516,12 +517,31 @@ dane2$age_group <- cut(
 )
 
 tab_age_bike <- table(dane2$age_group, dane2$purchased_bike)
+
 chi_res <- chisq.test(tab_age_bike)
-chi2 <- as.numeric(chi_res$statistic)
-n <- sum(tab_age_bike)
-k <- min(nrow(tab_age_bike) - 1, ncol(tab_age_bike) - 1)
+chi2    <- as.numeric(chi_res$statistic)
+n       <- sum(tab_age_bike)
+k       <- min(nrow(tab_age_bike) - 1, ncol(tab_age_bike) - 1)
 V_cramer <- sqrt(chi2 / (n * k))
-prop_age <- prop.table(tab_age_bike, margin = 1)
+
+# procenty w wierszach
+prop_age <- prop.table(tab_age_bike, margin = 1) * 100
+
+# łączymy: "liczba (procent%)"
+tab_combo <- matrix(
+  paste0(tab_age_bike, " (", round(prop_age, 1), "%)"),
+  nrow = nrow(tab_age_bike),
+  dimnames = dimnames(tab_age_bike)
+)
+
+library(knitr)
+library(kableExtra)
+
+kable(tab_combo,
+      caption = "Zakup roweru w grupach wiekowych (liczba i % w wierszu)") %>%
+  kable_styling(bootstrap_options = c("striped","hover"))
+
+
 ```
 
 Wiek klientów ma istotny statystycznie wpływ na decyzję zakupową (p < 0,001, V Craméra = 0,18). Najwyższy odsetek kupujących występuje w grupie 36-45 lat (57%), podczas najmłodsi klienci (≤25 lat) choć kupują najchętniej (60%), stanowią znikomą część bazy. Powyżej 55 roku życia skłonność do zakupu gwałtownie spada (tylko 31% kupujących), co sugeruje, że rower jest produktem skierowanym głównie do osób w średnim wieku.
@@ -563,51 +583,9 @@ corrplot(
 
 ```
 
-Występują słabe dodatnie korelacje między większością zmiennych, co sugeruje ogólną tendencję, że starsi klienci mają wyższe dochody (r=0,17) i więcej dzieci (r=0,53). Najsilniejsza zależność dotyczy liczby samochodów i dochodu (r=0,44) – bogatsi klienci posiadają więcej aut. Interesujące, że wiek ma zaskakująco niską korelację z dochodem, co może wskazywać na zróżnicowaną strukturę zawodową lub regionalną w zbiorze danych.
+Macierz Craméra pokazuje, że najsilniej z decyzją o zakupie roweru powiązane są wykształcenie, stan cywilny i region, a słabsze związki występują dla dystansu do pracy. Płeć, status właściciela domu i typ zawodu mają niskie wartości V, co potwierdza ich ograniczoną rolę jako predyktorów zakupu.
 
 ## Profil klienta kupującego rower
-
-```{r}
-
-if (!require(DescTools)) install.packages("DescTools")  # do Cramér's V
-if (!require(corrplot)) install.packages("corrplot")
-if (!require(dplyr)) install.packages("dplyr")
-
-library(DescTools)
-library(corrplot)
-library(dplyr)
-
-qual_vars <- dane2 %>% 
-  select(purchased_bike, gender, marital_status, home_owner, education, occupation, region)
-
-n <- ncol(qual_vars)
-cramer_matrix <- matrix(NA, nrow = n, ncol = n)
-colnames(cramer_matrix) <- colnames(qual_vars)
-rownames(cramer_matrix) <- colnames(qual_vars)
-
-for (i in 1:n) {
-  for (j in 1:n) {
-    cramer_matrix[i, j] <- if(i==j) 1 else CramerV(table(qual_vars[[i]], qual_vars[[j]]))
-  }
-}
-
-cramer_matrix
-
-corrplot(
-  cramer_matrix, 
-  method = "color",          # kolorowe kwadraty
-  type = "upper",            # tylko górna trójkątna
-  addCoef.col = "black",     # wartości w kwadratach
-  tl.col = "black",           # kolor etykiet
-  tl.srt = 45,                # obrót etykiet
-  number.cex = 0.8,          # rozmiar współczynników
-  col = colorRampPalette(c("white", "red"))(200), 
-  title = "Macierz zależności zmiennych jakościowych (Cramér's V)"
-)
-
-```
-
-Analiza danych pokazuje, że decyzje o zakupie roweru są zależne zarówno od cech demograficznych, jak i statusu społeczno-ekonomicznego klientów. Najwięcej zakupów dokonują osoby w wieku 26–35 i 36–45 lat, a różnice w decyzjach zakupowych między grupami wiekowymi są istotne statystycznie, co potwierdza test chi-kwadrat (p \< 0,001) oraz umiarkowana wartość V Craméra (\~0,24). W przypadku zmiennych jakościowych najsilniejszy wpływ na zakup roweru mają poziom wykształcenia, status właściciela domu oraz region zamieszkania. Wizualizacja macierzy Cramér’s V pokazuje wyraźnie, które zmienne jakościowe są najbardziej powiązane z decyzją o zakupie, a wnioski te sugerują, że zarówno cechy demograficzne, jak i styl życia oraz pozycja społeczno-ekonomiczna klienta mają istotny wpływ na zachowania zakupowe w sklepie rowerowym.
 
 ```{r}
 library(dplyr)
@@ -631,9 +609,11 @@ profil_klienta %>%
 
 ```
 
-# Testowanie statystyczne
+Analiza pokazuje, że decyzje o zakupie roweru zależą zarówno od cech demograficznych, jak i statusu społeczno‑ekonomicznego klientów. Najwięcej zakupów dokonują osoby w wieku 26–45 lat, a różnice między grupami wiekowymi są istotne statystycznie (test chi‑kwadrat, p < 0,001; V Craméra ≈ 0,24). Wśród zmiennych jakościowych największe znaczenie mają poziom wykształcenia, status właściciela domu oraz region zamieszkania, co dobrze widać na macierzy Craméra. Wynika z tego, że na zachowania zakupowe w sklepie rowerowym silnie wpływają zarówno cechy demograficzne, jak i szeroko rozumiany styl życia oraz pozycja społeczno‑ekonomiczna klienta.
 
-##ZMIENNE ILOŚCIOWE vs ZAKUP ROWERU
+# TESTOWANIE STATYSTYCZNE
+
+## Zmienne ilościowe a zakup roweru
 
 ```{r testowanie statystyczne, message=FALSE, warning=FALSE}
 # ===========================
@@ -663,46 +643,12 @@ ggbetweenstats(
   pairwise.comparisons = TRUE,
   centrality.plotting = TRUE
 ) + theme_minimal()
-```
 
+#Dlaczego wybraliśmy testy nie wymagają normalnosci rozkładu?
+test_norm<- shapiro.test(dane2$income)
+test_norm$p.value
+print(test_norm)
 
-```{r tabela_shapiro, echo=FALSE, message=FALSE, warning=FALSE}
-# Wymagane pakiety
-library(broom)
-library(dplyr)
-library(knitr)
-library(kableExtra)
-
-# 1. Wykonanie testu (zakładam, że dane2$income istnieje)
-test_norm <- shapiro.test(dane2$income)
-
-# 2. Porządkowanie wyników za pomocą broom::tidy()
-tabela_norm <- tidy(test_norm) %>%
-  mutate(
-    # Formatowanie statystyki W
-    statistic = round(statistic, 3),
-    # Formatowanie p-value (np. <0.001)
-    p.value_formatted = format.pval(p.value, digits = 3, eps = 0.001),
-    # Dodanie interpretacji tekstowej w tabeli
-    Interpretacja = if_else(p.value < 0.05, 
-                            "Rozkład inny niż normalny", 
-                            "Rozkład normalny")
-  ) %>%
-  select(method, statistic, p.value_formatted, Interpretacja)
-
-# 3. Generowanie tabeli
-kable(tabela_norm, 
-      col.names = c("Test", "Statystyka W", "P-value", "Wniosek"),
-      align = "lccc",
-      caption = "Weryfikacja normalności rozkładu zmiennej dochód") %>%
-  kable_styling(bootstrap_options = c("striped", "hover"), full_width = F) %>%
-  column_spec(3, bold = TRUE, color = ifelse(test_norm$p.value < 0.05, "red", "green")) %>%
-  footnote(general = "P-value < 0.05 oznacza brak rozkładu normalnego.")
-
-
-```
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Dochód vs Zakup
 ggbetweenstats(
   data = dane2,
@@ -722,7 +668,7 @@ Test Manna-Whitneya potwierdza istotną statystycznie różnicę wieku między k
 Test Manna-Whitneya nie wykazał istotnej statystycznie różnicy w dochodach między kupującymi a niekupującymi (p = 0,18). Obie grupy mają identyczną medianę dochodu (60 tys. $), co sugeruje, że sam poziom zarobków nie determinuje decyzji o zakupie roweru. Rozkłady dochodów w obu grupach są bardzo podobne – zakup zależy raczej od innych czynników (jak stan cywilny, liczba samochodów czy wykształcenie) niż od wysokości wynagrodzenia.
 
 
-## analiza dla wszystkich poziomów zmiennej 'cars'
+## Analiza dla wszystkich poziomów zmiennej 'cars'
 
 ```{r}
 # Automatyczna analiza dla wszystkich poziomów zmiennej 'cars'
@@ -738,10 +684,11 @@ grouped_ggbetweenstats(
 )
 
 ```
+Dla każdego poziomu zmiennej cars (0–4 auta) rozkłady wieku kupujących i niekupujących są bardzo podobne, a różnice w medianach są niewielkie. Testy nie wskazują na istotny efekt wieku w żadnej z podgrup – nawet przy większej liczbie samochodów kupujący i niekupujący mają zbliżony wiek. W praktyce oznacza to, że to liczba aut, a nie wiek w obrębie danej kategorii „cars”, jest kluczowym czynnikiem różnicującym decyzję o zakupie.
 
+## Rozkład wieku i dochodu z podziałem na zakup
 
-# model logitowy, jego ilorazy szans oraz ocena jakości modelu
-```{r model_logitowy}
+```{r}
 # Rozkład punktowy z linią regresji + test korelacji
 ggscatterstats(
   data = dane2,
@@ -756,108 +703,7 @@ ggscatterstats(
 
 Wykres pokazuje, że rozkłady wieku kupujących ("Yes") i niekupujących ("No") są praktycznie identyczne dla każdego roku życia od 40 do 80 lat – każda grupa wiekowa ma po 1000 obserwacji w obu kategoriach. To potwierdza wcześniejsze wnioski: wiek sam w sobie nie różnicuje silnie kupujących od niekupujących, gdyż proporcje w każdej kohorcie wiekowej są stałe. Różnica w medianach (41 vs 44 lata) wynika z nieznacznych różnic w ogólnej strukturze wiekowej, a nie z odmiennych zachowań w poszczególnych przedziałach wiekowych.
 
-## Wyniki modelu logitowego
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(dplyr)
-
-df_clean <- df %>%
-  mutate(Purchased.Bike = as.factor(purchased_bike))%>%
-  mutate(Education= as.factor(education))%>%
-  mutate(Occupation= as.factor(occupation))
-
-model <- glm(Purchased.Bike ~ marital_status+gender+income +children +home_owner + cars + age +Education + Occupation, data = df_clean, family = binomial(link = "logit"))
-
-or <- exp(coef(model))
-
-prob <- predict(model, type = "response")
-predicted_classes <- ifelse(prob > 0.5, "Yes", "No")
-```
-
-```{r macierz_pomylek_ulepszona, echo=FALSE, message=FALSE, warning=FALSE}
-library(knitr)
-library(kableExtra)
-library(dplyr) 
-
-
-prob <- predict(model, type = "response")
-predicted_classes <- ifelse(prob > 0.5, "Kupi (Yes)", "Nie kupi (No)")
-
-# Tworzymy tabelę
-tabela_conf <- table(Prognoza = predicted_classes, Rzeczywistosc = df_clean$Purchased.Bike)
-
-# Obliczenie dokładności do stopki
-accuracy <- round(sum(diag(tabela_conf)) / sum(tabela_conf) * 100, 2)
-
-kbl(tabela_conf, 
-    col.names = c("Nie kupił", "Kupił"), 
-    align = "cc",
-    caption = "Macierz Pomyłek: Ocena trafności modelu") %>%
-  
-  # Stylizacja ogólna - full_width = T rozciągnie tabelę
-  kable_styling(bootstrap_options = c("striped", "hover"), full_width = TRUE, font_size = 16) %>%
-  
-  # Nagłówek górny (Rzeczywistość)
-  add_header_above(c(" " = 1, "Rzeczywista decyzja klienta" = 2), 
-                   bold = TRUE, background = "#f0f0f0") %>%
-  
-  # Dodanie etykiety dla kolumny z prognozami (Wiersze)
-  pack_rows("Prognoza Modelu", 1, 2, label_row_css = "background-color: #666; color: white;") %>%
-  
-  # Formatowanie pierwszej kolumny (Nazwy wierszy)
-  column_spec(1, bold = TRUE, width = "30%") %>%
-  
-  # KOLOROWANIE TRAFIEN
-  # Zakładając układ: Wiersz 1=Nie, Wiersz 2=Tak
-  # Komórka (1, 2) to True Negative (Dobrze przewidziane "Nie")
-  column_spec(2, background = ifelse(rownames(tabela_conf) == "Nie kupi (No)", "#d1e7dd", "white")) %>%
-  # Komórka (2, 3) to True Positive (Dobrze przewidziane "Tak")
-  column_spec(3, background = ifelse(rownames(tabela_conf) == "Kupi (Yes)", "#d1e7dd", "white")) %>%
-  
-  # Stopka z wynikiem
-  footnote(general = paste0("Całkowita dokładność modelu (Accuracy): ", accuracy, "%"),
-           general_title = "Wniosek: ",
-           footnote_as_chunk = T)
-```
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Wymagane pakiety
-library(broom)
-library(dplyr)
-library(knitr)
-library(kableExtra)
-
-# 1. Wyciągnięcie uporządkowanych danych z modelu
-
-wyniki_modelu <- tidy(model, conf.int = TRUE, exponentiate = TRUE)
-
-# 2. Filtrowanie i formatowanie tabeli
-tabela_istotne <- wyniki_modelu %>%
-  filter(p.value < 0.05) %>%
-  filter(term != "(Intercept)") %>%
-  mutate(
-    OR_Formatted = round(estimate, 2), # Zaokrąglenie OR
-    CI_Formatted = paste0("[", round(conf.low, 2), " - ", round(conf.high, 2), "]"), # Ładne przedziały ufności
-    p_value_Formatted = format.pval(p.value, digits = 3, eps = 0.001) # Formatowanie p-value (np. <0.001)
-  ) %>%
-  select(term, OR_Formatted, CI_Formatted, p_value_Formatted)
-
-# 3. Generowanie eleganckiej tabeli
-kable(tabela_istotne, 
-      col.names = c("Zmienna", "Iloraz Szans (OR)", "95% Przedział Ufności", "P-value"),
-      align = "lccc",
-      caption = "Istotne statystycznie determinanty zakupu roweru (Model Logitowy)") %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>%
-  column_spec(2, bold = TRUE, color = "darkblue") %>% # Wyróżnienie kolumny z OR
-  footnote(general = "OR > 1 oznacza wzrost szansy na zakup, OR < 1 oznacza spadek szansy.")
-```
-
-
-Model regresji logistycznej wskazał kluczowe czynniki wpływające na decyzję zakupu roweru. Najsilniejszymi predyktorami są: status cywilny (single częściej kupują), liczba posiadanych samochodów (im więcej aut, tym mniejsza skłonność do zakupu), liczba dzieci (wpływ negatywny) oraz dochód (wpływ pozytywny – rower jest dobrem normalnym).
-
-Profil klienta o najwyższym potencjale zakupowym to osoba z wykształceniem wyższym, mieszkająca w Ameryce Północnej. Analiza wykazała natomiast brak istotnego wpływu płci, posiadania domu oraz zawodu na decyzję zakupową.
-
-Jakość modelu jest umiarkowana (accuracy ok. 62,6%) – lepiej przewiduje brak zakupu niż zakup. Sugeruje to istnienie dodatkowych, nieujętych w danych czynników (np. styl życia, zainteresowania), które mogłyby poprawić trafność predykcji.
+## Zmienne kategoryczne a zakup roweru
 
 ```{r}
 library(dplyr)
@@ -909,12 +755,121 @@ wyniki_zbiorcze %>%
   column_spec(1, bold = TRUE) # Pogrubienie nazw zmiennych
 ```
 
+Testy chi‑kwadrat potwierdziły istotny związek decyzji o zakupie z wykształceniem, stanem cywilnym i regionem (p < 0,001), a słabsze, lecz nadal widoczne zależności z dystansem do pracy. Z kolei płeć, status właściciela domu i typ zawodu uzyskały wysokie wartości p‑value, co oznacza brak istotnych różnic w odsetku kupujących między kategoriami tych zmiennych. Wyniki te są spójne z późniejszym modelem logitowym, w którym te same zmienne okazują się odpowiednio kluczowe lub nieistotne.
 
-## Podsumowanie i wnioski końcowe
+# MODELOWANIE ZAKUPU ROWERU - REGRESJA LOGISTYCZNA
 
-Projekt CycleInsight wykazał, że decyzja o zakupie roweru jest silnie uwarunkowana profilem socjodemograficznym i stylem życia klienta. Najważniejsze czynniki zwiększające prawdopodobieństwo zakupu to niższy dochód (szczególnie 20–40 tys. $), wykształcenie wyższe oraz zamieszkanie w Ameryce Północnej. Negatywnie wpływają natomiast liczba posiadanych samochodów i dzieci, co potwierdza rolę roweru jako alternatywnego środka transportu.
+```{r include=FALSE}
+library(dplyr)
 
-Analiza obaliła kilka intuicyjnych założeń: płeć, posiadanie domu i zawód nie mają istotnego znaczenia po uwzględnieniu innych zmiennych.
 
-Idealny klient to singiel w wieku 36–45 lat, z wyższym wykształceniem, średnio-niskimi dochodami i ograniczonym dostępem do samochodu. Wnioski te sugerują, że strategia marketingowa powinna koncentrować się na korzyściach transportowych, jakości i prestiżu produktu oraz uwzględniać różnice regionalne, zamiast segmentacji według płci czy statusu mieszkaniowego.
+# 2. Przygotowanie danych (Preprocessing)
+df_clean <- df %>%
+  mutate(Purchased.Bike = as.factor(purchased_bike))%>%
+  mutate(Education= as.factor(education))%>%
+  mutate(Occupation= as.factor(occupation))
 
+# Sprawdzenie struktury danych przed modelowaniem
+str(df_clean)
+# 3. Budowa Modelu Logitowego
+model <- glm(Purchased.Bike ~ marital_status+gender+income +children +home_owner + cars + age +Education + Occupation, data = df_clean, family = binomial(link = "logit"))
+
+# 4. Wyświetlenie wyników modelu
+summary(model)
+
+# 5. Obliczenie Ilorazu Szans (Odds Ratios)
+or <- exp(coef(model))
+print("Ilorazy Szans (Odds Ratios):")
+print(or)
+
+# 6. (Opcjonalnie) Ocena jakości modelu - Tabela pomyłek (Confusion Matrix)
+prob <- predict(model, type = "response")
+predicted_classes <- ifelse(prob > 0.5, "Yes", "No")
+table(Predicted = predicted_classes, Actual = df_clean$Purchased.Bike)
+```
+
+```{r}
+# Wymagane pakiety
+library(broom)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+
+# 1. Wyciągnięcie uporządkowanych danych z modelu
+
+wyniki_modelu <- tidy(model, conf.int = TRUE, exponentiate = TRUE)
+
+# 2. Filtrowanie i formatowanie tabeli
+tabela_istotne <- wyniki_modelu %>%
+  filter(p.value < 0.05) %>%
+  filter(term != "(Intercept)") %>%
+  mutate(
+    OR_Formatted = round(estimate, 2), # Zaokrąglenie OR
+    CI_Formatted = paste0("[", round(conf.low, 2), " - ", round(conf.high, 2), "]"), # Ładne przedziały ufności
+    p_value_Formatted = format.pval(p.value, digits = 3, eps = 0.001) # Formatowanie p-value (np. <0.001)
+  ) %>%
+  select(term, OR_Formatted, CI_Formatted, p_value_Formatted)
+
+# 3. Generowanie eleganckiej tabeli
+kable(tabela_istotne, 
+      col.names = c("Zmienna", "Iloraz Szans (OR)", "95% Przedział Ufności", "P-value"),
+      align = "lccc",
+      caption = "Istotne statystycznie determinanty zakupu roweru (Model Logitowy)") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>%
+  column_spec(2, bold = TRUE, color = "darkblue") %>% # Wyróżnienie kolumny z OR
+  footnote(general = "OR > 1 oznacza wzrost szansy na zakup, OR < 1 oznacza spadek szansy.")
+```
+
+## Kluczowe determinanty zakupu
+
+Model regresji logistycznej pozwolił wyodrębnić zmienne, które mają realny wpływ na decyzję zakupową, eliminując zakłócenia wynikające ze współzależności cech.
+
+Status cywilny (Marital Status): Jest to jeden z najsilniejszych predyktorów. Osoby samotne (Single) są znacznie bardziej skłonne do zakupu roweru niż osoby w związkach małżeńskich. Iloraz szans (Odds Ratio) wynosi ok. 1.73, co oznacza, że szansa na zakup u singla jest o 73% wyższa niż u osoby zamężnej/żonatej, przy zachowaniu pozostałych cech na stałym poziomie.
+
+Samochody (Cars): Liczba posiadanych samochodów jest silną barierą zakupową. Każdy dodatkowy samochód w gospodarstwie domowym drastycznie obniża szansę na zakup roweru (OR ≈ 0.64, p < 0.001). Potwierdza to hipotezę, że dla badanej grupy rower jest często alternatywą transportową, a nie tylko rekreacyjną.
+
+Dzieci (Children): Zmienna ta wpływa negatywnie na decyzję zakupową (p = 0.035). Większa liczba dzieci w gospodarstwie domowym wiąże się z niższą skłonnością do zakupu roweru dla siebie przez klienta (prawdopodobnie ze względu na ograniczenia budżetowe lub czasowe).
+
+Dochód (Income): Istnieje statystycznie istotna, dodatnia zależność między dochodem a prawdopodobieństwem zakupu (p < 0.001), co oznacza, że rower w ofercie sklepu jest dobrem normalnym (popyt rośnie wraz z dochodem).
+
+## Profil demograficzny i społeczny
+
+Wykształcenie: Klienci z wykształceniem wyższym (Bachelors) stanowią grupę referencyjną o najwyższym potencjale zakupowym. Osoby z wykształceniem częściowym (Partial College/High School) wykazują istotnie niższą szansę na zakup (wyniki ujemne w modelu logitowym).
+
+Region: Test Chi-kwadrat (p < 0.001) oraz analiza opisowa wskazują na silne zróżnicowanie regionalne, z dominacją sprzedaży w Ameryce Północnej.
+
+## Cechy nieistotne statystycznie
+
+Wbrew pierwotnym przypuszczeniom, analiza wielozmiennowa wykazała brak istotnego wpływu dla:
+
+Płci (Gender): Płeć klienta nie różnicuje szansy na zakup (p = 0.94 w modelu logitowym, p = 0.67 w teście Chi-kwadrat). Oferta sklepu jest uniwersalna.
+
+Posiadania domu (Home Owner): Zarówno test niezależności (p = 0.63), jak i model (p = 0.46) wskazują, że status własności nieruchomości nie ma związku z zakupem roweru. Jest to ważna korekta względem wstępnych obserwacji opartych wyłącznie na liczebnościach.
+
+Zawodu (Occupation): Poza pewnymi różnicami w dochodach, sam typ wykonywanej pracy nie jest istotnym predyktorem w modelu.
+
+## Ocena jakości modelu
+
+Zbudowany model logitowy charakteryzuje się trafnością (Accuracy) na poziomie ok. 62.6%.
+
+Macierz pomyłek pokazuje, że model lepiej radzi sobie z przewidywaniem braku zakupu (346 trafień) niż zakupu (280 trafień).
+
+Sugeruje to, że w danych istnieją inne, nieuchwycone zmienne (np. zainteresowania, styl życia, odległość do ścieżek rowerowych), które mogłyby poprawić predykcję.
+
+# PODSUMOWANIE I WNIOSKI KOŃCOWE
+
+## Przebieg i cel analizy
+
+Projekt CycleInsight dostarczył szczegółowej, opartej na danych analizy profilu klientów sklepu rowerowego i czynników wpływających na zakup. Przeprowadziliśmy pełny proces analityczny – od przygotowania danych, przez analizę eksploracyjną i testy statystyczne, po model regresji logistycznej – co pozwoliło zweryfikować postawione hipotezy i sformułować praktyczne rekomendacje biznesowe.
+
+## Najważniejsze wyniki analityczne
+
+Główne ustalenia analityczne potwierdziły, że zakup roweru nie jest zdarzeniem losowym, lecz wynika z wyraźnego profilu socjodemograficznego i stylu życia. Regresja logistyczna wyodrębniła najsilniejsze predyktory: status cywilny (singiel: +73% szans) i liczbę samochodów (każdy dodatkowy: -36% szans), co wskazuje, że rower stanowi często alternatywę transportową dla osób niezwiązanych i o ograniczonej dostępności do samochodu. Istotny, choć mniejszy, negatywny wpływ ma liczba dzieci, co sugeruje przesunięcie priorytetów budżetowych lub czasowych w rodzinach. Dochód wykazał pozytywną, lecz nieliniową zależność, z największą konwersją w przedziale 80-100 tys. $, pozycjonując rower jako dobro dla zamożnej klasy średniej. Wykształcenie wyższe oraz region Ameryki Północnej również znacząco zwiększały prawdopodobieństwo zakupu.
+
+## Wnioski metodyczne
+
+Kluczowym wnioskiem metodycznym jest obalenie kilku intuicyjnych założeń. Analiza wielowymiarowa jednoznacznie wykazała brak statystycznie istotnego wpływu płci i posiadania domu na decyzję zakupową, co jest istotną korektą względem wstępnych obserwacji opartych na prostych rozkładach częstości. Podobnie, wiek okazał się czynnikiem istotnym, ale o niewielkim efekcie praktycznym, a zawód nie miał znaczenia po uwzględnieniu dochodu. Pokazuje to wartość zaawansowanych modeli statystycznych w oddzielaniu prawdziwych sygnałów od pozornych korelacji.
+
+## Wnioski biznesowe i rekomendacje
+
+Podsumowując, typowy klient kupujący rower to singiel w wieku 36–45 lat, z wyższym wykształceniem, dochodem 80–100 tys. $, posiadający co najwyżej jeden samochód i mieszkający w Ameryce Północnej. Strategia marketingowa powinna więc mniej opierać się na kryteriach płci czy statusu mieszkaniowego, a bardziej na komunikowaniu korzyści dla osób szukających alternatywnego środka transportu oraz na podkreślaniu jakości i prestiżu produktu w segmencie zamożniejszych, wykształconych klientów. Warto też różnicować ofertę między regionami, biorąc pod uwagę lokalne wzorce dojazdów do pracy, a w przyszłych analizach uwzględnić czynniki behawioralne (np. aktywność fizyczną, dostępność infrastruktury rowerowej), aby jeszcze lepiej prognozować popyt i personalizować ofertę.
