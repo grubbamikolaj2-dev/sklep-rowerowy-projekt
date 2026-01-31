@@ -633,7 +633,7 @@ profil_klienta %>%
 
 # Testowanie statystyczne
 
-##ZMIENNE ILOŚCIOWE vs ZAKUP ROWERU
+## Zmienne ilościowe a zakup roweru
 
 ```{r testowanie statystyczne, message=FALSE, warning=FALSE}
 # ===========================
@@ -688,7 +688,7 @@ Test Manna-Whitneya potwierdza istotną statystycznie różnicę wieku między k
 Test Manna-Whitneya nie wykazał istotnej statystycznie różnicy w dochodach między kupującymi a niekupującymi (p = 0,18). Obie grupy mają identyczną medianę dochodu (60 tys. $), co sugeruje, że sam poziom zarobków nie determinuje decyzji o zakupie roweru. Rozkłady dochodów w obu grupach są bardzo podobne – zakup zależy raczej od innych czynników (jak stan cywilny, liczba samochodów czy wykształcenie) niż od wysokości wynagrodzenia.
 
 
-## analiza dla wszystkich poziomów zmiennej 'cars'
+## Analiza dla wszystkich poziomów zmiennej 'cars'
 
 ```{r}
 # Automatyczna analiza dla wszystkich poziomów zmiennej 'cars'
@@ -704,10 +704,11 @@ grouped_ggbetweenstats(
 )
 
 ```
+Dla każdego poziomu zmiennej cars (0–4 auta) rozkłady wieku kupujących i niekupujących są bardzo podobne, a różnice w medianach są niewielkie. Testy nie wskazują na istotny efekt wieku w żadnej z podgrup – nawet przy większej liczbie samochodów kupujący i niekupujący mają zbliżony wiek. W praktyce oznacza to, że to liczba aut, a nie wiek w obrębie danej kategorii „cars”, jest kluczowym czynnikiem różnicującym decyzję o zakupie.
 
+## Rozkład wieku i dochodu z podziałem na zakup
 
-# model logitowy, jego ilorazy szans oraz ocena jakości modelu
-```{r model_logitowy}
+```{r}
 # Rozkład punktowy z linią regresji + test korelacji
 ggscatterstats(
   data = dane2,
@@ -722,7 +723,61 @@ ggscatterstats(
 
 Wykres pokazuje, że rozkłady wieku kupujących ("Yes") i niekupujących ("No") są praktycznie identyczne dla każdego roku życia od 40 do 80 lat – każda grupa wiekowa ma po 1000 obserwacji w obu kategoriach. To potwierdza wcześniejsze wnioski: wiek sam w sobie nie różnicuje silnie kupujących od niekupujących, gdyż proporcje w każdej kohorcie wiekowej są stałe. Różnica w medianach (41 vs 44 lata) wynika z nieznacznych różnic w ogólnej strukturze wiekowej, a nie z odmiennych zachowań w poszczególnych przedziałach wiekowych.
 
+## Zmienne kategoryczne a zakup roweru
+
 ```{r}
+library(dplyr)
+library(broom)
+library(knitr)
+library(kableExtra)
+library(purrr) # Do łatwego iterowania (mapowania)
+
+# 1. Lista zmiennych kategorialnych, które chcemy sprawdzić
+zmienne_do_analizy <- c("region", "home_owner", "gender", "marital_status", 
+                        "education", "occupation", "commute_distance")
+
+# 2. Funkcja wykonująca test i czyszcząca wynik dla jednej zmiennej
+oblicz_chi <- function(zmienna, dane) {
+  # Tworzymy tabelę krzyżową
+  tabela <- table(dane[[zmienna]], dane$purchased_bike)
+  
+  # Liczymy test
+  test <- chisq.test(tabela)
+  
+  # Zamieniamy na ładny format i dodajemy nazwę zmiennej
+  tidy(test) %>%
+    mutate(Cecha = zmienna) %>%
+    select(Cecha, statistic, parameter, p.value)
+}
+
+# 3. Wykonanie pętli po wszystkich zmiennych i połączenie wyników
+wyniki_zbiorcze <- map_df(zmienne_do_analizy, oblicz_chi, dane = dane2)
+
+# 4. Formatowanie tabeli końcowej
+wyniki_zbiorcze %>%
+  # Dodajemy interpretację gwiazdkową (opcjonalnie)
+  mutate(Istotnosc = case_when(
+    p.value < 0.001 ~ "***",
+    p.value < 0.01  ~ "**",
+    p.value < 0.05  ~ "*",
+    TRUE ~ "brak"
+  )) %>%
+  # Formatowanie p-value na ładny tekst (np. <0.001)
+  mutate(p.value = format.pval(p.value, digits = 3, eps = 0.001)) %>%
+  # Tworzenie tabeli
+  kable(
+    col.names = c("Badana Cecha", "Chi-kwadrat", "Stopnie swobody (df)", "P-value", "Istotność"),
+    digits = 2,
+    escape = FALSE, # Ważne dla kolorowania cell_spec
+    caption = "Ranking czynników wpływających na zakup roweru (Test niezależności Chi-kwadrat)"
+  ) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>%
+  column_spec(1, bold = TRUE) # Pogrubienie nazw zmiennych
+```
+
+# Regresja logistyczna - Modelowanie zakupu roweru
+
+```{r include=FALSE}
 library(dplyr)
 
 
@@ -783,8 +838,8 @@ kable(tabela_istotne,
   footnote(general = "OR > 1 oznacza wzrost szansy na zakup, OR < 1 oznacza spadek szansy.")
 ```
 
-##Wyniki modelu logitowego
-1. Kluczowe determinanty zakupu 
+## Kluczowe determinanty zakupu
+
 Model regresji logistycznej pozwolił wyodrębnić zmienne, które mają realny wpływ na decyzję zakupową, eliminując zakłócenia wynikające ze współzależności cech.
 
 Status cywilny (Marital Status): Jest to jeden z najsilniejszych predyktorów. Osoby samotne (Single) są znacznie bardziej skłonne do zakupu roweru niż osoby w związkach małżeńskich. Iloraz szans (Odds Ratio) wynosi ok. 1.73, co oznacza, że szansa na zakup u singla jest o 73% wyższa niż u osoby zamężnej/żonatej, przy zachowaniu pozostałych cech na stałym poziomie.
@@ -795,12 +850,14 @@ Dzieci (Children): Zmienna ta wpływa negatywnie na decyzję zakupową (p = 0.03
 
 Dochód (Income): Istnieje statystycznie istotna, dodatnia zależność między dochodem a prawdopodobieństwem zakupu (p < 0.001), co oznacza, że rower w ofercie sklepu jest dobrem normalnym (popyt rośnie wraz z dochodem).
 
-2. Profil demograficzny i społeczny
+## Profil demograficzny i społeczny
+
 Wykształcenie: Klienci z wykształceniem wyższym (Bachelors) stanowią grupę referencyjną o najwyższym potencjale zakupowym. Osoby z wykształceniem częściowym (Partial College/High School) wykazują istotnie niższą szansę na zakup (wyniki ujemne w modelu logitowym).
 
 Region: Test Chi-kwadrat (p < 0.001) oraz analiza opisowa wskazują na silne zróżnicowanie regionalne, z dominacją sprzedaży w Ameryce Północnej.
 
-3. Cechy nieistotne statystycznie (Obalenie hipotez)
+## Cechy nieistotne statystycznie
+
 Wbrew pierwotnym przypuszczeniom, analiza wielozmiennowa wykazała brak istotnego wpływu dla:
 
 Płci (Gender): Płeć klienta nie różnicuje szansy na zakup (p = 0.94 w modelu logitowym, p = 0.67 w teście Chi-kwadrat). Oferta sklepu jest uniwersalna.
@@ -809,64 +866,13 @@ Posiadania domu (Home Owner): Zarówno test niezależności (p = 0.63), jak i mo
 
 Zawodu (Occupation): Poza pewnymi różnicami w dochodach, sam typ wykonywanej pracy nie jest istotnym predyktorem w modelu.
 
-4. Ocena jakości modelu
+## Ocena jakości modelu
+
 Zbudowany model logitowy charakteryzuje się trafnością (Accuracy) na poziomie ok. 62.6%.
 
 Macierz pomyłek pokazuje, że model lepiej radzi sobie z przewidywaniem braku zakupu (346 trafień) niż zakupu (280 trafień).
 
 Sugeruje to, że w danych istnieją inne, nieuchwycone zmienne (np. zainteresowania, styl życia, odległość do ścieżek rowerowych), które mogłyby poprawić predykcję.
-
-
-```{r}
-library(dplyr)
-library(broom)
-library(knitr)
-library(kableExtra)
-library(purrr) # Do łatwego iterowania (mapowania)
-
-# 1. Lista zmiennych kategorialnych, które chcemy sprawdzić
-zmienne_do_analizy <- c("region", "home_owner", "gender", "marital_status", 
-                        "education", "occupation", "commute_distance")
-
-# 2. Funkcja wykonująca test i czyszcząca wynik dla jednej zmiennej
-oblicz_chi <- function(zmienna, dane) {
-  # Tworzymy tabelę krzyżową
-  tabela <- table(dane[[zmienna]], dane$purchased_bike)
-  
-  # Liczymy test
-  test <- chisq.test(tabela)
-  
-  # Zamieniamy na ładny format i dodajemy nazwę zmiennej
-  tidy(test) %>%
-    mutate(Cecha = zmienna) %>%
-    select(Cecha, statistic, parameter, p.value)
-}
-
-# 3. Wykonanie pętli po wszystkich zmiennych i połączenie wyników
-wyniki_zbiorcze <- map_df(zmienne_do_analizy, oblicz_chi, dane = dane2)
-
-# 4. Formatowanie tabeli końcowej
-wyniki_zbiorcze %>%
-  # Dodajemy interpretację gwiazdkową (opcjonalnie)
-  mutate(Istotnosc = case_when(
-    p.value < 0.001 ~ "***",
-    p.value < 0.01  ~ "**",
-    p.value < 0.05  ~ "*",
-    TRUE ~ "brak"
-  )) %>%
-  # Formatowanie p-value na ładny tekst (np. <0.001)
-  mutate(p.value = format.pval(p.value, digits = 3, eps = 0.001)) %>%
-  # Tworzenie tabeli
-  kable(
-    col.names = c("Badana Cecha", "Chi-kwadrat", "Stopnie swobody (df)", "P-value", "Istotność"),
-    digits = 2,
-    escape = FALSE, # Ważne dla kolorowania cell_spec
-    caption = "Ranking czynników wpływających na zakup roweru (Test niezależności Chi-kwadrat)"
-  ) %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>%
-  column_spec(1, bold = TRUE) # Pogrubienie nazw zmiennych
-```
-
 
 # Podsumowanie i wnioski końcowe
 
