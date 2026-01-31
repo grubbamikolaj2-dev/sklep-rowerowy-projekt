@@ -1,0 +1,250 @@
+---
+title: "brudnopis"
+output: html_document
+date: "2025-11-16"
+---
+
+---
+title: "Sklep  rowerowy"
+author: "MG, PO, BK"
+date: "2025-11-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(visdat)
+library(naniar)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(janitor)
+library(mice)
+dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
+head(dane)
+```
+
+# Wstęp
+
+Projekt **Sklep rowerowy** to analiza danych sklepu rowerowego na potrzeby przedmiotu: Analiza danych w R.\
+Celem jest badanie zależności między cechami klientów a decyzją o zakupie roweru. Analiza obejmuje przetwarzanie danych, imputację braków oraz modelowanie statystyczne.
+
+```{r wczytanie danych}
+
+dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
+head(dane)
+```
+
+# Struktura danych i analiza braków
+
+Nazwy kolumn w zbiorze danych::
+
+```{r struktura danych}
+library(knitr)
+kable(colnames(dane), caption = "Lista nazw kolumn w zbiorze danych")
+```
+Liczba brakujących wartości, proporcje i kompletność danych:
+```{r Liczba brakujących wartości, proporcje i kompletność}
+library(naniar)
+
+cat("Liczba braków w danych:", n_miss(dane), "\n")
+cat("Liczba kompletnych obserwacji:", n_complete(dane), "\n")
+cat("Proporcja braków:", round(prop_miss(dane)*100, 2), "%\n")
+
+```
+Procent brakujących wartości na zmienną:
+```{r Procent brakujących wartości na zmienną}
+pct <- pct_miss(dane)
+print(pct)
+
+```
+Podsumowanie braków na poziomie zmiennych i obserwacji:
+```{r Podsumowanie braków na poziomie zmiennych i obserwacji}
+miss_var_summary(dane)
+miss_case_table(dane)
+
+```
+
+
+```{r}
+
+n_miss(dane)
+#W całej ramce danych znajduje się 31 brakujących wartości
+n_complete(dane)
+#Całkowita liczba kompletnych obserwacji to 12 969
+prop_miss(dane)
+#Proporcja braków wynosi jedynie 0.24%
+pct_miss(dane)
+#Najwięcej brakujących wartości jest w kolumnie Cars (9), następnie Children (8), Age (8) i Income (6). Reszta zmiennych nie ma żadnych braków
+
+miss_var_summary(dane)
+miss_case_table(dane) 
+#97,1% przypadków (971 obserwacji) nie ma żadnych braków 
+
+```
+
+```{r wykresy NA}
+wykres1 <- vis_dat(dane) +
+  theme(axis.text.x = element_text(hjust = 1),margin = margin(t = 10))+
+  ggtitle("Wizualizacja danych z użyciem visdat") +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
+wykres1
+wykres2 <- vis_miss(dane)+
+  theme(axis.text.x = element_text(hjust = 1),margin = margin(t = 10))+
+  ggtitle("Liczba brakujących wartości w zmiennych") +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
+wykres2
+```
+
+# 
+
+```{r}
+
+# 1. zmiana nazw kolumn na małe litery i podłogi
+dane <- dane %>%
+  janitor::clean_names()
+
+# 2. Usuwamy niepotrzebne kolumny, np. id lub kolumny zbyt dużą liczbą NA
+dane <- dane %>%
+  select(-c(id))
+
+# 3. Sprawdzamy brakujące wartości
+summary(dane)
+colSums(is.na(dane))
+
+# 4. nie usuwamy duplikaty
+
+
+# 2. Podstawowa eksploracja braków
+summary(dane)
+colSums(is.na(dane))
+
+# 3. Imputacja wielokrotna z użyciem mice
+# - definiujemy gdzie są braki
+where_matrix <- is.na(dane)
+
+
+# Zamień puste stringi ("") na NA we wszystkich kolumnach typu character
+dane <- dane %>%
+  mutate(across(where(is.character), ~ na_if(., "")))
+
+# Konwersja zmiennych kategorycznych na faktory
+dane$marital_status <- as.factor(dane$marital_status)
+dane$gender <- as.factor(dane$gender)
+dane$home_owner <- as.factor(dane$home_owner)
+
+
+
+meth <- make.method(dane)
+
+# Kolumny kategoryczne z brakami -> metoda "polyreg"
+meth[c("marital_status", "gender", "home_owner")] <- "logreg"
+
+# Kolumny numeryczne z brakami -> metoda "pmm"
+meth[c("income", "children", "cars", "age")] <- "pmm"
+
+# Kolumny bez braków -> wyłącz imputację
+meth[c("education", "occupation", "commute_distance", "region", "purchased_bike")] <- ""
+
+# Uruchom imputację z przypisanymi metodami
+imp <- mice(dane, method = meth, maxit = 30, m = 5, seed = 123)
+# Przegląd wyników imputacji
+summary(imp)
+plot(imp)   
+densityplot(imp)
+
+ kompletne_dane <- complete(imp, action = 1)  # wyciąga pierwszy z kompletnych zestawów danych
+ colSums(is.na(kompletne_dane))               # sprawdza braki po imputacji
+
+
+# 4. Wizualizacja imputacji (np. rozkład imputowanych wartości)
+stripplot(imp)
+
+# 5. Wspólna analiza wyników imputacji, np. model regresji
+fit <- with(imp, lm(zmienna_docelowa ~ zmienna1 + zmienna2))
+summary(pool(fit))
+
+# 6. Po zakończonej imputacji można uzyskać "pełne" dane (jeden z kompletnych zbiorów)
+completed_data <- complete(imp, action = "long")  # lub action = 1..5
+
+# 7. Ewentualna dalsza analiza na imputowanych danych
+
+# Opcjonalnie: dostosowanie metod imputacji (np. dla bloków zmiennych)
+blocks <- list(block1 = c("zmienna1", "zmienna2"), block2 = c("zmienna3"))
+formulas <- make.formulas(dane, method = "norm")
+imp <- mice(dane, blocks = blocks, formulas = formulas)
+
+
+
+# 5. Uzupełniamy brakujące wartości zmiennych ilościowych
+#  Uzupełniamy brakujące wartości w kolumnie 'income' medianą
+data$income <- ifelse(is.na(data$income), median(data$income, na.rm = TRUE), data$income)
+#  Uzupełniamy brakujące wartości w kolumnie 'children' medianą
+data$children <- ifelse(is.na(data$children), median(data$children, na.rm = TRUE), data$children)
+#  Uzupełniamy brakujące wartości w kolumnie 'age' medianą
+data$age <- ifelse(is.na(data$age), median(data$age, na.rm = TRUE), data$age)
+#  Uzupełniamy brakujące wartości w kolumnie 'cars' medianą
+data$cars <- ifelse(is.na(data$cars), median(data$cars, na.rm = TRUE), data$cars)
+
+# Sprawdzamy ponownie brakujące wartości
+colSums(is.na(data))
+
+
+# 6. Standaryzujemy wartości tekstowe 
+# kolumna martial_status - małe litery, bez spacji
+
+data$produkt <- data$produkt %>%
+  str_to_lower() %>%           # małe litery
+  str_replace_all("\\s+", "_") # zamiana spacji na podkreślniki
+
+# 7. Filtrowanie wierszy, np. tylko rowery marki 'giant'
+data <- data %>%
+  filter(marka == "giant")
+
+# 8. Tworzymy nowe kolumny, np. łączące kategorię i podkategorię
+data <- data %>%
+  mutate(kategoria_podkategoria = paste(kategoria, podkategoria, sep = "_"))
+
+# 9. Przekształcenie danych z szerokiego formatu do długiego (tidy data)
+data_long <- data %>%
+  pivot_longer(cols = starts_with("miesiac_"), names_to = "miesiac", values_to = "sprzedaz")
+
+```
+
+
+```{r wizualizacja}
+ggplot(dane2, aes(x = age, y = income, color = purchased_bike)) +
+  geom_point() +
+  labs(title = "Wizualizacja zależności między wiekiem a dochodem",
+       x = "Wiek",
+       y = "Dochód")
+
+ggplot()
+
+#Wykresy interaktywne z użyciem plotly:
+
+
+
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

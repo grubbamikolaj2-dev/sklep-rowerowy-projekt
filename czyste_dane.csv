@@ -1,0 +1,1001 @@
+"marital_status","gender","income","children","education","occupation","home_owner","cars","commute_distance","region","age","purchased_bike","income_imp"
+"Married","Female",40000,1,"Bachelors","Skilled Manual","Yes",0,"0-1 Miles","Europe",42,"No",FALSE
+"Married","Male",30000,3,"Partial College","Clerical","Yes",1,"0-1 Miles","Europe",43,"No",FALSE
+"Married","Male",80000,5,"Partial College","Professional","No",2,"2-5 Miles","Europe",60,"No",FALSE
+"Single","Male",70000,0,"Bachelors","Professional","Yes",1,"5-10 Miles","Pacific",41,"Yes",FALSE
+"Single","Male",30000,0,"Bachelors","Clerical","No",0,"0-1 Miles","Europe",36,"Yes",FALSE
+"Married","Female",10000,2,"Partial College","Manual","Yes",0,"1-2 Miles","Europe",50,"No",FALSE
+"Single","Male",160000,2,"High School","Management","Yes",4,"0-1 Miles","Pacific",33,"Yes",FALSE
+"Married","Male",40000,1,"Bachelors","Skilled Manual","Yes",0,"0-1 Miles","Europe",43,"Yes",FALSE
+"Married","Male",20000,2,"Partial High School","Clerical","Yes",2,"5-10 Miles","Pacific",58,"No",FALSE
+"Married","Male",130000,2,"Partial College","Manual","Yes",1,"0-1 Miles","Europe",43,"Yes",TRUE
+"Married","Female",30000,3,"High School","Skilled Manual","No",2,"1-2 Miles","Pacific",54,"Yes",FALSE
+"Single","Female",90000,0,"Bachelors","Professional","No",4,"10+ Miles","Pacific",36,"No",FALSE
+"Married","Male",170000,5,"Partial College","Professional","Yes",1,"0-1 Miles","Europe",55,"No",FALSE
+"Married","Male",40000,2,"Partial College","Clerical","Yes",1,"1-2 Miles","Europe",35,"Yes",FALSE
+"Single","Male",60000,1,"Partial College","Skilled Manual","No",1,"0-1 Miles","Pacific",45,"Yes",FALSE
+"Single","Female",10000,2,"High School","Manual","Yes",1,"0-1 Miles","Europe",38,"Yes",FALSE
+"Single","Male",30000,3,"Partial College","Clerical","No",2,"1-2 Miles","Pacific",59,"Yes",FALSE
+"Married","Female",30000,1,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",47,"No",FALSE
+"Single","Male",40000,2,"Partial College","Clerical","Yes",1,"1-2 Miles","Europe",35,"Yes",FALSE
+"Single","Male",20000,2,"Partial High School","Clerical","Yes",2,"5-10 Miles","Pacific",55,"Yes",FALSE
+"Married","Female",40000,0,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",36,"Yes",FALSE
+"Single","Female",80000,0,"Bachelors","Professional","Yes",4,"10+ Miles","Pacific",35,"No",FALSE
+"Single","Male",40000,2,"Partial College","Clerical","Yes",0,"1-2 Miles","Europe",35,"Yes",FALSE
+"Married","Female",80000,5,"High School","Management","No",3,"5-10 Miles","Europe",56,"No",FALSE
+"Single","Male",40000,2,"Partial College","Clerical","No",1,"0-1 Miles","Europe",34,"No",FALSE
+"Single","Male",30000,1,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",63,"No",FALSE
+"Single","Male",30000,0,"Partial College","Clerical","No",1,"0-1 Miles","Europe",29,"Yes",FALSE
+"Married","Female",100000,0,"Bachelors","Professional","No",1,"5-10 Miles","Pacific",40,"No",FALSE
+"Married","Male",70000,5,"Partial College","Skilled Manual","Yes",2,"5-10 Miles","Pacific",44,"No",FALSE
+"Single","Female",20000,0,"Partial High School","Manual","No",2,"0-1 Miles","Europe",32,"Yes",FALSE
+"Married","Female",20000,2,"Partial College","Manual","Yes",0,"0-1 Miles","Europe",63,"No",FALSE
+"Married","Male",10000,0,"Partial College","Manual","No",1,"0-1 Miles","Pacific",26,"Yes",FALSE
+"Single","Female",20000,0,"High School","Manual","No",1,"5-10 Miles","Europe",31,"No",FALSE
+"Single","Male",80000,2,"High School","Skilled Manual","No",2,"1-2 Miles","Pacific",50,"Yes",FALSE
+"Single","Male",90000,5,"Partial College","Professional","No",2,"2-5 Miles","Europe",62,"Yes",FALSE
+"Single","Female",10000,5,"Partial High School","Manual","No",2,"0-1 Miles","Europe",41,"No",FALSE
+"Married","Female",10000,2,"Partial College","Manual","Yes",1,"0-1 Miles","Europe",50,"Yes",FALSE
+"Single","Female",30000,0,"Partial College","Clerical","No",1,"2-5 Miles","Europe",30,"No",FALSE
+"Single","Male",20000,0,"High School","Manual","No",1,"2-5 Miles","Europe",28,"No",FALSE
+"Single","Female",10000,4,"Partial High School","Manual","Yes",2,"0-1 Miles","Europe",40,"Yes",FALSE
+"Single","Female",30000,2,"Partial College","Clerical","No",0,"0-1 Miles","Europe",43,"No",FALSE
+"Single","Female",40000,2,"Bachelors","Management","Yes",2,"5-10 Miles","Pacific",65,"Yes",FALSE
+"Married","Female",10000,1,"Graduate Degree","Manual","Yes",0,"0-1 Miles","Europe",40,"No",FALSE
+"Married","Female",170000,4,"Partial College","Professional","No",3,"5-10 Miles","Europe",48,"Yes",FALSE
+"Married","Female",20000,3,"High School","Manual","Yes",0,"0-1 Miles","Europe",41,"Yes",FALSE
+"Married","Female",20000,1,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",66,"Yes",FALSE
+"Married","Female",60000,1,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","Pacific",46,"Yes",FALSE
+"Single","Female",40000,2,"Partial College","Skilled Manual","Yes",2,"5-10 Miles","Pacific",52,"Yes",FALSE
+"Married","Male",30000,2,"Partial College","Clerical","No",2,"0-1 Miles","Europe",42,"No",FALSE
+"Married","Male",40000,0,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",39,"Yes",FALSE
+"Single","Female",30000,0,"Partial College","Clerical","No",1,"0-1 Miles","Europe",28,"No",FALSE
+"Single","Male",80000,0,"Bachelors","Professional","No",4,"10+ Miles","Pacific",35,"No",FALSE
+"Married","Female",20000,1,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",65,"No",FALSE
+"Single","Female",90000,4,"High School","Management","No",3,"5-10 Miles","Europe",56,"No",FALSE
+"Single","Female",70000,0,"Bachelors","Professional","No",1,"5-10 Miles","Pacific",42,"No",FALSE
+"Married","Male",80000,4,"High School","Professional","Yes",2,"10+ Miles","Europe",54,"No",FALSE
+"Married","Male",40000,0,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",38,"Yes",FALSE
+"Married","Male",130000,4,"Partial College","Professional","No",4,"5-10 Miles","Europe",61,"Yes",FALSE
+"Married","Female",40000,1,"Bachelors","Skilled Manual","Yes",0,"0-1 Miles","Europe",43,"Yes",FALSE
+"Married","Male",60000,2,"Bachelors","Professional","Yes",1,"2-5 Miles","Pacific",38,"Yes",FALSE
+"Single","Female",10000,1,"High School","Manual","No",1,"1-2 Miles","Europe",45,"No",FALSE
+"Single","Female",10000,2,"High School","Manual","Yes",0,"0-1 Miles","Europe",35,"No",FALSE
+"Married","Male",40000,2,"Bachelors","Management","Yes",1,"0-1 Miles","Pacific",52,"Yes",FALSE
+"Single","Male",60000,4,"Bachelors","Professional","Yes",3,"10+ Miles","Pacific",41,"No",FALSE
+"Married","Female",30000,1,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",37,"Yes",FALSE
+"Single","Male",30000,2,"Partial College","Clerical","Yes",2,"5-10 Miles","Pacific",68,"No",FALSE
+"Married","Female",40000,0,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",37,"Yes",FALSE
+"Single","Male",30000,0,"High School","Manual","Yes",1,"2-5 Miles","Europe",33,"Yes",FALSE
+"Single","Female",20000,4,"High School","Manual","Yes",1,"0-1 Miles","Europe",43,"Yes",FALSE
+"Married","Female",10000,0,"Partial High School","Manual","No",2,"0-1 Miles","Europe",30,"No",FALSE
+"Married","Male",120000,0,"Partial High School","Professional","Yes",4,"10+ Miles","Pacific",36,"Yes",FALSE
+"Single","Female",10000,0,"Partial High School","Manual","No",2,"0-1 Miles","Europe",35,"No",FALSE
+"Married","Female",130000,3,"High School","Professional","Yes",4,"0-1 Miles","Europe",52,"No",FALSE
+"Single","Female",20000,0,"Partial College","Manual","No",1,"2-5 Miles","Europe",36,"Yes",FALSE
+"Married","Female",20000,3,"High School","Skilled Manual","No",2,"1-2 Miles","Pacific",62,"No",FALSE
+"Single","Female",130000,4,"High School","Management","Yes",4,"0-1 Miles","Pacific",31,"No",FALSE
+"Single","Female",20000,0,"Partial High School","Manual","No",2,"1-2 Miles","Europe",26,"No",FALSE
+"Married","Male",80000,0,"Bachelors","Professional","Yes",2,"10+ Miles","Pacific",29,"Yes",FALSE
+"Married","Male",80000,2,"High School","Skilled Manual","No",2,"1-2 Miles","Pacific",50,"Yes",FALSE
+"Single","Male",40000,2,"Bachelors","Management","Yes",2,"5-10 Miles","Pacific",63,"Yes",FALSE
+"Married","Female",30000,4,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",45,"Yes",FALSE
+"Single","Female",10000,4,"Partial High School","Manual","Yes",2,"0-1 Miles","Europe",40,"No",FALSE
+"Married","Male",30000,0,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",47,"Yes",FALSE
+"Single","Male",20000,0,"High School","Manual","No",1,"2-5 Miles","Europe",29,"No",FALSE
+"Single","Male",40000,2,"Bachelors","Management","No",1,"5-10 Miles","Pacific",52,"Yes",FALSE
+"Single","Male",10000,0,"Partial College","Manual","Yes",1,"1-2 Miles","Pacific",26,"Yes",FALSE
+"Single","Male",130000,3,"Partial College","Professional","No",3,"0-1 Miles","Europe",51,"Yes",FALSE
+"Married","Male",80000,5,"Bachelors","Professional","Yes",4,"1-2 Miles","Pacific",40,"No",FALSE
+"Single","Male",30000,0,"Partial College","Clerical","No",1,"2-5 Miles","Europe",29,"No",FALSE
+"Married","Male",20000,1,"High School","Manual","No",1,"1-2 Miles","Europe",40,"Yes",FALSE
+"Single","Female",30000,0,"Partial College","Clerical","No",1,"0-1 Miles","Europe",29,"Yes",FALSE
+"Single","Male",30000,0,"Partial College","Clerical","No",1,"0-1 Miles","Europe",30,"Yes",FALSE
+"Single","Female",60000,2,"Bachelors","Professional","Yes",1,"2-5 Miles","Pacific",37,"Yes",FALSE
+"Single","Female",30000,0,"Partial College","Clerical","No",1,"2-5 Miles","Europe",33,"No",FALSE
+"Single","Female",30000,3,"High School","Skilled Manual","Yes",2,"5-10 Miles","Pacific",55,"No",FALSE
+"Single","Female",90000,5,"Partial College","Professional","Yes",2,"10+ Miles","Europe",62,"No",FALSE
+"Married","Male",30000,1,"Partial College","Clerical","Yes",1,"0-1 Miles","Europe",43,"No",FALSE
+"Married","Male",40000,1,"Bachelors","Skilled Manual","Yes",1,"0-1 Miles","Europe",44,"Yes",FALSE
+"Married","Male",40000,0,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",43,"Yes",FALSE
+"Married","Female",20000,3,"High School","Manual","Yes",2,"0-1 Miles","Europe",43,"No",FALSE
+"Single","Male",10000,2,"High School","Manual","Yes",0,"0-1 Miles","Europe",35,"No",FALSE
+"Single","Male",60000,3,"Bachelors","Professional","No",2,"0-1 Miles","Pacific",43,"Yes",FALSE
+"Married","Male",10000,2,"Partial College","Manual","Yes",0,"1-2 Miles","Europe",49,"No",FALSE
+"Single","Male",60000,1,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","Pacific",45,"No",FALSE
+"Single","Female",70000,2,"High School","Professional","Yes",2,"5-10 Miles","Pacific",49,"Yes",FALSE
+"Single","Female",30000,0,"Partial College","Clerical","No",1,"2-5 Miles","Europe",30,"No",FALSE
+"Married","Male",70000,2,"Partial College","Skilled Manual","Yes",2,"5-10 Miles","Pacific",52,"Yes",FALSE
+"Single","Female",40000,2,"Partial College","Skilled Manual","No",2,"1-2 Miles","Pacific",53,"Yes",FALSE
+"Married","Female",40000,0,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",38,"Yes",FALSE
+"Single","Male",40000,0,"Bachelors","Professional","No",0,"0-1 Miles","Europe",39,"Yes",FALSE
+"Single","Female",20000,1,"Partial College","Manual","No",0,"0-1 Miles","Europe",46,"Yes",TRUE
+"Single","Female",70000,0,"Bachelors","Professional","No",1,"5-10 Miles","Pacific",38,"No",FALSE
+"Single","Female",40000,2,"Partial College","Clerical","Yes",2,"1-2 Miles","Europe",35,"No",FALSE
+"Single","Female",130000,1,"Graduate Degree","Management","No",1,"0-1 Miles","Pacific",36,"Yes",FALSE
+"Married","Male",20000,0,"Bachelors","Clerical","Yes",0,"0-1 Miles","Pacific",26,"Yes",FALSE
+"Single","Male",10000,0,"Graduate Degree","Manual","No",0,"0-1 Miles","Europe",30,"Yes",FALSE
+"Married","Female",30000,1,"Bachelors","Skilled Manual","Yes",2,"0-1 Miles","Europe",42,"No",FALSE
+"Single","Female",20000,2,"High School","Manual","Yes",0,"0-1 Miles","Europe",40,"Yes",FALSE
+"Married","Male",80000,5,"Bachelors","Management","Yes",2,"2-5 Miles","Europe",62,"No",FALSE
+"Single","Female",30000,0,"Partial College","Clerical","No",1,"2-5 Miles","Europe",29,"No",FALSE
+"Married","Female",40000,2,"Bachelors","Management","Yes",2,"5-10 Miles","Pacific",66,"Yes",FALSE
+"Married","Male",150000,2,"High School","Professional","Yes",4,"0-1 Miles","Europe",48,"No",FALSE
+"Single","Female",80000,0,"Bachelors","Professional","No",3,"10+ Miles","Pacific",31,"No",FALSE
+"Single","Female",100000,3,"Partial College","Management","No",4,"5-10 Miles","Europe",56,"No",FALSE
+"Single","Female",40000,0,"Bachelors","Clerical","No",0,"0-1 Miles","Europe",38,"Yes",FALSE
+"Married","Male",80000,5,"Bachelors","Professional","Yes",4,"1-2 Miles","Pacific",40,"No",FALSE
+"Single","Male",30000,0,"Partial College","Clerical","Yes",1,"2-5 Miles","Europe",32,"No",FALSE
+"Married","Male",30000,1,"Bachelors","Clerical","Yes",1,"2-5 Miles","Europe",39,"No",FALSE
+"Single","Male",10000,2,"Partial College","Manual","Yes",1,"0-1 Miles","Europe",52,"Yes",FALSE
+"Single","Male",10000,3,"High School","Manual","Yes",1,"0-1 Miles","Europe",39,"Yes",FALSE
+"Married","Male",60000,2,"Bachelors","Professional","Yes",1,"2-5 Miles","Pacific",37,"No",FALSE
+"Married","Male",90000,4,"High School","Management","Yes",3,"5-10 Miles","Europe",56,"Yes",FALSE
+"Married","Male",40000,0,"Bachelors","Professional","Yes",0,"0-1 Miles","Europe",40,"Yes",FALSE
+"Single","Male",40000,2,"Bachelors","Management","Yes",2,"5-10 Miles","Pacific",65,"Yes",FALSE
+"Single","Female",30000,2,"Partial College","Clerical","Yes",2,"0-1 Miles","Europe",42,"No",FALSE
+"Married","Male",10000,2,"Partial College","Manual","Yes",1,"2-5 Miles","Europe",52,"No",FALSE
+"Single","Female",10000,1,"High School","Manual","No",1,"5-10 Miles","Europe",35,"Yes",FALSE
+"Single","Male",20000,2,"High School","Manual","Yes",2,"0-1 Miles","Europe",42,"No",FALSE
+"Married","Female",20000,2,"Partial High School","Clerical","Yes",2,"5-10 Miles","Pacific",55,"Yes",FALSE
+"Single","Female",30000,2,"Partial College","Clerical","No",2,"5-10 Miles","Pacific",60,"Yes",FALSE
+"Single","Male",40000,0,"Bachelors","Professional","No",0,"0-1 Miles","Europe",40,"Yes",FALSE
+"Single","Female",10000,0,"Partial College","Manual","No",1,"0-1 Miles","Pacific",26,"Yes",FALSE
+"Married","Male",40000,1,"Bachelors","Skilled Manual","Yes",0,"0-1 Miles","Europe",42,"Yes",FALSE
+"Married","Female",80000,0,"Bachelors","Professional","Yes",3,"10+ Miles","Pacific",32,"No",FALSE
+"Single","Male",30000,1,"Bachelors","Clerical","Yes",0,"1-2 Miles","Europe",37,"Yes",FALSE
+"Married","Female",40000,2,"Partial College","Clerical","No",1,"0-1 Miles","Europe",34,"No",FALSE
+"Married","Male",40000,0,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",37,"Yes",FALSE
+"Married","Female",40000,0,"Bachelors","Professional","No",0,"0-1 Miles","Europe",40,"Yes",FALSE
+"Married","Male",20000,4,"High School","Skilled Manual","Yes",2,"5-10 Miles","Pacific",60,"No",FALSE
+"Single","Male",30000,0,"Partial College","Clerical","No",1,"1-2 Miles","Europe",27,"No",FALSE
+"Married","Male",60000,1,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","Pacific",43,"Yes",FALSE
+"Single","Male",100000,1,"Bachelors","Management","No",3,"0-1 Miles","Pacific",48,"No",FALSE
+"Single","Female",20000,0,"Partial High School","Manual","No",2,"1-2 Miles","Europe",32,"No",FALSE
+"Married","Male",100000,1,"Bachelors","Management","Yes",3,"2-5 Miles","Pacific",47,"No",FALSE
+"Single","Male",80000,5,"Graduate Degree","Management","Yes",3,"0-1 Miles","Pacific",40,"No",FALSE
+"Single","Female",10000,4,"Partial High School","Manual","Yes",2,"0-1 Miles","Europe",41,"Yes",FALSE
+"Married","Female",130000,5,"Partial College","Professional","Yes",4,"0-1 Miles","Europe",59,"No",FALSE
+"Single","Male",10000,2,"Partial College","Manual","No",0,"0-1 Miles","Europe",50,"No",FALSE
+"Single","Female",20000,2,"Partial College","Manual","No",1,"0-1 Miles","Europe",54,"Yes",FALSE
+"Married","Female",10000,1,"Bachelors","Manual","Yes",0,"0-1 Miles","Europe",48,"No",FALSE
+"Single","Female",60000,1,"Bachelors","Professional","Yes",1,"5-10 Miles","Pacific",44,"Yes",FALSE
+"Married","Female",20000,2,"High School","Manual","Yes",0,"0-1 Miles","Europe",40,"Yes",FALSE
+"Single","Female",60000,2,"Bachelors","Professional","No",1,"0-1 Miles","Pacific",38,"Yes",FALSE
+"Single","Male",40000,2,"Partial College","Skilled Manual","No",2,"1-2 Miles","Pacific",52,"No",FALSE
+"Married","Male",10000,0,"Partial College","Manual","Yes",1,"2-5 Miles","Pacific",25,"Yes",FALSE
+"Married","Female",10000,0,"Partial College","Manual","No",1,"0-1 Miles","Pacific",25,"No",FALSE
+"Single","Male",90000,1,"Bachelors","Professional","Yes",1,"2-5 Miles","Pacific",47,"Yes",FALSE
+"Single","Male",100000,0,"High School","Management","Yes",3,"10+ Miles","Pacific",35,"No",FALSE
+"Single","Male",70000,0,"Bachelors","Professional","No",1,"5-10 Miles","Pacific",41,"Yes",FALSE
+"Married","Male",30000,1,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",47,"No",FALSE
+"Married","Female",130000,4,"Partial College","Professional","Yes",4,"5-10 Miles","Europe",61,"Yes",FALSE
+"Married","Female",80000,5,"Bachelors","Management","Yes",2,"2-5 Miles","Europe",61,"No",FALSE
+"Married","Male",10000,0,"Partial High School","Manual","No",2,"0-1 Miles","Europe",33,"No",FALSE
+"Married","Female",10000,0,"Partial College","Manual","Yes",1,"2-5 Miles","Pacific",27,"No",FALSE
+"Single","Male",50000,0,"Graduate Degree","Skilled Manual","Yes",0,"0-1 Miles","Europe",37,"Yes",FALSE
+"Single","Female",80000,2,"Partial College","Skilled Manual","Yes",2,"5-10 Miles","Pacific",52,"Yes",FALSE
+"Single","Female",20000,0,"Partial College","Manual","Yes",0,"0-1 Miles","Pacific",29,"Yes",FALSE
+"Single","Female",110000,2,"Partial College","Professional","No",3,"5-10 Miles","Europe",48,"No",FALSE
+"Married","Male",160000,4,"Partial College","Professional","No",2,"10+ Miles","Europe",55,"Yes",FALSE
+"Married","Female",10000,0,"Graduate Degree","Manual","Yes",0,"0-1 Miles","Europe",37,"Yes",FALSE
+"Single","Male",10000,1,"Graduate Degree","Manual","Yes",0,"0-1 Miles","Europe",44,"No",FALSE
+"Married","Female",30000,3,"Partial College","Clerical","No",2,"1-2 Miles","Pacific",55,"Yes",FALSE
+"Married","Female",10000,2,"High School","Manual","No",1,"0-1 Miles","Europe",38,"No",FALSE
+"Single","Male",40000,2,"Bachelors","Management","Yes",2,"5-10 Miles","Pacific",66,"Yes",FALSE
+"Married","Female",130000,4,"High School","Management","No",4,"10+ Miles","Europe",58,"No",FALSE
+"Married","Female",90000,1,"Bachelors","Professional","Yes",1,"2-5 Miles","Pacific",47,"Yes",FALSE
+"Married","Female",30000,3,"High School","Skilled Manual","No",2,"1-2 Miles","Pacific",56,"Yes",FALSE
+"Single","Male",80000,5,"Partial College","Professional","No",2,"10+ Miles","Europe",59,"No",FALSE
+"Married","Female",70000,0,"Bachelors","Professional","Yes",4,"10+ Miles","Pacific",32,"Yes",FALSE
+"Married","Male",30000,1,"Partial College","Clerical","Yes",1,"0-1 Miles","Europe",44,"Yes",FALSE
+"Married","Male",30000,3,"High School","Skilled Manual","Yes",2,"5-10 Miles","Pacific",55,"No",FALSE
+"Single","Male",30000,2,"High School","Manual","Yes",0,"0-1 Miles","Europe",36,"Yes",TRUE
+"Single","Female",80000,5,"Bachelors","Management","Yes",2,"10+ Miles","Europe",62,"No",FALSE
+"Married","Female",70000,5,"Bachelors","Professional","Yes",4,"10+ Miles","Pacific",41,"No",FALSE
+"Single","Female",10000,0,"Partial High School","Manual","No",2,"0-1 Miles","Europe",32,"No",FALSE
+"Single","Male",20000,0,"Bachelors","Clerical","Yes",0,"0-1 Miles","Pacific",25,"Yes",FALSE
+"Single","Female",50000,0,"Graduate Degree","Skilled Manual","Yes",1,"1-2 Miles","Europe",36,"No",FALSE
+"Married","Male",60000,2,"Graduate Degree","Management","Yes",1,"0-1 Miles","Pacific",67,"Yes",FALSE
+"Single","Female",100000,0,"Graduate Degree","Management","No",1,"1-2 Miles","Pacific",39,"Yes",FALSE
+"Single","Male",80000,0,"Bachelors","Professional","No",3,"10+ Miles","Pacific",33,"Yes",FALSE
+"Single","Male",60000,0,"Bachelors","Professional","No",3,"2-5 Miles","Pacific",31,"No",FALSE
+"Married","Male",10000,1,"High School","Manual","Yes",0,"2-5 Miles","Pacific",27,"Yes",FALSE
+"Single","Male",40000,2,"Partial College","Clerical","Yes",1,"1-2 Miles","Europe",33,"Yes",FALSE
+"Single","Female",60000,1,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","Pacific",46,"Yes",FALSE
+"Single","Female",90000,3,"High School","Professional","No",1,"2-5 Miles","Europe",51,"No",FALSE
+"Married","Male",30000,3,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",46,"Yes",FALSE
+"Single","Male",90000,5,"Partial College","Professional","No",2,"10+ Miles","Europe",62,"No",FALSE
+"Single","Female",20000,0,"Partial High School","Manual","Yes",2,"1-2 Miles","Europe",26,"Yes",FALSE
+"Single","Female",40000,0,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",37,"Yes",FALSE
+"Single","Female",30000,3,"Partial College","Clerical","Yes",0,"0-1 Miles","Europe",42,"Yes",FALSE
+"Married","Female",80000,4,"Graduate Degree","Management","Yes",1,"0-1 Miles","Pacific",36,"No",FALSE
+"Married","Female",50000,0,"Graduate Degree","Skilled Manual","Yes",0,"0-1 Miles","Europe",36,"Yes",FALSE
+"Single","Female",30000,0,"Partial College","Clerical","No",1,"2-5 Miles","Europe",30,"No",FALSE
+"Single","Male",70000,0,"Bachelors","Professional","No",4,"10+ Miles","Pacific",31,"Yes",FALSE
+"Married","Male",30000,1,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",65,"Yes",FALSE
+"Single","Male",80000,4,"Partial College","Professional","No",2,"2-5 Miles","Europe",54,"Yes",FALSE
+"Married","Male",20000,2,"Partial High School","Clerical","Yes",3,"5-10 Miles","Pacific",54,"No",FALSE
+"Single","Female",20000,2,"Partial High School","Manual","No",2,"0-1 Miles","Europe",25,"No",FALSE
+"Single","Male",10000,1,"Bachelors","Manual","Yes",0,"0-1 Miles","Europe",48,"No",FALSE
+"Single","Male",10000,0,"Partial College","Manual","Yes",1,"1-2 Miles","Pacific",26,"Yes",FALSE
+"Married","Male",60000,1,"Bachelors","Professional","Yes",1,"5-10 Miles","Pacific",43,"Yes",FALSE
+"Single","Male",10000,0,"Partial High School","Manual","No",2,"1-2 Miles","Europe",35,"No",FALSE
+"Married","Female",30000,3,"Partial College","Clerical","No",0,"0-1 Miles","Europe",42,"No",FALSE
+"Single","Female",70000,5,"Bachelors","Professional","Yes",4,"10+ Miles","Pacific",39,"No",FALSE
+"Married","Female",30000,2,"Partial College","Clerical","No",2,"0-1 Miles","Pacific",67,"No",FALSE
+"Married","Male",20000,1,"Partial College","Manual","Yes",0,"1-2 Miles","Europe",43,"No",FALSE
+"Single","Female",20000,3,"High School","Manual","Yes",1,"0-1 Miles","Europe",42,"Yes",FALSE
+"Married","Male",10000,3,"Partial High School","Manual","Yes",2,"0-1 Miles","Europe",43,"No",FALSE
+"Married","Female",20000,1,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",45,"No",FALSE
+"Single","Male",80000,5,"High School","Management","Yes",3,"10+ Miles","Europe",57,"No",FALSE
+"Married","Male",120000,4,"Partial College","Management","Yes",3,"10+ Miles","Europe",56,"No",FALSE
+"Married","Female",40000,0,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",38,"Yes",FALSE
+"Married","Female",30000,4,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",45,"No",FALSE
+"Married","Male",20000,0,"Bachelors","Clerical","Yes",0,"0-1 Miles","Pacific",27,"Yes",FALSE
+"Married","Male",90000,0,"Bachelors","Professional","No",4,"10+ Miles","Pacific",35,"Yes",FALSE
+"Married","Female",10000,1,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",70,"Yes",FALSE
+"Single","Female",30000,5,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",44,"Yes",FALSE
+"Married","Female",10000,0,"Partial College","Manual","No",1,"0-1 Miles","Pacific",26,"Yes",FALSE
+"Married","Male",70000,5,"Partial College","Skilled Manual","Yes",3,"5-10 Miles","Pacific",46,"No",FALSE
+"Single","Female",30000,0,"High School","Manual","No",1,"2-5 Miles","Europe",34,"Yes",FALSE
+"Married","Male",10000,1,"Graduate Degree","Manual","Yes",0,"0-1 Miles","Europe",37,"No",FALSE
+"Single","Female",30000,3,"Partial College","Clerical","Yes",2,"0-1 Miles","Europe",27,"No",FALSE
+"Single","Male",30000,1,"Bachelors","Clerical","No",1,"0-1 Miles","Europe",39,"Yes",FALSE
+"Single","Female",20000,0,"High School","Manual","No",1,"2-5 Miles","Europe",29,"No",FALSE
+"Married","Female",120000,3,"Bachelors","Management","No",2,"10+ Miles","Europe",52,"Yes",FALSE
+"Married","Male",110000,5,"Bachelors","Management","Yes",4,"2-5 Miles","Pacific",48,"Yes",FALSE
+"Married","Female",130000,3,"Partial College","Professional","Yes",3,"0-1 Miles","Europe",51,"Yes",FALSE
+"Married","Female",100000,0,"High School","Management","Yes",4,"10+ Miles","Pacific",34,"Yes",FALSE
+"Married","Female",10000,5,"High School","Skilled Manual","No",3,"1-2 Miles","Pacific",62,"No",FALSE
+"Single","Male",70000,0,"Bachelors","Professional","Yes",1,"5-10 Miles","Pacific",37,"Yes",FALSE
+"Married","Male",100000,5,"Graduate Degree","Management","No",1,"1-2 Miles","Pacific",78,"Yes",FALSE
+"Married","Male",130000,4,"High School","Professional","Yes",3,"0-1 Miles","Europe",55,"No",FALSE
+"Single","Male",60000,0,"Bachelors","Professional","No",4,"2-5 Miles","Pacific",31,"No",FALSE
+"Married","Male",100000,3,"Partial High School","Professional","Yes",0,"10+ Miles","Europe",59,"Yes",FALSE
+"Single","Male",20000,2,"Partial High School","Clerical","Yes",2,"5-10 Miles","Pacific",57,"No",FALSE
+"Single","Female",30000,3,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",47,"Yes",FALSE
+"Married","Male",20000,1,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",43,"No",FALSE
+"Single","Female",50000,0,"Graduate Degree","Skilled Manual","Yes",0,"0-1 Miles","Europe",36,"Yes",FALSE
+"Single","Female",100000,3,"Partial College","Management","Yes",4,"10+ Miles","Europe",56,"No",FALSE
+"Married","Male",150000,0,"Bachelors","Management","Yes",4,"0-1 Miles","Pacific",37,"Yes",FALSE
+"Single","Female",30000,2,"Partial College","Clerical","Yes",0,"0-1 Miles","Europe",43,"No",FALSE
+"Married","Female",40000,1,"Bachelors","Skilled Manual","Yes",1,"1-2 Miles","Europe",33,"Yes",FALSE
+"Married","Female",10000,2,"Partial College","Manual","Yes",0,"1-2 Miles","Europe",51,"No",FALSE
+"Single","Female",70000,5,"Bachelors","Professional","Yes",3,"10+ Miles","Pacific",39,"No",FALSE
+"Married","Male",40000,0,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",37,"Yes",FALSE
+"Single","Female",30000,2,"Partial College","Clerical","Yes",2,"0-1 Miles","Europe",42,"No",FALSE
+"Single","Female",20000,5,"High School","Manual","Yes",2,"0-1 Miles","Europe",27,"No",FALSE
+"Single","Male",100000,5,"Bachelors","Professional","Yes",1,"5-10 Miles","Pacific",47,"Yes",FALSE
+"Married","Male",70000,5,"Partial College","Skilled Manual","Yes",3,"5-10 Miles","Pacific",45,"No",FALSE
+"Single","Female",50000,0,"Graduate Degree","Skilled Manual","No",0,"0-1 Miles","Europe",37,"Yes",FALSE
+"Single","Female",10000,2,"Partial College","Manual","Yes",0,"0-1 Miles","Europe",51,"Yes",FALSE
+"Single","Female",20000,0,"High School","Manual","No",1,"1-2 Miles","Europe",28,"No",FALSE
+"Married","Male",10000,4,"Partial High School","Manual","Yes",1,"0-1 Miles","Europe",40,"Yes",FALSE
+"Single","Female",20000,0,"High School","Manual","No",1,"2-5 Miles","Europe",30,"No",FALSE
+"Married","Female",30000,0,"Bachelors","Clerical","No",0,"0-1 Miles","Europe",36,"Yes",FALSE
+"Married","Female",90000,1,"Graduate Degree","Management","Yes",0,"0-1 Miles","Pacific",37,"Yes",FALSE
+"Married","Female",10000,2,"Partial College","Manual","Yes",0,"1-2 Miles","Europe",49,"No",FALSE
+"Married","Female",10000,2,"High School","Manual","Yes",0,"0-1 Miles","Europe",37,"Yes",FALSE
+"Married","Male",100000,0,"High School","Management","Yes",3,"10+ Miles","Pacific",35,"Yes",FALSE
+"Single","Male",30000,1,"Bachelors","Clerical","No",0,"0-1 Miles","Europe",38,"Yes",FALSE
+"Single","Female",10000,3,"Partial High School","Manual","Yes",2,"0-1 Miles","Europe",43,"No",FALSE
+"Single","Male",20000,1,"Partial College","Manual","No",0,"0-1 Miles","Europe",37,"No",FALSE
+"Single","Male",10000,0,"Partial High School","Manual","No",2,"0-1 Miles","Europe",34,"No",FALSE
+"Married","Female",70000,5,"Partial College","Skilled Manual","No",3,"5-10 Miles","Pacific",46,"No",FALSE
+"Single","Male",10000,1,"Partial College","Manual","Yes",0,"0-1 Miles","Europe",49,"No",FALSE
+"Married","Female",60000,1,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","Pacific",45,"No",FALSE
+"Single","Female",100000,1,"Bachelors","Management","Yes",4,"2-5 Miles","Pacific",48,"No",FALSE
+"Single","Female",30000,3,"Graduate Degree","Clerical","No",0,"0-1 Miles","Europe",46,"Yes",FALSE
+"Married","Male",130000,0,"Graduate Degree","Management","Yes",0,"5-10 Miles","Pacific",48,"No",FALSE
+"Married","Male",30000,3,"High School","Skilled Manual","Yes",2,"5-10 Miles","Pacific",54,"Yes",FALSE
+"Single","Female",60000,1,"Partial College","Skilled Manual","No",1,"0-1 Miles","Pacific",46,"Yes",FALSE
+"Married","Male",40000,0,"Bachelors","Clerical","No",0,"0-1 Miles","Europe",38,"Yes",FALSE
+"Married","Female",40000,1,"Bachelors","Skilled Manual","Yes",0,"0-1 Miles","Europe",42,"Yes",FALSE
+"Single","Female",10000,1,"High School","Manual","No",1,"2-5 Miles","Europe",46,"Yes",FALSE
+"Single","Male",20000,0,"Partial College","Manual","No",1,"2-5 Miles","Europe",36,"Yes",FALSE
+"Single","Female",110000,0,"Partial College","Management","Yes",3,"10+ Miles","Pacific",32,"Yes",FALSE
+"Single","Female",60000,2,"Bachelors","Professional","No",1,"0-1 Miles","Pacific",39,"Yes",FALSE
+"Married","Male",100000,1,"Graduate Degree","Management","Yes",0,"2-5 Miles","Pacific",36,"Yes",FALSE
+"Married","Female",90000,4,"High School","Professional","No",2,"2-5 Miles","Europe",54,"Yes",FALSE
+"Married","Female",30000,2,"Partial College","Clerical","No",2,"5-10 Miles","Pacific",69,"No",FALSE
+"Single","Female",10000,5,"High School","Skilled Manual","No",2,"1-2 Miles","Pacific",62,"No",FALSE
+"Married","Female",60000,0,"Bachelors","Clerical","No",0,"0-1 Miles","Pacific",28,"Yes",TRUE
+"Single","Male",30000,1,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",62,"Yes",FALSE
+"Married","Female",30000,1,"Bachelors","Skilled Manual","Yes",2,"0-1 Miles","Europe",40,"No",FALSE
+"Married","Male",80000,4,"Graduate Degree","Management","Yes",1,"0-1 Miles","Pacific",36,"Yes",FALSE
+"Single","Male",10000,2,"Partial High School","Clerical","Yes",2,"5-10 Miles","Pacific",58,"No",FALSE
+"Married","Male",90000,2,"Bachelors","Professional","Yes",0,"1-2 Miles","Pacific",40,"Yes",FALSE
+"Married","Male",10000,2,"Bachelors","Clerical","Yes",1,"0-1 Miles","Europe",66,"No",FALSE
+"Married","Male",40000,2,"Partial College","Clerical","Yes",1,"1-2 Miles","Europe",35,"Yes",FALSE
+"Married","Female",20000,2,"Partial College","Manual","Yes",1,"2-5 Miles","Europe",47,"Yes",FALSE
+"Married","Male",120000,4,"Bachelors","Management","Yes",1,"2-5 Miles","Pacific",47,"No",FALSE
+"Married","Male",60000,1,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","Pacific",46,"No",FALSE
+"Married","Male",20000,4,"High School","Skilled Manual","Yes",2,"5-10 Miles","Pacific",58,"Yes",FALSE
+"Single","Male",40000,3,"Partial High School","Clerical","No",2,"5-10 Miles","Pacific",52,"Yes",FALSE
+"Married","Male",80000,5,"Bachelors","Professional","No",1,"0-1 Miles","Pacific",47,"Yes",FALSE
+"Single","Male",70000,0,"Bachelors","Professional","No",1,"5-10 Miles","Pacific",41,"No",FALSE
+"Married","Male",50000,2,"Graduate Degree","Management","Yes",1,"5-10 Miles","Pacific",64,"Yes",FALSE
+"Married","Male",30000,0,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",35,"Yes",FALSE
+"Married","Male",130000,4,"Partial College","Professional","No",3,"10+ Miles","Europe",54,"No",FALSE
+"Married","Female",30000,3,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",45,"No",FALSE
+"Married","Male",100000,0,"Graduate Degree","Management","Yes",0,"2-5 Miles","Pacific",40,"Yes",FALSE
+"Single","Female",160000,0,"Graduate Degree","Management","No",3,"0-1 Miles","Pacific",47,"Yes",FALSE
+"Single","Female",10000,4,"Partial High School","Manual","Yes",2,"0-1 Miles","Europe",41,"Yes",FALSE
+"Single","Female",40000,0,"Graduate Degree","Clerical","No",0,"0-1 Miles","Europe",37,"Yes",FALSE
+"Married","Male",90000,4,"Bachelors","Professional","Yes",0,"1-2 Miles","Pacific",38,"Yes",FALSE
+"Single","Male",40000,2,"Partial College","Clerical","No",2,"0-1 Miles","Europe",36,"Yes",FALSE
+"Married","Female",20000,0,"Bachelors","Clerical","No",0,"0-1 Miles","Pacific",26,"Yes",FALSE
+"Married","Male",30000,1,"Bachelors","Skilled Manual","Yes",2,"0-1 Miles","Europe",40,"No",FALSE
+"Single","Male",40000,2,"Partial College","Clerical","Yes",2,"1-2 Miles","Europe",36,"No",FALSE
+"Married","Female",90000,5,"Partial High School","Skilled Manual","Yes",2,"10+ Miles","Europe",59,"No",FALSE
+"Single","Female",80000,0,"Bachelors","Professional","Yes",3,"10+ Miles","Pacific",32,"No",FALSE
+"Married","Male",10000,0,"Partial High School","Manual","No",2,"0-1 Miles","Europe",30,"No",FALSE
+"Single","Female",20000,0,"Partial High School","Manual","No",2,"1-2 Miles","Europe",35,"Yes",FALSE
+"Married","Male",130000,3,"High School","Professional","Yes",4,"5-10 Miles","Europe",51,"Yes",FALSE
+"Married","Male",90000,2,"Bachelors","Professional","Yes",1,"5-10 Miles","Pacific",47,"No",FALSE
+"Married","Male",80000,5,"Graduate Degree","Management","No",2,"0-1 Miles","Pacific",39,"No",FALSE
+"Single","Male",20000,0,"Partial High School","Manual","No",2,"0-1 Miles","Europe",34,"No",FALSE
+"Married","Male",10000,0,"Partial High School","Manual","Yes",2,"0-1 Miles","Europe",32,"No",FALSE
+"Single","Female",120000,3,"High School","Professional","Yes",4,"5-10 Miles","Europe",50,"Yes",FALSE
+"Married","Male",20000,1,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",66,"No",FALSE
+"Single","Male",30000,0,"Partial College","Clerical","Yes",1,"2-5 Miles","Europe",30,"No",FALSE
+"Single","Female",30000,0,"High School","Manual","No",1,"2-5 Miles","Europe",32,"Yes",FALSE
+"Single","Male",10000,0,"Partial High School","Manual","Yes",2,"1-2 Miles","Europe",35,"No",FALSE
+"Single","Female",30000,0,"High School","Manual","No",1,"2-5 Miles","Europe",32,"No",FALSE
+"Single","Male",30000,0,"Partial College","Clerical","No",1,"2-5 Miles","Europe",31,"Yes",FALSE
+"Married","Female",20000,1,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",50,"Yes",FALSE
+"Married","Male",40000,1,"Bachelors","Skilled Manual","No",0,"0-1 Miles","Europe",43,"Yes",FALSE
+"Single","Female",60000,1,"Partial College","Skilled Manual","No",1,"0-1 Miles","Pacific",45,"Yes",FALSE
+"Married","Male",20000,2,"High School","Manual","Yes",2,"0-1 Miles","Europe",42,"No",FALSE
+"Single","Female",30000,0,"Partial College","Clerical","No",1,"0-1 Miles","Europe",29,"Yes",FALSE
+"Single","Male",20000,0,"Partial College","Manual","No",0,"0-1 Miles","Pacific",28,"Yes",FALSE
+"Single","Male",10000,3,"High School","Manual","Yes",1,"0-1 Miles","Europe",37,"Yes",FALSE
+"Married","Female",80000,4,"Partial College","Professional","Yes",2,"2-5 Miles","Europe",53,"No",FALSE
+"Single","Male",40000,0,"Graduate Degree","Clerical","No",0,"0-1 Miles","Europe",38,"Yes",FALSE
+"Single","Male",30000,1,"Bachelors","Clerical","No",1,"1-2 Miles","Europe",39,"No",FALSE
+"Single","Male",80000,0,"Bachelors","Professional","Yes",3,"10+ Miles","Pacific",32,"No",FALSE
+"Married","Female",150000,3,"High School","Professional","Yes",3,"0-1 Miles","Europe",51,"Yes",FALSE
+"Single","Female",10000,0,"Partial High School","Manual","Yes",2,"1-2 Miles","Europe",33,"No",FALSE
+"Married","Male",90000,4,"High School","Management","Yes",3,"5-10 Miles","Europe",58,"Yes",FALSE
+"Married","Male",80000,0,"Bachelors","Professional","Yes",3,"10+ Miles","Pacific",30,"No",FALSE
+"Single","Male",130000,0,"Graduate Degree","Management","Yes",0,"2-5 Miles","Pacific",48,"Yes",FALSE
+"Single","Female",30000,3,"Partial College","Clerical","No",2,"0-1 Miles","Europe",27,"Yes",FALSE
+"Married","Male",40000,1,"Bachelors","Skilled Manual","Yes",1,"0-1 Miles","Europe",33,"Yes",FALSE
+"Married","Female",40000,2,"Bachelors","Management","Yes",2,"0-1 Miles","Pacific",66,"Yes",FALSE
+"Single","Female",10000,2,"High School","Manual","Yes",1,"0-1 Miles","Europe",38,"Yes",FALSE
+"Single","Female",40000,0,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",38,"Yes",FALSE
+"Married","Male",60000,1,"Partial College","Skilled Manual","Yes",1,"0-1 Miles","Pacific",45,"Yes",FALSE
+"Married","Female",130000,3,"Partial College","Professional","Yes",3,"5-10 Miles","Europe",50,"Yes",FALSE
+"Single","Female",30000,2,"Partial College","Clerical","No",2,"5-10 Miles","Pacific",60,"Yes",FALSE
+"Single","Female",20000,2,"Partial College","Manual","No",1,"0-1 Miles","Europe",53,"Yes",FALSE
+"Married","Female",100000,4,"Bachelors","Professional","Yes",1,"10+ Miles","Pacific",46,"No",FALSE
+"Single","Male",80000,5,"Graduate Degree","Management","Yes",3,"0-1 Miles","Pacific",43,"No",FALSE
+"Married","Male",40000,1,"Bachelors","Skilled Manual","Yes",1,"0-1 Miles","Europe",43,"Yes",FALSE
+"Single","Male",20000,0,"High School","Manual","No",1,"2-5 Miles","Europe",30,"No",FALSE
+"Single","Female",80000,5,"Bachelors","Professional","Yes",4,"1-2 Miles","Pacific",38,"No",FALSE
+"Married","Female",40000,1,"Bachelors","Skilled Manual","Yes",1,"0-1 Miles","Europe",89,"No",FALSE
+"Married","Male",20000,1,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",64,"Yes",FALSE
+"Married","Male",130000,3,"Partial College","Professional","No",3,"5-10 Miles","Europe",51,"Yes",FALSE
+"Married","Male",30000,3,"Partial College","Clerical","No",2,"5-10 Miles","Pacific",56,"No",FALSE
+"Married","Male",60000,3,"Bachelors","Professional","Yes",2,"5-10 Miles","Pacific",43,"No",FALSE
+"Single","Male",70000,0,"Bachelors","Professional","No",3,"10+ Miles","Pacific",30,"Yes",FALSE
+"Married","Female",30000,2,"Partial College","Clerical","Yes",2,"5-10 Miles","Pacific",69,"No",FALSE
+"Married","Male",80000,4,"Partial College","Professional","Yes",2,"10+ Miles","Europe",53,"No",FALSE
+"Married","Male",40000,0,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",37,"Yes",FALSE
+"Single","Female",10000,0,"Partial College","Manual","No",1,"0-1 Miles","Pacific",28,"Yes",FALSE
+"Single","Male",30000,3,"Partial College","Clerical","Yes",0,"0-1 Miles","Europe",43,"No",FALSE
+"Single","Female",120000,2,"Partial High School","Professional","Yes",4,"10+ Miles","Pacific",34,"Yes",FALSE
+"Single","Female",20000,0,"Partial High School","Manual","No",2,"1-2 Miles","Europe",34,"Yes",FALSE
+"Married","Female",30000,1,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",64,"No",FALSE
+"Married","Female",80000,0,"Bachelors","Professional","Yes",1,"1-2 Miles","Pacific",41,"Yes",FALSE
+"Single","Male",70000,0,"Bachelors","Professional","No",1,"5-10 Miles","Pacific",38,"No",FALSE
+"Single","Female",70000,0,"Bachelors","Professional","No",1,"0-1 Miles","Pacific",41,"Yes",FALSE
+"Single","Male",20000,1,"Bachelors","Clerical","No",0,"0-1 Miles","Europe",51,"No",FALSE
+"Married","Female",10000,0,"Partial High School","Manual","Yes",2,"1-2 Miles","Europe",32,"No",FALSE
+"Married","Female",40000,0,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",38,"Yes",FALSE
+"Married","Male",30000,1,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",38,"Yes",FALSE
+"Single","Male",60000,2,"Bachelors","Professional","Yes",1,"2-5 Miles","Pacific",38,"Yes",FALSE
+"Married","Female",10000,2,"Partial High School","Clerical","Yes",2,"5-10 Miles","Pacific",58,"No",FALSE
+"Single","Male",30000,1,"Bachelors","Clerical","Yes",1,"1-2 Miles","Europe",39,"Yes",FALSE
+"Single","Female",40000,2,"Bachelors","Management","No",1,"5-10 Miles","Pacific",53,"Yes",FALSE
+"Single","Female",110000,3,"Bachelors","Management","Yes",4,"10+ Miles","Europe",53,"No",FALSE
+"Married","Female",40000,1,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",80,"No",FALSE
+"Married","Male",10000,1,"Graduate Degree","Manual","Yes",0,"0-1 Miles","Europe",44,"No",FALSE
+"Married","Male",20000,1,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",44,"No",FALSE
+"Married","Male",30000,3,"High School","Skilled Manual","Yes",2,"5-10 Miles","Pacific",54,"Yes",FALSE
+"Married","Female",30000,0,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",37,"Yes",FALSE
+"Married","Female",40000,1,"Bachelors","Skilled Manual","Yes",0,"0-1 Miles","Europe",41,"No",FALSE
+"Single","Female",90000,2,"Bachelors","Professional","No",0,"0-1 Miles","Pacific",36,"Yes",FALSE
+"Single","Female",40000,2,"Partial College","Clerical","Yes",0,"0-1 Miles","Europe",33,"No",FALSE
+"Married","Female",130000,3,"Partial College","Professional","Yes",4,"0-1 Miles","Europe",52,"No",FALSE
+"Married","Female",20000,2,"Partial College","Manual","Yes",1,"0-1 Miles","Europe",46,"Yes",FALSE
+"Married","Male",70000,5,"Partial College","Skilled Manual","Yes",2,"5-10 Miles","Pacific",43,"No",FALSE
+"Single","Male",40000,2,"Partial College","Clerical","Yes",0,"0-1 Miles","Europe",34,"No",FALSE
+"Single","Female",30000,2,"Partial College","Clerical","No",2,"5-10 Miles","Pacific",67,"No",FALSE
+"Married","Female",40000,0,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",35,"Yes",FALSE
+"Married","Female",80000,5,"Graduate Degree","Management","Yes",3,"0-1 Miles","Pacific",40,"No",FALSE
+"Single","Male",60000,2,"Bachelors","Professional","No",1,"0-1 Miles","Pacific",37,"Yes",FALSE
+"Single","Female",30000,2,"Partial College","Clerical","No",2,"5-10 Miles","Pacific",67,"No",FALSE
+"Married","Male",30000,1,"Bachelors","Skilled Manual","Yes",2,"0-1 Miles","Europe",41,"Yes",FALSE
+"Single","Male",10000,2,"Partial College","Manual","Yes",1,"0-1 Miles","Europe",51,"Yes",FALSE
+"Married","Female",100000,2,"Bachelors","Management","Yes",4,"10+ Miles","Europe",59,"No",FALSE
+"Married","Male",10000,2,"Partial College","Manual","Yes",0,"1-2 Miles","Europe",51,"No",FALSE
+"Single","Male",110000,0,"Partial College","Management","No",3,"10+ Miles","Pacific",32,"Yes",FALSE
+"Single","Male",30000,0,"High School","Manual","Yes",1,"2-5 Miles","Europe",34,"Yes",FALSE
+"Single","Female",10000,3,"Partial High School","Manual","Yes",2,"0-1 Miles","Europe",43,"No",FALSE
+"Married","Male",40000,2,"Bachelors","Management","Yes",2,"0-1 Miles","Pacific",67,"No",FALSE
+"Single","Male",30000,0,"Partial College","Clerical","No",1,"2-5 Miles","Europe",28,"No",FALSE
+"Single","Female",90000,1,"Graduate Degree","Management","Yes",0,"0-1 Miles","Pacific",36,"Yes",FALSE
+"Married","Male",110000,4,"Bachelors","Management","Yes",3,"2-5 Miles","Pacific",48,"No",FALSE
+"Single","Female",30000,0,"Partial College","Clerical","Yes",1,"2-5 Miles","Europe",31,"No",FALSE
+"Single","Female",30000,3,"High School","Skilled Manual","Yes",2,"5-10 Miles","Pacific",55,"No",FALSE
+"Single","Male",20000,0,"Partial College","Manual","Yes",0,"0-1 Miles","Pacific",28,"Yes",FALSE
+"Married","Female",110000,0,"High School","Management","Yes",3,"10+ Miles","Pacific",34,"Yes",FALSE
+"Single","Female",30000,3,"Partial College","Clerical","No",1,"0-1 Miles","Europe",26,"No",FALSE
+"Married","Female",30000,3,"High School","Skilled Manual","Yes",2,"5-10 Miles","Pacific",53,"Yes",FALSE
+"Single","Female",10000,2,"Bachelors","Clerical","No",1,"2-5 Miles","Europe",68,"No",FALSE
+"Married","Female",80000,2,"High School","Skilled Manual","Yes",2,"5-10 Miles","Pacific",50,"Yes",FALSE
+"Single","Female",30000,3,"Partial College","Clerical","Yes",2,"0-1 Miles","Europe",28,"Yes",FALSE
+"Single","Female",80000,0,"Graduate Degree","Skilled Manual","No",0,"0-1 Miles","Europe",40,"Yes",FALSE
+"Married","Male",70000,5,"Partial College","Skilled Manual","Yes",2,"0-1 Miles","Pacific",44,"No",FALSE
+"Single","Male",90000,0,"Bachelors","Professional","No",3,"10+ Miles","Pacific",34,"Yes",FALSE
+"Married","Male",20000,2,"Partial College","Skilled Manual","Yes",2,"5-10 Miles","Pacific",52,"Yes",TRUE
+"Single","Male",80000,4,"Graduate Degree","Management","Yes",0,"0-1 Miles","Pacific",36,"Yes",FALSE
+"Married","Female",40000,1,"Bachelors","Skilled Manual","Yes",1,"0-1 Miles","Europe",43,"Yes",FALSE
+"Single","Male",30000,0,"High School","Manual","No",1,"1-2 Miles","Europe",32,"No",FALSE
+"Married","Female",40000,1,"Bachelors","Skilled Manual","Yes",1,"1-2 Miles","Europe",32,"Yes",FALSE
+"Married","Female",130000,0,"Graduate Degree","Management","Yes",1,"10+ Miles","Pacific",48,"No",FALSE
+"Married","Female",40000,1,"Bachelors","Skilled Manual","Yes",0,"1-2 Miles","Europe",32,"Yes",FALSE
+"Married","Female",30000,3,"Graduate Degree","Clerical","Yes",1,"0-1 Miles","Europe",46,"No",FALSE
+"Married","Female",40000,1,"Bachelors","Skilled Manual","Yes",0,"0-1 Miles","Europe",42,"No",FALSE
+"Single","Female",10000,2,"High School","Manual","Yes",0,"0-1 Miles","Europe",36,"Yes",FALSE
+"Married","Female",40000,1,"Bachelors","Skilled Manual","Yes",0,"0-1 Miles","Europe",41,"No",FALSE
+"Married","Female",30000,2,"Partial College","Clerical","No",2,"0-1 Miles","Pacific",69,"No",FALSE
+"Single","Female",70000,5,"Partial College","Skilled Manual","Yes",2,"5-10 Miles","Pacific",45,"No",FALSE
+"Single","Male",30000,0,"High School","Manual","No",1,"2-5 Miles","Europe",34,"No",FALSE
+"Married","Female",80000,4,"Partial College","Professional","No",1,"2-5 Miles","Europe",53,"Yes",FALSE
+"Single","Male",120000,3,"High School","Professional","No",4,"5-10 Miles","Europe",50,"No",FALSE
+"Married","Female",20000,1,"Partial College","Manual","Yes",0,"0-1 Miles","Europe",65,"No",FALSE
+"Married","Male",120000,0,"Partial High School","Professional","Yes",4,"10+ Miles","Pacific",32,"Yes",FALSE
+"Single","Female",80000,0,"Bachelors","Professional","No",3,"10+ Miles","Pacific",33,"No",FALSE
+"Single","Male",20000,0,"Partial High School","Manual","Yes",2,"1-2 Miles","Europe",31,"Yes",FALSE
+"Married","Female",120000,1,"Bachelors","Management","Yes",2,"0-1 Miles","Pacific",46,"Yes",FALSE
+"Married","Female",40000,0,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",39,"Yes",FALSE
+"Single","Male",20000,2,"High School","Manual","Yes",1,"0-1 Miles","Europe",40,"No",FALSE
+"Single","Female",30000,3,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",46,"Yes",FALSE
+"Married","Male",40000,2,"Bachelors","Management","Yes",2,"0-1 Miles","Pacific",65,"No",FALSE
+"Single","Female",30000,3,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",47,"Yes",FALSE
+"Single","Male",100000,1,"Bachelors","Management","No",3,"0-1 Miles","Pacific",46,"Yes",FALSE
+"Married","Female",80000,5,"Graduate Degree","Management","Yes",3,"0-1 Miles","Pacific",40,"No",FALSE
+"Married","Female",30000,1,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",65,"No",FALSE
+"Single","Male",30000,0,"High School","Manual","No",1,"1-2 Miles","Europe",28,"No",FALSE
+"Single","Male",70000,0,"Bachelors","Professional","No",2,"5-10 Miles","Pacific",43,"Yes",FALSE
+"Single","Female",40000,0,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",38,"Yes",FALSE
+"Married","Female",30000,0,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",47,"Yes",FALSE
+"Married","Female",90000,2,"Bachelors","Professional","No",0,"0-1 Miles","Pacific",36,"Yes",FALSE
+"Married","Male",20000,4,"High School","Skilled Manual","No",2,"1-2 Miles","Pacific",60,"No",FALSE
+"Single","Female",70000,0,"Bachelors","Professional","Yes",1,"5-10 Miles","Pacific",42,"Yes",FALSE
+"Married","Male",70000,2,"High School","Skilled Manual","No",2,"1-2 Miles","Pacific",50,"Yes",FALSE
+"Married","Male",30000,0,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",35,"Yes",FALSE
+"Married","Male",40000,1,"Bachelors","Skilled Manual","Yes",1,"0-1 Miles","Europe",32,"Yes",FALSE
+"Married","Female",90000,1,"Bachelors","Professional","Yes",1,"5-10 Miles","Pacific",46,"No",FALSE
+"Single","Female",40000,2,"Partial College","Clerical","Yes",0,"1-2 Miles","Europe",33,"Yes",FALSE
+"Single","Male",40000,0,"Graduate Degree","Clerical","No",0,"0-1 Miles","Europe",36,"Yes",FALSE
+"Married","Male",10000,1,"Graduate Degree","Clerical","Yes",0,"0-1 Miles","Europe",70,"No",FALSE
+"Single","Female",30000,0,"Partial College","Clerical","No",1,"2-5 Miles","Europe",31,"Yes",FALSE
+"Single","Male",30000,2,"Partial College","Clerical","Yes",2,"0-1 Miles","Europe",42,"No",FALSE
+"Married","Female",90000,4,"Partial High School","Skilled Manual","Yes",4,"10+ Miles","Europe",58,"No",FALSE
+"Married","Male",40000,0,"Bachelors","Clerical","Yes",0,"0-1 Miles","Europe",39,"No",FALSE
+"Single","Female",10000,0,"Partial High School","Manual","Yes",2,"1-2 Miles","Europe",34,"No",FALSE
+"Married","Male",20000,0,"Partial High School","Manual","Yes",2,"0-1 Miles","Europe",32,"No",FALSE
+"Married","Male",60000,4,"Bachelors","Professional","Yes",0,"2-5 Miles","North America",46,"No",FALSE
+"Married","Male",70000,2,"Partial High School","Skilled Manual","Yes",2,"5-10 Miles","North America",48,"No",FALSE
+"Single","Female",40000,3,"Partial College","Clerical","Yes",1,"1-2 Miles","North America",31,"Yes",FALSE
+"Single","Male",70000,5,"Bachelors","Management","Yes",3,"10+ Miles","North America",60,"Yes",FALSE
+"Married","Male",70000,4,"High School","Professional","Yes",0,"5-10 Miles","North America",51,"No",FALSE
+"Married","Male",60000,2,"Partial College","Professional","Yes",2,"10+ Miles","North America",56,"No",FALSE
+"Single","Female",60000,3,"Bachelors","Skilled Manual","Yes",1,"2-5 Miles","North America",40,"Yes",FALSE
+"Single","Female",70000,1,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",34,"Yes",FALSE
+"Married","Male",80000,1,"Partial College","Skilled Manual","Yes",1,"2-5 Miles","North America",48,"Yes",FALSE
+"Single","Female",40000,0,"High School","Skilled Manual","No",2,"1-2 Miles","North America",31,"Yes",FALSE
+"Married","Male",60000,5,"Bachelors","Professional","Yes",1,"2-5 Miles","North America",47,"No",FALSE
+"Married","Female",50000,0,"Graduate Degree","Skilled Manual","Yes",0,"0-1 Miles","North America",34,"No",FALSE
+"Married","Male",40000,0,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","North America",29,"No",FALSE
+"Married","Female",130000,1,"Bachelors","Management","Yes",4,"2-5 Miles","North America",44,"Yes",FALSE
+"Married","Male",70000,2,"Bachelors","Skilled Manual","Yes",1,"2-5 Miles","North America",38,"Yes",FALSE
+"Married","Male",100000,4,"Partial College","Professional","Yes",4,"0-1 Miles","North America",40,"No",FALSE
+"Married","Female",70000,4,"Bachelors","Professional","Yes",2,"2-5 Miles","North America",42,"Yes",FALSE
+"Married","Female",40000,1,"Partial College","Clerical","Yes",1,"1-2 Miles","North America",51,"Yes",FALSE
+"Married","Male",60000,0,"Partial College","Skilled Manual","No",2,"1-2 Miles","North America",29,"No",FALSE
+"Married","Male",80000,3,"Bachelors","Professional","Yes",1,"2-5 Miles","North America",48,"Yes",TRUE
+"Single","Male",70000,0,"Bachelors","Professional","No",1,"2-5 Miles","North America",37,"Yes",FALSE
+"Single","Male",80000,4,"Bachelors","Management","Yes",1,"5-10 Miles","North America",66,"Yes",FALSE
+"Married","Female",60000,1,"Partial College","Skilled Manual","Yes",1,"0-1 Miles","North America",45,"Yes",FALSE
+"Single","Female",60000,4,"Graduate Degree","Management","Yes",2,"10+ Miles","North America",61,"Yes",FALSE
+"Single","Male",40000,0,"Bachelors","Professional","No",1,"2-5 Miles","North America",45,"No",FALSE
+"Married","Female",70000,5,"Bachelors","Professional","Yes",2,"2-5 Miles","North America",47,"No",FALSE
+"Married","Female",60000,2,"High School","Professional","Yes",2,"5-10 Miles","North America",49,"No",FALSE
+"Single","Male",60000,3,"Bachelors","Professional","No",0,"0-1 Miles","North America",47,"Yes",FALSE
+"Married","Female",80000,0,"Bachelors","Management","Yes",1,"1-2 Miles","North America",34,"Yes",FALSE
+"Married","Male",80000,5,"Bachelors","Management","Yes",2,"1-2 Miles","North America",64,"No",FALSE
+"Single","Male",100000,1,"Partial College","Professional","No",3,"1-2 Miles","North America",44,"No",FALSE
+"Single","Male",40000,4,"High School","Professional","Yes",2,"10+ Miles","North America",62,"Yes",FALSE
+"Single","Male",60000,3,"Bachelors","Professional","No",1,"0-1 Miles","North America",47,"Yes",FALSE
+"Married","Male",80000,3,"Partial College","Professional","No",2,"0-1 Miles","North America",49,"Yes",FALSE
+"Single","Female",80000,4,"Graduate Degree","Management","Yes",2,"5-10 Miles","North America",67,"No",FALSE
+"Single","Male",60000,5,"Bachelors","Management","Yes",3,"10+ Miles","North America",59,"Yes",FALSE
+"Married","Female",110000,1,"Bachelors","Management","Yes",2,"1-2 Miles","North America",44,"No",FALSE
+"Married","Male",50000,1,"Bachelors","Skilled Manual","Yes",0,"0-1 Miles","North America",36,"No",FALSE
+"Single","Female",30000,0,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","North America",28,"No",FALSE
+"Married","Male",60000,2,"Partial College","Professional","Yes",1,"10+ Miles","North America",57,"Yes",FALSE
+"Married","Male",60000,0,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","North America",27,"Yes",FALSE
+"Single","Male",30000,0,"Partial High School","Clerical","Yes",2,"5-10 Miles","North America",28,"No",FALSE
+"Single","Female",60000,1,"Bachelors","Professional","No",1,"0-1 Miles","North America",44,"Yes",FALSE
+"Married","Male",60000,3,"Bachelors","Management","Yes",2,"10+ Miles","North America",66,"No",FALSE
+"Married","Male",40000,4,"High School","Professional","Yes",2,"10+ Miles","North America",64,"No",FALSE
+"Married","Male",50000,3,"Bachelors","Skilled Manual","Yes",3,"10+ Miles","North America",41,"No",FALSE
+"Single","Female",80000,3,"Bachelors","Skilled Manual","Yes",1,"0-1 Miles","North America",41,"Yes",FALSE
+"Married","Female",40000,1,"Partial College","Clerical","Yes",1,"1-2 Miles","North America",49,"Yes",FALSE
+"Married","Female",80000,4,"Bachelors","Management","Yes",0,"0-1 Miles","North America",42,"No",FALSE
+"Single","Female",70000,0,"Bachelors","Professional","No",1,"2-5 Miles","North America",37,"Yes",FALSE
+"Single","Female",70000,3,"Graduate Degree","Management","Yes",2,"1-2 Miles","North America",52,"No",FALSE
+"Married","Male",50000,1,"Graduate Degree","Skilled Manual","Yes",0,"1-2 Miles","North America",34,"No",FALSE
+"Married","Male",40000,0,"High School","Skilled Manual","Yes",2,"5-10 Miles","North America",29,"No",FALSE
+"Married","Female",70000,2,"High School","Professional","Yes",2,"2-5 Miles","North America",53,"No",FALSE
+"Single","Male",120000,2,"Bachelors","Management","No",4,"1-2 Miles","North America",40,"No",FALSE
+"Single","Male",60000,0,"Partial College","Skilled Manual","No",2,"1-2 Miles","North America",29,"No",FALSE
+"Married","Male",60000,4,"Bachelors","Professional","Yes",2,"2-5 Miles","North America",43,"Yes",FALSE
+"Married","Male",60000,2,"High School","Professional","Yes",2,"2-5 Miles","North America",55,"Yes",FALSE
+"Single","Female",80000,4,"Graduate Degree","Skilled Manual","No",0,"0-1 Miles","North America",48,"No",FALSE
+"Married","Female",130000,2,"Bachelors","Management","Yes",3,"0-1 Miles","North America",45,"Yes",FALSE
+"Single","Female",70000,0,"Bachelors","Professional","No",1,"0-1 Miles","Pacific",42,"Yes",FALSE
+"Married","Female",50000,4,"Bachelors","Management","Yes",2,"10+ Miles","North America",63,"No",FALSE
+"Single","Male",60000,3,"High School","Professional","Yes",2,"10+ Miles","North America",54,"Yes",FALSE
+"Married","Male",40000,3,"Partial College","Professional","No",2,"5-10 Miles","North America",73,"Yes",FALSE
+"Married","Female",60000,2,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",43,"Yes",FALSE
+"Single","Male",50000,0,"Partial College","Skilled Manual","No",1,"2-5 Miles","North America",39,"Yes",FALSE
+"Married","Male",80000,4,"Bachelors","Management","Yes",0,"1-2 Miles","North America",42,"No",FALSE
+"Married","Female",40000,3,"Partial College","Clerical","Yes",0,"1-2 Miles","North America",31,"No",FALSE
+"Married","Female",50000,3,"Bachelors","Skilled Manual","Yes",2,"0-1 Miles","North America",41,"No",FALSE
+"Single","Female",60000,2,"Bachelors","Management","Yes",0,"10+ Miles","North America",58,"No",FALSE
+"Married","Female",60000,0,"Graduate Degree","Professional","Yes",0,"0-1 Miles","North America",40,"No",FALSE
+"Married","Female",20000,2,"Partial High School","Clerical","No",1,"0-1 Miles","North America",48,"No",FALSE
+"Married","Female",70000,2,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",34,"Yes",FALSE
+"Single","Female",30000,0,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","North America",28,"No",FALSE
+"Single","Male",30000,0,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","North America",27,"No",FALSE
+"Married","Male",40000,3,"Partial College","Professional","No",2,"5-10 Miles","North America",54,"Yes",FALSE
+"Married","Female",60000,2,"Graduate Degree","Management","Yes",2,"5-10 Miles","North America",70,"No",FALSE
+"Married","Male",40000,1,"Partial College","Clerical","Yes",1,"1-2 Miles","North America",48,"Yes",FALSE
+"Married","Male",70000,1,"Partial College","Skilled Manual","Yes",1,"2-5 Miles","North America",44,"Yes",FALSE
+"Single","Male",50000,3,"Graduate Degree","Management","Yes",2,"10+ Miles","North America",69,"No",FALSE
+"Married","Male",70000,3,"Partial High School","Skilled Manual","Yes",2,"5-10 Miles","North America",52,"No",FALSE
+"Married","Male",40000,2,"Partial High School","Skilled Manual","Yes",2,"2-5 Miles","North America",55,"No",FALSE
+"Single","Male",30000,0,"High School","Skilled Manual","Yes",2,"5-10 Miles","North America",30,"No",FALSE
+"Married","Male",60000,3,"Graduate Degree","Management","Yes",2,"1-2 Miles","North America",63,"No",FALSE
+"Single","Female",80000,0,"Bachelors","Management","Yes",1,"1-2 Miles","North America",34,"Yes",FALSE
+"Single","Male",60000,2,"Partial College","Professional","Yes",1,"10+ Miles","North America",56,"No",FALSE
+"Single","Female",40000,0,"High School","Skilled Manual","Yes",1,"5-10 Miles","North America",31,"No",FALSE
+"Married","Male",120000,1,"Bachelors","Management","Yes",4,"0-1 Miles","North America",38,"No",FALSE
+"Married","Male",60000,4,"Bachelors","Management","Yes",2,"2-5 Miles","North America",59,"No",FALSE
+"Single","Female",40000,3,"Partial College","Clerical","No",2,"0-1 Miles","North America",32,"No",FALSE
+"Married","Female",60000,3,"Graduate Degree","Management","Yes",2,"10+ Miles","North America",69,"No",FALSE
+"Married","Male",40000,0,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","North America",28,"No",FALSE
+"Married","Male",80000,4,"Graduate Degree","Skilled Manual","Yes",0,"1-2 Miles","North America",47,"No",FALSE
+"Married","Male",60000,3,"Bachelors","Management","Yes",2,"10+ Miles","North America",66,"No",FALSE
+"Single","Male",70000,2,"Bachelors","Skilled Manual","No",1,"0-1 Miles","North America",37,"Yes",FALSE
+"Single","Male",120000,2,"Bachelors","Management","No",3,"0-1 Miles","North America",39,"Yes",FALSE
+"Married","Male",60000,2,"High School","Professional","No",2,"1-2 Miles","North America",51,"No",FALSE
+"Married","Female",130000,0,"Graduate Degree","Management","Yes",3,"1-2 Miles","North America",40,"No",FALSE
+"Married","Female",90000,2,"High School","Professional","Yes",1,"10+ Miles","North America",51,"Yes",FALSE
+"Single","Male",60000,2,"Bachelors","Management","Yes",0,"10+ Miles","North America",57,"No",FALSE
+"Married","Female",60000,1,"Graduate Degree","Professional","No",0,"0-1 Miles","North America",35,"Yes",FALSE
+"Married","Male",40000,4,"High School","Professional","No",2,"10+ Miles","North America",61,"Yes",FALSE
+"Single","Female",80000,5,"Partial College","Professional","Yes",2,"5-10 Miles","North America",44,"No",FALSE
+"Single","Female",70000,2,"Partial College","Professional","Yes",0,"5-10 Miles","North America",49,"Yes",FALSE
+"Married","Male",80000,4,"Graduate Degree","Management","Yes",2,"5-10 Miles","North America",70,"No",FALSE
+"Single","Female",20000,3,"High School","Skilled Manual","Yes",2,"2-5 Miles","North America",78,"No",FALSE
+"Married","Female",90000,4,"Partial College","Professional","Yes",1,"1-2 Miles","North America",45,"No",FALSE
+"Single","Male",40000,2,"High School","Professional","No",1,"2-5 Miles","North America",58,"Yes",FALSE
+"Married","Male",130000,1,"Graduate Degree","Management","Yes",4,"0-1 Miles","North America",41,"No",FALSE
+"Married","Female",60000,2,"Partial College","Professional","Yes",1,"2-5 Miles","North America",57,"Yes",FALSE
+"Married","Male",30000,2,"High School","Skilled Manual","No",2,"0-1 Miles","North America",49,"No",FALSE
+"Single","Male",80000,4,"Partial College","Professional","No",2,"0-1 Miles","North America",43,"No",FALSE
+"Single","Male",60000,2,"Partial High School","Skilled Manual","Yes",2,"5-10 Miles","North America",52,"Yes",FALSE
+"Married","Male",60000,1,"Graduate Degree","Professional","Yes",0,"0-1 Miles","North America",35,"Yes",FALSE
+"Married","Male",40000,0,"High School","Skilled Manual","Yes",2,"5-10 Miles","North America",27,"No",FALSE
+"Single","Male",70000,3,"High School","Professional","Yes",0,"5-10 Miles","North America",52,"Yes",FALSE
+"Single","Male",40000,2,"Bachelors","Skilled Manual","Yes",0,"2-5 Miles","North America",36,"No",FALSE
+"Single","Female",70000,5,"Graduate Degree","Professional","Yes",3,"10+ Miles","North America",46,"Yes",FALSE
+"Married","Male",60000,3,"Partial High School","Skilled Manual","Yes",2,"5-10 Miles","North America",52,"Yes",FALSE
+"Married","Male",70000,0,"Bachelors","Professional","No",1,"0-1 Miles","North America",43,"No",FALSE
+"Married","Male",60000,1,"Partial College","Skilled Manual","Yes",1,"2-5 Miles","North America",44,"No",FALSE
+"Married","Female",80000,0,"Bachelors","Management","Yes",1,"1-2 Miles","North America",34,"Yes",FALSE
+"Single","Female",30000,0,"Partial High School","Clerical","Yes",2,"5-10 Miles","North America",27,"No",FALSE
+"Single","Male",110000,1,"Partial College","Professional","Yes",4,"5-10 Miles","North America",45,"Yes",FALSE
+"Married","Female",100000,3,"Partial College","Professional","Yes",4,"1-2 Miles","North America",45,"No",FALSE
+"Single","Female",60000,4,"Graduate Degree","Skilled Manual","No",1,"0-1 Miles","North America",47,"Yes",FALSE
+"Single","Female",80000,4,"Graduate Degree","Skilled Manual","Yes",0,"1-2 Miles","North America",47,"No",FALSE
+"Married","Male",40000,4,"High School","Skilled Manual","Yes",2,"2-5 Miles","North America",44,"Yes",FALSE
+"Single","Female",20000,3,"Partial High School","Clerical","No",2,"0-1 Miles","North America",49,"No",FALSE
+"Single","Female",40000,0,"High School","Skilled Manual","Yes",1,"5-10 Miles","North America",30,"No",FALSE
+"Married","Female",100000,4,"Partial College","Professional","Yes",4,"2-5 Miles","North America",41,"Yes",FALSE
+"Married","Male",70000,4,"Bachelors","Management","Yes",1,"1-2 Miles","North America",58,"No",FALSE
+"Married","Male",60000,5,"Bachelors","Professional","Yes",1,"2-5 Miles","North America",47,"No",FALSE
+"Married","Female",70000,4,"Partial College","Professional","Yes",1,"1-2 Miles","North America",55,"No",FALSE
+"Single","Female",70000,0,"Partial College","Skilled Manual","No",2,"0-1 Miles","North America",27,"Yes",FALSE
+"Married","Male",60000,3,"Graduate Degree","Management","Yes",2,"1-2 Miles","North America",67,"No",FALSE
+"Married","Female",60000,0,"Partial College","Skilled Manual","Yes",2,"5-10 Miles","North America",29,"No",FALSE
+"Married","Female",60000,3,"Graduate Degree","Management","Yes",2,"1-2 Miles","North America",67,"No",FALSE
+"Single","Male",80000,3,"Partial College","Professional","No",1,"1-2 Miles","North America",51,"Yes",FALSE
+"Married","Female",50000,1,"Graduate Degree","Skilled Manual","Yes",0,"0-1 Miles","North America",35,"No",FALSE
+"Married","Male",40000,0,"High School","Skilled Manual","No",2,"1-2 Miles","North America",30,"No",FALSE
+"Single","Male",70000,5,"Partial College","Professional","Yes",3,"2-5 Miles","North America",44,"No",FALSE
+"Single","Female",80000,4,"Graduate Degree","Skilled Manual","Yes",0,"1-2 Miles","North America",48,"No",FALSE
+"Married","Female",130000,1,"Bachelors","Management","Yes",2,"0-1 Miles","North America",45,"Yes",FALSE
+"Married","Male",60000,3,"Bachelors","Management","No",2,"1-2 Miles","North America",66,"No",FALSE
+"Single","Female",30000,2,"High School","Skilled Manual","No",2,"0-1 Miles","North America",49,"No",FALSE
+"Single","Female",120000,4,"Partial College","Professional","Yes",3,"5-10 Miles","North America",43,"Yes",FALSE
+"Single","Male",40000,0,"High School","Skilled Manual","No",2,"1-2 Miles","North America",30,"No",FALSE
+"Single","Male",70000,2,"Graduate Degree","Management","Yes",2,"5-10 Miles","North America",74,"Yes",FALSE
+"Married","Male",100000,2,"Graduate Degree","Management","Yes",3,"1-2 Miles","North America",65,"No",FALSE
+"Married","Female",60000,2,"Partial College","Professional","Yes",2,"2-5 Miles","North America",56,"Yes",FALSE
+"Married","Male",50000,4,"Bachelors","Management","Yes",2,"10+ Miles","North America",64,"No",FALSE
+"Married","Female",70000,3,"Partial College","Professional","Yes",2,"5-10 Miles","North America",50,"Yes",FALSE
+"Married","Female",70000,3,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",35,"Yes",FALSE
+"Married","Female",60000,5,"Bachelors","Skilled Manual","Yes",3,"10+ Miles","North America",41,"No",FALSE
+"Single","Female",60000,0,"Graduate Degree","Skilled Manual","Yes",0,"0-1 Miles","North America",39,"No",FALSE
+"Single","Female",60000,4,"Graduate Degree","Skilled Manual","Yes",0,"1-2 Miles","North America",47,"No",FALSE
+"Single","Male",40000,0,"High School","Skilled Manual","Yes",2,"5-10 Miles","North America",31,"No",FALSE
+"Single","Female",70000,2,"Bachelors","Management","No",1,"2-5 Miles","North America",58,"Yes",FALSE
+"Single","Female",70000,0,"Bachelors","Professional","No",1,"2-5 Miles","North America",38,"Yes",FALSE
+"Single","Female",70000,5,"Graduate Degree","Management","Yes",2,"10+ Miles","North America",67,"Yes",FALSE
+"Single","Male",60000,0,"Partial College","Professional","No",2,"1-2 Miles","North America",32,"Yes",FALSE
+"Married","Male",70000,5,"Partial College","Professional","No",3,"5-10 Miles","North America",45,"No",FALSE
+"Single","Male",30000,0,"High School","Skilled Manual","No",2,"1-2 Miles","North America",31,"Yes",FALSE
+"Single","Male",40000,0,"High School","Skilled Manual","No",2,"1-2 Miles","North America",31,"Yes",FALSE
+"Married","Female",40000,3,"Partial College","Clerical","Yes",1,"0-1 Miles","North America",31,"No",FALSE
+"Married","Male",60000,2,"High School","Professional","No",2,"5-10 Miles","North America",50,"No",FALSE
+"Married","Male",70000,1,"Partial College","Skilled Manual","Yes",1,"0-1 Miles","North America",44,"No",FALSE
+"Single","Male",50000,2,"Bachelors","Skilled Manual","Yes",1,"2-5 Miles","North America",38,"Yes",FALSE
+"Single","Female",60000,4,"Bachelors","Management","Yes",2,"10+ Miles","North America",63,"No",FALSE
+"Married","Female",60000,1,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",36,"Yes",FALSE
+"Single","Male",40000,0,"High School","Skilled Manual","No",2,"0-1 Miles","North America",28,"Yes",FALSE
+"Single","Female",100000,1,"Partial College","Professional","No",3,"1-2 Miles","North America",44,"No",FALSE
+"Married","Female",70000,5,"Graduate Degree","Professional","Yes",1,"0-1 Miles","North America",47,"No",FALSE
+"Married","Female",80000,0,"Graduate Degree","Skilled Manual","Yes",0,"1-2 Miles","North America",40,"Yes",FALSE
+"Married","Male",130000,1,"Graduate Degree","Management","Yes",4,"0-1 Miles","North America",40,"No",FALSE
+"Married","Female",60000,1,"Partial College","Skilled Manual","Yes",1,"2-5 Miles","North America",46,"Yes",FALSE
+"Married","Female",40000,5,"High School","Professional","No",2,"10+ Miles","North America",61,"No",FALSE
+"Married","Female",60000,0,"Graduate Degree","Professional","Yes",0,"0-1 Miles","North America",40,"No",FALSE
+"Married","Female",60000,2,"High School","Professional","Yes",2,"5-10 Miles","North America",50,"No",FALSE
+"Married","Male",70000,2,"Partial College","Professional","Yes",1,"10+ Miles","North America",59,"No",FALSE
+"Single","Female",60000,1,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",36,"Yes",FALSE
+"Single","Female",40000,0,"High School","Skilled Manual","Yes",2,"5-10 Miles","North America",30,"No",FALSE
+"Single","Female",70000,4,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",35,"Yes",FALSE
+"Married","Female",30000,2,"High School","Skilled Manual","Yes",2,"1-2 Miles","North America",48,"No",FALSE
+"Married","Male",100000,3,"Bachelors","Management","Yes",4,"0-1 Miles","North America",41,"No",FALSE
+"Married","Male",40000,2,"Partial College","Clerical","Yes",1,"0-1 Miles","North America",47,"No",FALSE
+"Married","Male",60000,4,"Graduate Degree","Skilled Manual","No",0,"0-1 Miles","North America",47,"No",FALSE
+"Married","Male",80000,5,"Bachelors","Management","No",2,"2-5 Miles","Europe",62,"No",FALSE
+"Married","Male",60000,4,"Bachelors","Management","Yes",2,"10+ Miles","North America",60,"No",FALSE
+"Married","Female",60000,0,"Partial College","Skilled Manual","No",1,"1-2 Miles","North America",33,"No",FALSE
+"Single","Female",80000,4,"Graduate Degree","Skilled Manual","No",0,"0-1 Miles","North America",47,"No",FALSE
+"Married","Male",20000,3,"Partial High School","Clerical","No",2,"0-1 Miles","North America",52,"No",FALSE
+"Married","Female",90000,5,"Partial College","Professional","Yes",3,"2-5 Miles","North America",40,"No",FALSE
+"Single","Female",60000,4,"Bachelors","Skilled Manual","No",2,"0-1 Miles","North America",42,"No",FALSE
+"Single","Female",60000,3,"Graduate Degree","Management","Yes",2,"5-10 Miles","North America",53,"Yes",FALSE
+"Married","Female",40000,1,"Partial College","Clerical","Yes",1,"1-2 Miles","North America",51,"Yes",FALSE
+"Single","Male",30000,0,"Partial College","Skilled Manual","Yes",2,"5-10 Miles","North America",30,"No",FALSE
+"Single","Male",60000,2,"Bachelors","Skilled Manual","No",2,"0-1 Miles","North America",43,"No",FALSE
+"Married","Male",30000,0,"High School","Skilled Manual","Yes",2,"5-10 Miles","North America",26,"No",FALSE
+"Single","Female",130000,1,"Bachelors","Management","No",1,"2-5 Miles","North America",45,"No",FALSE
+"Married","Male",50000,1,"Bachelors","Skilled Manual","Yes",0,"0-1 Miles","North America",34,"Yes",FALSE
+"Married","Male",70000,1,"Bachelors","Professional","Yes",1,"2-5 Miles","North America",44,"Yes",FALSE
+"Single","Female",60000,4,"Bachelors","Skilled Manual","No",2,"0-1 Miles","North America",41,"Yes",FALSE
+"Single","Female",80000,3,"Graduate Degree","Professional","No",0,"0-1 Miles","North America",36,"Yes",FALSE
+"Married","Male",80000,5,"Partial College","Professional","Yes",2,"0-1 Miles","North America",44,"No",FALSE
+"Single","Male",60000,0,"Partial College","Professional","No",2,"1-2 Miles","North America",30,"No",FALSE
+"Married","Female",30000,0,"Partial High School","Clerical","No",2,"0-1 Miles","North America",28,"No",FALSE
+"Married","Male",20000,2,"Partial High School","Clerical","Yes",2,"1-2 Miles","North America",49,"No",FALSE
+"Single","Male",90000,0,"Partial College","Professional","No",2,"0-1 Miles","North America",43,"Yes",FALSE
+"Married","Female",70000,4,"Bachelors","Management","Yes",1,"1-2 Miles","North America",59,"No",FALSE
+"Single","Male",30000,0,"High School","Skilled Manual","Yes",2,"5-10 Miles","North America",26,"No",FALSE
+"Married","Male",120000,1,"High School","Professional","Yes",4,"5-10 Miles","North America",46,"Yes",FALSE
+"Single","Female",50000,0,"Graduate Degree","Skilled Manual","Yes",0,"1-2 Miles","North America",33,"No",FALSE
+"Single","Female",40000,0,"Bachelors","Professional","Yes",1,"2-5 Miles","North America",42,"Yes",FALSE
+"Married","Female",70000,4,"Bachelors","Management","Yes",1,"10+ Miles","North America",59,"No",FALSE
+"Single","Female",60000,0,"Partial College","Skilled Manual","No",1,"1-2 Miles","North America",33,"Yes",FALSE
+"Married","Female",70000,1,"Partial College","Skilled Manual","Yes",1,"0-1 Miles","North America",44,"Yes",FALSE
+"Married","Male",70000,5,"Bachelors","Management","Yes",4,"10+ Miles","North America",60,"No",FALSE
+"Single","Female",70000,2,"Bachelors","Management","Yes",1,"10+ Miles","North America",59,"No",FALSE
+"Married","Male",60000,0,"High School","Professional","Yes",2,"5-10 Miles","North America",32,"Yes",FALSE
+"Married","Female",70000,2,"Partial College","Professional","Yes",1,"10+ Miles","North America",58,"No",FALSE
+"Married","Female",40000,2,"High School","Professional","No",2,"2-5 Miles","North America",59,"No",FALSE
+"Single","Female",70000,2,"Bachelors","Skilled Manual","Yes",1,"2-5 Miles","North America",38,"No",FALSE
+"Married","Male",40000,0,"High School","Skilled Manual","Yes",2,"5-10 Miles","North America",28,"Yes",FALSE
+"Married","Female",60000,1,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",37,"Yes",FALSE
+"Single","Female",80000,0,"Graduate Degree","Skilled Manual","No",0,"0-1 Miles","North America",40,"No",FALSE
+"Single","Male",90000,4,"Bachelors","Management","Yes",1,"1-2 Miles","North America",38,"Yes",FALSE
+"Married","Male",70000,4,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",36,"Yes",FALSE
+"Married","Female",70000,5,"Graduate Degree","Professional","Yes",2,"0-1 Miles","North America",37,"No",FALSE
+"Single","Female",40000,5,"High School","Professional","No",3,"2-5 Miles","North America",60,"Yes",FALSE
+"Single","Male",110000,4,"Bachelors","Management","Yes",4,"5-10 Miles","North America",42,"Yes",FALSE
+"Single","Female",70000,3,"Graduate Degree","Management","No",2,"1-2 Miles","North America",53,"No",FALSE
+"Single","Female",80000,2,"Partial High School","Skilled Manual","Yes",2,"5-10 Miles","North America",49,"No",FALSE
+"Married","Male",30000,2,"High School","Skilled Manual","Yes",2,"1-2 Miles","North America",49,"No",FALSE
+"Married","Male",130000,2,"Graduate Degree","Management","Yes",3,"0-1 Miles","North America",42,"Yes",FALSE
+"Married","Male",20000,2,"High School","Manual","No",2,"0-1 Miles","North America",53,"No",FALSE
+"Married","Male",70000,1,"Graduate Degree","Professional","Yes",1,"0-1 Miles","North America",46,"Yes",FALSE
+"Married","Male",40000,0,"High School","Skilled Manual","Yes",2,"5-10 Miles","North America",27,"No",FALSE
+"Married","Female",60000,3,"Bachelors","Professional","Yes",1,"0-1 Miles","North America",48,"Yes",FALSE
+"Single","Female",60000,4,"Bachelors","Skilled Manual","Yes",2,"2-5 Miles","North America",41,"Yes",FALSE
+"Married","Male",60000,2,"High School","Professional","No",2,"1-2 Miles","North America",49,"Yes",FALSE
+"Single","Female",60000,0,"Graduate Degree","Professional","Yes",1,"2-5 Miles","North America",38,"Yes",FALSE
+"Single","Male",130000,1,"Bachelors","Management","No",4,"0-1 Miles","North America",44,"No",FALSE
+"Single","Female",130000,1,"Bachelors","Management","No",3,"0-1 Miles","North America",45,"Yes",FALSE
+"Single","Female",30000,0,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","North America",26,"No",FALSE
+"Married","Male",40000,0,"High School","Skilled Manual","Yes",1,"5-10 Miles","North America",31,"No",FALSE
+"Married","Male",70000,2,"Partial High School","Skilled Manual","No",2,"1-2 Miles","North America",49,"No",FALSE
+"Single","Female",40000,2,"Partial College","Clerical","No",1,"1-2 Miles","North America",47,"Yes",FALSE
+"Married","Female",60000,2,"Partial College","Professional","Yes",1,"10+ Miles","North America",55,"No",FALSE
+"Married","Male",40000,4,"Partial College","Clerical","No",0,"0-1 Miles","North America",30,"No",FALSE
+"Married","Female",40000,1,"Partial College","Clerical","Yes",1,"1-2 Miles","North America",48,"Yes",FALSE
+"Single","Male",30000,0,"High School","Skilled Manual","Yes",2,"5-10 Miles","North America",30,"No",FALSE
+"Married","Male",110000,1,"Bachelors","Management","Yes",3,"5-10 Miles","North America",45,"No",FALSE
+"Married","Female",70000,4,"Partial College","Professional","Yes",1,"10+ Miles","North America",56,"No",FALSE
+"Married","Male",60000,4,"Graduate Degree","Skilled Manual","Yes",0,"1-2 Miles","North America",47,"Yes",FALSE
+"Married","Female",60000,2,"Bachelors","Management","Yes",0,"10+ Miles","North America",56,"No",FALSE
+"Single","Female",70000,1,"Bachelors","Professional","No",1,"0-1 Miles","North America",44,"No",FALSE
+"Married","Male",130000,2,"Graduate Degree","Management","Yes",3,"2-5 Miles","North America",69,"No",FALSE
+"Married","Female",70000,2,"Partial College","Professional","Yes",1,"2-5 Miles","North America",59,"No",FALSE
+"Married","Male",30000,2,"High School","Skilled Manual","Yes",2,"1-2 Miles","North America",50,"No",FALSE
+"Married","Male",60000,1,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",36,"No",FALSE
+"Married","Male",60000,0,"Partial College","Professional","Yes",2,"5-10 Miles","North America",32,"No",FALSE
+"Single","Female",40000,0,"Partial College","Skilled Manual","No",1,"1-2 Miles","North America",27,"No",FALSE
+"Married","Female",40000,4,"High School","Professional","Yes",2,"5-10 Miles","North America",59,"Yes",FALSE
+"Married","Male",60000,3,"High School","Professional","No",2,"2-5 Miles","North America",53,"No",FALSE
+"Married","Male",40000,1,"Bachelors","Skilled Manual","No",1,"0-1 Miles","North America",36,"Yes",FALSE
+"Single","Male",30000,1,"High School","Clerical","Yes",2,"1-2 Miles","North America",51,"Yes",FALSE
+"Single","Female",80000,5,"Graduate Degree","Skilled Manual","No",0,"0-1 Miles","North America",47,"No",FALSE
+"Single","Female",60000,3,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",43,"Yes",FALSE
+"Single","Male",20000,3,"Partial High School","Clerical","No",2,"0-1 Miles","North America",50,"No",FALSE
+"Married","Female",60000,5,"Bachelors","Management","Yes",3,"10+ Miles","North America",59,"No",FALSE
+"Single","Male",50000,2,"Bachelors","Skilled Manual","Yes",0,"2-5 Miles","North America",37,"Yes",FALSE
+"Married","Male",50000,1,"Graduate Degree","Skilled Manual","Yes",0,"0-1 Miles","North America",33,"Yes",FALSE
+"Married","Female",60000,0,"Partial College","Skilled Manual","No",1,"1-2 Miles","North America",27,"No",FALSE
+"Single","Female",70000,0,"Partial College","Skilled Manual","Yes",2,"5-10 Miles","North America",34,"Yes",FALSE
+"Married","Male",50000,4,"Bachelors","Skilled Manual","Yes",3,"10+ Miles","North America",42,"No",FALSE
+"Married","Female",60000,2,"Partial College","Professional","Yes",2,"2-5 Miles","North America",57,"Yes",FALSE
+"Married","Female",120000,1,"High School","Professional","No",4,"2-5 Miles","North America",45,"No",FALSE
+"Married","Female",100000,4,"Bachelors","Management","Yes",4,"0-1 Miles","North America",40,"No",FALSE
+"Married","Male",60000,1,"Graduate Degree","Skilled Manual","No",0,"0-1 Miles","North America",43,"No",FALSE
+"Married","Male",80000,1,"Partial College","Skilled Manual","No",1,"0-1 Miles","North America",47,"Yes",FALSE
+"Single","Male",60000,4,"Graduate Degree","Skilled Manual","Yes",0,"1-2 Miles","North America",47,"Yes",FALSE
+"Married","Female",60000,1,"Graduate Degree","Skilled Manual","Yes",0,"0-1 Miles","North America",34,"No",FALSE
+"Married","Female",80000,3,"Graduate Degree","Professional","Yes",0,"0-1 Miles","North America",36,"Yes",FALSE
+"Married","Male",70000,2,"Partial High School","Skilled Manual","Yes",2,"10+ Miles","North America",54,"No",FALSE
+"Single","Male",70000,2,"Bachelors","Management","No",1,"2-5 Miles","North America",59,"Yes",FALSE
+"Single","Male",40000,0,"High School","Skilled Manual","Yes",2,"5-10 Miles","North America",27,"No",FALSE
+"Married","Male",90000,5,"Partial College","Professional","Yes",3,"0-1 Miles","North America",41,"No",FALSE
+"Married","Male",80000,3,"Partial College","Professional","No",2,"2-5 Miles","North America",50,"Yes",FALSE
+"Married","Female",60000,2,"Partial College","Professional","Yes",1,"10+ Miles","North America",55,"No",FALSE
+"Married","Male",80000,4,"Bachelors","Management","Yes",0,"0-1 Miles","North America",43,"No",FALSE
+"Single","Male",70000,4,"Bachelors","Professional","Yes",2,"2-5 Miles","North America",43,"Yes",FALSE
+"Married","Male",60000,4,"Bachelors","Skilled Manual","Yes",3,"5-10 Miles","North America",42,"No",FALSE
+"Single","Female",10000,2,"High School","Manual","Yes",2,"1-2 Miles","North America",53,"Yes",FALSE
+"Single","Female",40000,0,"High School","Skilled Manual","No",2,"0-1 Miles","North America",28,"Yes",FALSE
+"Married","Female",50000,1,"Bachelors","Skilled Manual","Yes",1,"0-1 Miles","North America",35,"No",FALSE
+"Single","Female",70000,2,"Bachelors","Management","No",1,"2-5 Miles","North America",59,"Yes",FALSE
+"Single","Female",20000,2,"Partial High School","Clerical","Yes",2,"1-2 Miles","North America",49,"No",FALSE
+"Married","Male",60000,2,"High School","Professional","No",2,"1-2 Miles","North America",48,"Yes",FALSE
+"Single","Female",80000,2,"Partial High School","Skilled Manual","No",2,"1-2 Miles","North America",50,"No",FALSE
+"Married","Male",40000,0,"High School","Skilled Manual","Yes",2,"5-10 Miles","North America",28,"Yes",FALSE
+"Single","Male",30000,1,"High School","Clerical","No",1,"5-10 Miles","North America",52,"No",FALSE
+"Married","Male",30000,1,"High School","Clerical","Yes",1,"2-5 Miles","North America",52,"Yes",FALSE
+"Married","Male",50000,2,"Graduate Degree","Management","Yes",2,"5-10 Miles","North America",69,"No",FALSE
+"Single","Male",60000,2,"High School","Professional","Yes",2,"5-10 Miles","North America",51,"No",FALSE
+"Married","Male",70000,5,"Partial College","Professional","Yes",2,"1-2 Miles","North America",57,"Yes",FALSE
+"Single","Male",60000,0,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","North America",27,"Yes",FALSE
+"Single","Female",30000,0,"High School","Skilled Manual","No",2,"0-1 Miles","North America",25,"Yes",FALSE
+"Single","Female",50000,1,"Graduate Degree","Skilled Manual","Yes",0,"1-2 Miles","North America",33,"Yes",FALSE
+"Single","Male",60000,4,"Bachelors","Professional","Yes",2,"2-5 Miles","North America",43,"Yes",FALSE
+"Married","Male",70000,4,"Graduate Degree","Management","Yes",2,"5-10 Miles","North America",73,"No",FALSE
+"Married","Male",40000,0,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","North America",27,"No",FALSE
+"Married","Male",40000,0,"High School","Skilled Manual","Yes",2,"5-10 Miles","North America",28,"Yes",FALSE
+"Married","Male",40000,0,"High School","Skilled Manual","No",2,"0-1 Miles","North America",27,"Yes",FALSE
+"Single","Female",40000,2,"High School","Skilled Manual","Yes",2,"5-10 Miles","North America",31,"No",FALSE
+"Married","Female",10000,2,"High School","Manual","Yes",2,"1-2 Miles","North America",53,"No",FALSE
+"Single","Female",60000,0,"Partial College","Professional","No",2,"1-2 Miles","North America",32,"Yes",FALSE
+"Single","Male",30000,2,"High School","Skilled Manual","Yes",2,"1-2 Miles","North America",50,"Yes",FALSE
+"Married","Female",40000,4,"High School","Professional","Yes",2,"5-10 Miles","North America",69,"No",FALSE
+"Single","Female",70000,3,"Graduate Degree","Management","Yes",2,"5-10 Miles","North America",52,"Yes",FALSE
+"Married","Male",60000,0,"Partial College","Skilled Manual","No",2,"1-2 Miles","North America",31,"No",FALSE
+"Single","Female",70000,4,"Bachelors","Management","Yes",2,"10+ Miles","North America",61,"No",FALSE
+"Married","Female",70000,2,"High School","Professional","Yes",2,"10+ Miles","North America",53,"No",FALSE
+"Single","Female",70000,4,"Bachelors","Management","Yes",2,"1-2 Miles","North America",62,"Yes",FALSE
+"Married","Male",40000,0,"Partial College","Skilled Manual","No",2,"1-2 Miles","North America",30,"No",FALSE
+"Married","Female",60000,3,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",43,"Yes",FALSE
+"Married","Female",60000,3,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",42,"Yes",FALSE
+"Married","Male",40000,0,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","North America",30,"No",FALSE
+"Single","Female",40000,0,"High School","Skilled Manual","Yes",2,"5-10 Miles","North America",30,"No",FALSE
+"Single","Male",110000,1,"Bachelors","Management","Yes",1,"5-10 Miles","North America",43,"No",FALSE
+"Married","Male",60000,0,"Partial College","Skilled Manual","Yes",2,"5-10 Miles","North America",33,"Yes",FALSE
+"Married","Male",30000,0,"High School","Skilled Manual","Yes",2,"5-10 Miles","North America",32,"No",FALSE
+"Single","Female",70000,4,"High School","Professional","Yes",0,"5-10 Miles","North America",50,"Yes",FALSE
+"Single","Male",110000,2,"Bachelors","Management","No",3,"0-1 Miles","North America",37,"Yes",FALSE
+"Married","Male",70000,3,"High School","Professional","No",1,"1-2 Miles","North America",52,"Yes",FALSE
+"Married","Male",70000,4,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",36,"Yes",FALSE
+"Single","Female",80000,3,"Bachelors","Skilled Manual","Yes",2,"2-5 Miles","North America",41,"Yes",FALSE
+"Single","Female",40000,0,"Partial High School","Clerical","Yes",2,"5-10 Miles","North America",26,"No",FALSE
+"Single","Male",170000,1,"Graduate Degree","Management","No",4,"0-1 Miles","North America",66,"No",FALSE
+"Married","Male",60000,2,"High School","Professional","No",2,"5-10 Miles","North America",51,"No",FALSE
+"Married","Female",70000,4,"Bachelors","Professional","Yes",2,"0-1 Miles","North America",43,"Yes",FALSE
+"Married","Female",60000,0,"Graduate Degree","Professional","Yes",0,"0-1 Miles","North America",39,"No",FALSE
+"Single","Female",70000,0,"Bachelors","Professional","No",1,"0-1 Miles","North America",37,"Yes",FALSE
+"Single","Female",70000,2,"Partial High School","Skilled Manual","No",2,"2-5 Miles","North America",54,"Yes",FALSE
+"Single","Female",60000,3,"Bachelors","Skilled Manual","Yes",0,"2-5 Miles","North America",40,"Yes",FALSE
+"Married","Female",40000,0,"Partial College","Skilled Manual","Yes",2,"5-10 Miles","North America",28,"No",FALSE
+"Married","Male",60000,1,"Graduate Degree","Skilled Manual","Yes",0,"0-1 Miles","North America",33,"No",FALSE
+"Single","Female",80000,3,"Bachelors","Skilled Manual","Yes",2,"2-5 Miles","North America",41,"Yes",FALSE
+"Single","Female",80000,3,"Graduate Degree","Professional","Yes",0,"0-1 Miles","North America",37,"Yes",FALSE
+"Married","Male",70000,4,"Partial College","Professional","Yes",2,"10+ Miles","North America",53,"No",FALSE
+"Married","Male",120000,2,"Graduate Degree","Management","Yes",3,"5-10 Miles","North America",64,"No",FALSE
+"Married","Female",60000,1,"Partial College","Skilled Manual","Yes",1,"2-5 Miles","North America",45,"Yes",FALSE
+"Single","Male",80000,2,"Partial High School","Skilled Manual","No",2,"1-2 Miles","North America",52,"No",FALSE
+"Married","Female",40000,5,"High School","Professional","Yes",2,"10+ Miles","North America",60,"No",FALSE
+"Single","Female",20000,3,"Partial High School","Clerical","Yes",2,"1-2 Miles","North America",50,"No",FALSE
+"Married","Female",70000,4,"Partial College","Professional","No",1,"1-2 Miles","North America",56,"No",FALSE
+"Single","Female",40000,0,"Partial High School","Clerical","Yes",2,"5-10 Miles","North America",29,"No",FALSE
+"Single","Male",130000,0,"Graduate Degree","Management","No",2,"0-1 Miles","North America",38,"Yes",FALSE
+"Married","Female",40000,5,"High School","Professional","No",2,"2-5 Miles","North America",60,"No",FALSE
+"Single","Female",130000,2,"Bachelors","Management","No",4,"0-1 Miles","North America",67,"No",FALSE
+"Married","Male",60000,0,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","North America",32,"Yes",FALSE
+"Single","Male",50000,2,"Bachelors","Skilled Manual","No",1,"0-1 Miles","North America",39,"Yes",FALSE
+"Single","Male",60000,1,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",35,"Yes",FALSE
+"Married","Female",60000,0,"Partial College","Professional","Yes",2,"5-10 Miles","North America",32,"No",FALSE
+"Single","Female",30000,0,"Partial College","Skilled Manual","No",1,"1-2 Miles","North America",31,"No",FALSE
+"Single","Male",40000,0,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","North America",27,"No",FALSE
+"Married","Female",60000,1,"Bachelors","Professional","Yes",1,"0-1 Miles","North America",47,"Yes",FALSE
+"Married","Male",40000,0,"Bachelors","Professional","No",1,"0-1 Miles","North America",42,"No",FALSE
+"Married","Male",30000,2,"High School","Skilled Manual","Yes",2,"1-2 Miles","North America",49,"No",FALSE
+"Single","Male",30000,0,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","North America",32,"No",FALSE
+"Married","Female",20000,2,"High School","Manual","No",2,"1-2 Miles","North America",53,"Yes",FALSE
+"Married","Male",50000,0,"Graduate Degree","Skilled Manual","Yes",0,"1-2 Miles","North America",32,"Yes",FALSE
+"Single","Male",80000,0,"Bachelors","Management","No",1,"0-1 Miles","North America",38,"Yes",FALSE
+"Single","Male",40000,0,"High School","Skilled Manual","Yes",2,"5-10 Miles","North America",31,"No",FALSE
+"Single","Female",80000,0,"Bachelors","Management","No",1,"0-1 Miles","North America",38,"Yes",FALSE
+"Married","Male",60000,2,"High School","Professional","Yes",2,"10+ Miles","North America",55,"No",FALSE
+"Married","Male",70000,3,"Partial College","Professional","Yes",1,"5-10 Miles","North America",49,"No",FALSE
+"Single","Male",30000,5,"Partial High School","Skilled Manual","Yes",3,"10+ Miles","North America",60,"Yes",FALSE
+"Single","Female",110000,3,"Bachelors","Management","No",4,"1-2 Miles","North America",42,"No",FALSE
+"Married","Male",60000,1,"Partial College","Skilled Manual","Yes",1,"0-1 Miles","North America",46,"No",FALSE
+"Married","Male",60000,2,"High School","Professional","Yes",2,"10+ Miles","North America",55,"No",FALSE
+"Single","Female",70000,3,"Graduate Degree","Management","Yes",2,"5-10 Miles","North America",53,"Yes",FALSE
+"Married","Male",50000,3,"Bachelors","Skilled Manual","Yes",2,"2-5 Miles","North America",40,"No",FALSE
+"Married","Female",30000,1,"Bachelors","Skilled Manual","Yes",1,"5-10 Miles","North America",53,"Yes",FALSE
+"Single","Female",70000,2,"Bachelors","Skilled Manual","Yes",0,"2-5 Miles","North America",38,"Yes",FALSE
+"Single","Male",30000,0,"Partial High School","Clerical","No",2,"0-1 Miles","North America",26,"No",FALSE
+"Married","Male",70000,5,"Bachelors","Management","Yes",2,"2-5 Miles","North America",61,"No",FALSE
+"Married","Male",50000,2,"Graduate Degree","Management","Yes",2,"5-10 Miles","North America",71,"No",FALSE
+"Married","Male",90000,4,"High School","Professional","Yes",2,"1-2 Miles","North America",45,"No",FALSE
+"Married","Male",80000,2,"Graduate Degree","Professional","Yes",0,"0-1 Miles","North America",37,"Yes",FALSE
+"Married","Female",80000,4,"Graduate Degree","Management","Yes",2,"0-1 Miles","North America",72,"Yes",FALSE
+"Married","Male",30000,0,"Graduate Degree","Skilled Manual","Yes",0,"0-1 Miles","North America",32,"No",FALSE
+"Married","Female",60000,1,"Bachelors","Professional","Yes",1,"2-5 Miles","North America",48,"Yes",FALSE
+"Married","Male",80000,4,"Graduate Degree","Management","Yes",2,"5-10 Miles","North America",68,"No",FALSE
+"Married","Female",20000,2,"Partial High School","Clerical","Yes",2,"0-1 Miles","North America",49,"No",FALSE
+"Married","Male",70000,3,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",34,"No",FALSE
+"Married","Male",50000,0,"Graduate Degree","Skilled Manual","Yes",0,"0-1 Miles","North America",32,"No",FALSE
+"Single","Female",60000,4,"Bachelors","Skilled Manual","No",2,"0-1 Miles","North America",42,"No",FALSE
+"Married","Female",70000,1,"Graduate Degree","Skilled Manual","Yes",0,"0-1 Miles","North America",35,"Yes",FALSE
+"Married","Female",40000,2,"Partial College","Clerical","Yes",1,"0-1 Miles","North America",48,"No",FALSE
+"Single","Male",100000,1,"Graduate Degree","Management","Yes",3,"2-5 Miles","North America",73,"Yes",FALSE
+"Single","Female",70000,4,"Bachelors","Skilled Manual","Yes",2,"2-5 Miles","North America",43,"Yes",FALSE
+"Married","Male",60000,1,"Graduate Degree","Professional","Yes",0,"0-1 Miles","North America",35,"No",FALSE
+"Married","Male",70000,3,"Graduate Degree","Professional","Yes",0,"0-1 Miles","North America",35,"Yes",FALSE
+"Married","Female",50000,4,"Bachelors","Management","Yes",2,"1-2 Miles","North America",64,"Yes",FALSE
+"Married","Female",50000,1,"Bachelors","Skilled Manual","Yes",0,"0-1 Miles","North America",34,"Yes",FALSE
+"Married","Male",30000,0,"Partial High School","Clerical","No",2,"0-1 Miles","North America",28,"No",FALSE
+"Single","Male",70000,5,"Bachelors","Management","Yes",3,"10+ Miles","North America",60,"Yes",FALSE
+"Married","Female",70000,5,"Graduate Degree","Professional","Yes",3,"10+ Miles","North America",46,"No",FALSE
+"Married","Male",40000,4,"High School","Skilled Manual","Yes",2,"0-1 Miles","North America",44,"Yes",FALSE
+"Single","Female",60000,4,"Bachelors","Skilled Manual","Yes",2,"2-5 Miles","North America",42,"Yes",FALSE
+"Single","Male",80000,3,"Bachelors","Skilled Manual","Yes",0,"2-5 Miles","North America",40,"No",FALSE
+"Single","Male",90000,4,"Graduate Degree","Management","Yes",1,"5-10 Miles","North America",73,"No",FALSE
+"Single","Female",60000,2,"Bachelors","Skilled Manual","No",0,"0-1 Miles","North America",36,"Yes",FALSE
+"Single","Male",90000,4,"Bachelors","Management","Yes",1,"1-2 Miles","North America",38,"Yes",FALSE
+"Married","Male",60000,1,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",34,"Yes",FALSE
+"Married","Male",50000,4,"Bachelors","Management","Yes",2,"10+ Miles","North America",63,"No",FALSE
+"Single","Male",50000,3,"Bachelors","Skilled Manual","Yes",2,"2-5 Miles","North America",41,"Yes",FALSE
+"Married","Male",60000,0,"Graduate Degree","Skilled Manual","Yes",0,"1-2 Miles","North America",39,"Yes",FALSE
+"Married","Male",40000,4,"High School","Skilled Manual","Yes",2,"2-5 Miles","North America",46,"No",FALSE
+"Married","Female",80000,5,"Bachelors","Management","Yes",2,"5-10 Miles","North America",64,"No",FALSE
+"Married","Female",40000,3,"Partial College","Clerical","Yes",1,"1-2 Miles","North America",32,"No",FALSE
+"Single","Male",60000,2,"Bachelors","Skilled Manual","Yes",0,"2-5 Miles","North America",36,"Yes",FALSE
+"Single","Male",80000,5,"Graduate Degree","Skilled Manual","No",0,"0-1 Miles","North America",47,"No",FALSE
+"Married","Male",60000,3,"Graduate Degree","Management","Yes",2,"10+ Miles","North America",64,"No",FALSE
+"Single","Male",70000,3,"Graduate Degree","Professional","No",0,"0-1 Miles","North America",35,"Yes",FALSE
+"Single","Male",110000,3,"Bachelors","Management","Yes",4,"2-5 Miles","North America",40,"Yes",FALSE
+"Married","Female",70000,0,"Partial College","Skilled Manual","Yes",2,"5-10 Miles","North America",34,"Yes",FALSE
+"Married","Female",40000,4,"High School","Professional","Yes",2,"10+ Miles","North America",61,"No",FALSE
+"Married","Male",30000,2,"High School","Skilled Manual","Yes",2,"1-2 Miles","North America",51,"No",FALSE
+"Single","Female",70000,3,"Partial College","Professional","Yes",1,"5-10 Miles","North America",49,"Yes",FALSE
+"Married","Female",40000,3,"Partial College","Professional","No",2,"1-2 Miles","North America",54,"Yes",FALSE
+"Single","Male",70000,3,"Graduate Degree","Management","No",2,"1-2 Miles","North America",53,"Yes",FALSE
+"Single","Male",90000,2,"Partial College","Professional","Yes",1,"2-5 Miles","North America",48,"Yes",FALSE
+"Single","Female",50000,0,"Graduate Degree","Skilled Manual","Yes",0,"1-2 Miles","North America",33,"Yes",FALSE
+"Single","Female",40000,2,"High School","Professional","Yes",2,"10+ Miles","North America",57,"No",FALSE
+"Married","Female",70000,0,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",39,"No",FALSE
+"Married","Male",60000,2,"High School","Professional","Yes",2,"5-10 Miles","North America",48,"No",FALSE
+"Married","Male",60000,2,"High School","Professional","Yes",2,"5-10 Miles","North America",50,"No",FALSE
+"Married","Male",70000,5,"Graduate Degree","Professional","No",3,"10+ Miles","North America",47,"No",FALSE
+"Married","Female",40000,1,"Partial College","Clerical","Yes",1,"1-2 Miles","North America",49,"Yes",FALSE
+"Single","Female",40000,0,"High School","Skilled Manual","No",2,"0-1 Miles","North America",27,"Yes",FALSE
+"Single","Male",60000,0,"Partial College","Skilled Manual","Yes",1,"5-10 Miles","North America",29,"No",FALSE
+"Married","Male",60000,2,"Bachelors","Management","Yes",0,"2-5 Miles","North America",59,"No",FALSE
+"Married","Female",60000,1,"Partial College","Skilled Manual","Yes",1,"0-1 Miles","North America",45,"Yes",FALSE
+"Married","Female",60000,4,"Bachelors","Management","Yes",2,"2-5 Miles","North America",60,"No",FALSE
+"Married","Male",70000,4,"Graduate Degree","Professional","Yes",0,"0-1 Miles","North America",36,"Yes",FALSE
+"Married","Female",40000,0,"High School","Skilled Manual","Yes",2,"5-10 Miles","North America",27,"No",FALSE
+"Single","Male",80000,2,"Partial High School","Skilled Manual","No",2,"1-2 Miles","North America",50,"No",FALSE
+"Single","Female",60000,1,"Graduate Degree","Skilled Manual","Yes",0,"1-2 Miles","North America",35,"No",FALSE
+"Married","Female",60000,1,"Graduate Degree","Skilled Manual","Yes",0,"2-5 Miles","North America",34,"Yes",FALSE
+"Married","Female",40000,3,"Partial College","Professional","Yes",2,"5-10 Miles","North America",54,"No",FALSE
+"Married","Female",60000,4,"Bachelors","Skilled Manual","Yes",2,"0-1 Miles","North America",42,"No",FALSE
+"Married","Female",50000,1,"Bachelors","Skilled Manual","Yes",0,"2-5 Miles","North America",34,"Yes",FALSE
+"Single","Male",50000,2,"Bachelors","Skilled Manual","No",1,"0-1 Miles","North America",38,"Yes",FALSE
+"Married","Female",90000,5,"Bachelors","Management","Yes",2,"1-2 Miles","North America",63,"Yes",FALSE
+"Single","Female",90000,4,"High School","Professional","No",3,"1-2 Miles","North America",45,"Yes",FALSE
+"Single","Female",60000,0,"Graduate Degree","Skilled Manual","No",0,"0-1 Miles","North America",40,"No",FALSE
+"Married","Male",70000,2,"Partial High School","Skilled Manual","Yes",2,"10+ Miles","North America",53,"No",FALSE
+"Single","Female",70000,1,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",34,"No",FALSE
+"Married","Male",70000,0,"Bachelors","Professional","No",1,"0-1 Miles","North America",38,"No",FALSE
+"Married","Female",70000,4,"Bachelors","Management","No",1,"1-2 Miles","North America",59,"No",FALSE
+"Single","Female",40000,3,"Partial College","Clerical","Yes",1,"1-2 Miles","North America",30,"Yes",FALSE
+"Married","Male",60000,1,"Bachelors","Professional","Yes",1,"0-1 Miles","North America",48,"Yes",FALSE
+"Married","Female",40000,4,"High School","Skilled Manual","Yes",2,"2-5 Miles","North America",43,"No",FALSE
+"Married","Female",70000,4,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",35,"Yes",FALSE
+"Married","Female",60000,0,"Partial College","Professional","Yes",2,"5-10 Miles","North America",30,"No",FALSE
+"Married","Male",90000,5,"Graduate Degree","Professional","Yes",0,"0-1 Miles","North America",47,"Yes",FALSE
+"Married","Male",60000,1,"Partial College","Skilled Manual","Yes",1,"2-5 Miles","North America",45,"Yes",FALSE
+"Single","Male",100000,2,"Partial College","Professional","No",4,"1-2 Miles","North America",45,"No",FALSE
+"Married","Female",120000,2,"Bachelors","Management","Yes",3,"5-10 Miles","North America",62,"No",FALSE
+"Married","Male",60000,2,"Partial College","Professional","Yes",2,"10+ Miles","North America",55,"No",FALSE
+"Married","Female",90000,5,"Bachelors","Management","Yes",2,"1-2 Miles","North America",66,"Yes",FALSE
+"Single","Male",70000,4,"Partial College","Professional","Yes",1,"10+ Miles","North America",56,"No",FALSE
+"Single","Female",50000,3,"Bachelors","Skilled Manual","No",1,"0-1 Miles","North America",40,"No",FALSE
+"Married","Female",50000,0,"Graduate Degree","Skilled Manual","Yes",0,"1-2 Miles","North America",33,"Yes",FALSE
+"Married","Male",80000,3,"Bachelors","Management","Yes",1,"1-2 Miles","North America",56,"No",FALSE
+"Single","Male",30000,0,"Partial High School","Clerical","No",2,"5-10 Miles","North America",27,"No",FALSE
+"Married","Male",60000,0,"Graduate Degree","Professional","No",0,"0-1 Miles","North America",39,"No",FALSE
+"Married","Female",60000,0,"Partial College","Skilled Manual","Yes",2,"5-10 Miles","North America",31,"No",FALSE
+"Single","Female",60000,2,"Partial High School","Skilled Manual","No",2,"1-2 Miles","North America",51,"No",FALSE
+"Married","Female",30000,1,"High School","Clerical","Yes",1,"5-10 Miles","North America",52,"No",FALSE
+"Married","Male",60000,1,"Partial College","Skilled Manual","No",1,"0-1 Miles","North America",47,"No",FALSE
+"Married","Male",70000,3,"Graduate Degree","Management","Yes",2,"5-10 Miles","North America",53,"Yes",FALSE
+"Married","Male",70000,3,"Graduate Degree","Professional","Yes",0,"0-1 Miles","North America",35,"Yes",FALSE
+"Married","Female",60000,3,"Bachelors","Management","Yes",2,"10+ Miles","North America",66,"No",FALSE
+"Single","Female",80000,4,"Graduate Degree","Management","Yes",2,"5-10 Miles","North America",65,"No",FALSE
+"Married","Male",80000,5,"Partial College","Professional","Yes",3,"5-10 Miles","North America",45,"No",FALSE
+"Single","Male",40000,0,"High School","Skilled Manual","Yes",1,"5-10 Miles","North America",31,"No",FALSE
+"Single","Female",80000,3,"Bachelors","Skilled Manual","Yes",3,"10+ Miles","North America",40,"Yes",FALSE
+"Married","Male",110000,5,"Partial College","Professional","Yes",4,"2-5 Miles","North America",46,"No",FALSE
+"Single","Male",40000,2,"Partial College","Clerical","No",1,"1-2 Miles","North America",47,"Yes",FALSE
+"Married","Male",130000,2,"Graduate Degree","Management","Yes",2,"0-1 Miles","North America",41,"No",FALSE
+"Married","Male",60000,2,"High School","Professional","No",2,"1-2 Miles","North America",48,"Yes",FALSE
+"Single","Female",50000,4,"Bachelors","Skilled Manual","Yes",2,"0-1 Miles","North America",42,"No",FALSE
+"Single","Male",40000,5,"High School","Professional","Yes",4,"10+ Miles","North America",43,"Yes",FALSE
+"Single","Female",60000,3,"Graduate Degree","Management","Yes",2,"10+ Miles","North America",66,"No",FALSE
+"Married","Male",70000,5,"Bachelors","Management","Yes",2,"10+ Miles","North America",63,"No",FALSE
+"Married","Male",60000,4,"Bachelors","Skilled Manual","No",3,"10+ Miles","North America",42,"No",FALSE
+"Single","Female",30000,0,"High School","Skilled Manual","No",2,"5-10 Miles","North America",26,"No",FALSE
+"Single","Female",60000,1,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",36,"Yes",FALSE
+"Married","Male",90000,2,"Partial College","Professional","No",0,"5-10 Miles","North America",49,"Yes",FALSE
+"Single","Male",150000,1,"Partial College","Professional","No",3,"0-1 Miles","North America",44,"Yes",FALSE
+"Married","Male",80000,5,"Partial College","Professional","Yes",3,"1-2 Miles","North America",46,"No",FALSE
+"Married","Male",60000,2,"High School","Professional","Yes",2,"2-5 Miles","North America",54,"Yes",FALSE
+"Single","Male",70000,4,"Graduate Degree","Professional","Yes",0,"2-5 Miles","North America",35,"Yes",FALSE
+"Married","Male",60000,2,"Bachelors","Skilled Manual","Yes",0,"0-1 Miles","North America",38,"Yes",FALSE
+"Single","Male",100000,3,"Bachelors","Management","No",3,"1-2 Miles","North America",38,"No",FALSE
+"Single","Male",60000,3,"High School","Professional","Yes",2,"10+ Miles","North America",53,"Yes",FALSE
