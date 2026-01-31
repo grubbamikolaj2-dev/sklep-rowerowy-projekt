@@ -33,7 +33,7 @@ if(any(!(packages %in% installed.packages()[,"Package"]))) {
 # Ładowanie
 lapply(packages, library, character.only = TRUE)
 
-# USTAWIENIA - TYLKO WYNIKI
+# USTAWIENIA - TYLKO WYNIK
 knitr::opts_chunk$set(
   echo = FALSE,
   eval = TRUE,
