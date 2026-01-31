@@ -1,6 +1,6 @@
 ---
 title: "CycleInsight – analiza danych" 
-author: "MG, PC, BK"
+author: "Mikołaj Grubba, Piotr Czarnecki, Błażej Kujawski"
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -50,7 +50,7 @@ knitr::opts_chunk$set(
 dane <- read.csv("sklep_rowerowy.csv", header = TRUE, sep = ",")
 ```
 
-# Wstęp
+# WSTĘP
 
 Projekt **CycleInsight** stanowi analizę danych klientów sklepu rowerowego przygotowaną na potrzeby przedmiotu „Analiza danych w R”. Jego celem jest zbadanie zależności między cechami klientów a ich decyzją o zakupie roweru.
 
@@ -79,7 +79,7 @@ kable(colnames(dane), caption = "Lista nazw kolumn w zbiorze danych") %>%
 
 ```
 
-# Analiza braków danych
+# ANALIZA BRAKÓW DANYCH
 
 ## Liczba brakujących wartości, proporcje i kompletność danych:
 
@@ -107,6 +107,7 @@ miss_var_summary(dane)
 miss_case_table(dane)
 
 ```
+Braki danych występowały tylko w kilku zmiennych (głównie Cars, Children, Age i Income) i nie przekraczały ok. 1% obserwacji na zmienną. Ponad 97% rekordów było kompletnych, a pojedyncze braki były równomiernie rozłożone w zbiorze, bez wyraźnego wzorca.
 
 ## Wizualizacja braków danych z użyciem pakietu visdat
 
@@ -136,7 +137,7 @@ missing_pattern(dane)
 
 Braki dotyczyły głównie dochodu i kilku zmiennych demograficznych, a ich udział w zbiorze był niewielki i bez wyraźnego wzorca. Zastosowaliśmy imputację dominantą dla zmiennych kategorycznych oraz medianą i metodą hotdeck (dla dochodu), co pozwoliło uzupełnić dane bez utraty obserwacji.
 
-# Imputacja brakujących danych
+# IMPUTACJA BRAKUJĄCYCH DANYCH
 
 ## Przygotowanie danych do imputacji
 
@@ -169,7 +170,7 @@ dane$home_owner[is.na(dane$home_owner)] <- dominanta_home_owner
 
 Dla zmiennych kategorycznych (stan cywilny, płeć, status właściciela domu) brakujące wartości uzupełniliśmy dominantą. Dzięki temu zachowaliśmy rozkład kategorii, nie usuwając żadnych obserwacji.
 
-## imputacja danych z użyciem mediany oraz hotdeck
+## Imputacja danych z użyciem mediany oraz hotdeck
 
 ```{r imputacja-median-hotdeck, echo=FALSE, include=FALSE}
 dane2 <- as.data.frame(dane)
@@ -201,7 +202,7 @@ miss_var_summary(dane2) %>%
 
 Zastosowana procedura imputacji pozwoliła uzupełnić wszystkie brakujące wartości w zbiorze – dane po przekształceniach są w pełni kompletne.
 
-# Walidacja danych
+# WALIDACJA DANYCH
 
 ```{r walidacja danych}
 if (!require(validate)) install.packages("validate")
@@ -377,7 +378,7 @@ ggplot(heat_data, aes(x = commute_distance, y = region, fill = procent_Yes)) +
 
 Heatmapa pokazuje, że zależność między dystansem do pracy a zakupem roweru jest silnie zróżnicowana regionalnie – w niektórych regionach krótkie dojazdy wiążą się z wysokim udziałem kupujących, podczas gdy w innych nawet przy podobnych odległościach odsetek zakupów pozostaje niski.
 
-# Analiza opisowa
+# ANALIZA OPISOWA
 
 ## Statystyki opisowe zmiennych liczbowych
 
@@ -516,22 +517,15 @@ dane2$age_group <- cut(
 )
 
 tab_age_bike <- table(dane2$age_group, dane2$purchased_bike)
+
 chi_res <- chisq.test(tab_age_bike)
-chi2 <- as.numeric(chi_res$statistic)
-n <- sum(tab_age_bike)
-k <- min(nrow(tab_age_bike) - 1, ncol(tab_age_bike) - 1)
+chi2    <- as.numeric(chi_res$statistic)
+n       <- sum(tab_age_bike)
+k       <- min(nrow(tab_age_bike) - 1, ncol(tab_age_bike) - 1)
 V_cramer <- sqrt(chi2 / (n * k))
-prop_age <- prop.table(tab_age_bike, margin = 1)
 
-dane2$age_group <- cut(
-  dane2$age,
-  breaks = c(0, 25, 35, 45, 55, 100),
-  labels = c("<=25", "26–35", "36–45", "46–55", "56+"),
-  include.lowest = TRUE
-)
-
-tab_age_bike  <- table(dane2$age_group, dane2$purchased_bike)          # liczby
-prop_age      <- prop.table(tab_age_bike, margin = 1) * 100            # procenty
+# procenty w wierszach
+prop_age <- prop.table(tab_age_bike, margin = 1) * 100
 
 # łączymy: "liczba (procent%)"
 tab_combo <- matrix(
@@ -589,7 +583,7 @@ corrplot(
 
 ```
 
-Występują słabe dodatnie korelacje między większością zmiennych, co sugeruje ogólną tendencję, że starsi klienci mają wyższe dochody (r=0,17) i więcej dzieci (r=0,53). Najsilniejsza zależność dotyczy liczby samochodów i dochodu (r=0,44) – bogatsi klienci posiadają więcej aut. Interesujące, że wiek ma zaskakująco niską korelację z dochodem, co może wskazywać na zróżnicowaną strukturę zawodową lub regionalną w zbiorze danych.
+Macierz Craméra pokazuje, że najsilniej z decyzją o zakupie roweru powiązane są wykształcenie, stan cywilny i region, a słabsze związki występują dla dystansu do pracy. Płeć, status właściciela domu i typ zawodu mają niskie wartości V, co potwierdza ich ograniczoną rolę jako predyktorów zakupu.
 
 ## Profil klienta kupującego rower
 
@@ -617,7 +611,7 @@ profil_klienta %>%
 
 Analiza pokazuje, że decyzje o zakupie roweru zależą zarówno od cech demograficznych, jak i statusu społeczno‑ekonomicznego klientów. Najwięcej zakupów dokonują osoby w wieku 26–45 lat, a różnice między grupami wiekowymi są istotne statystycznie (test chi‑kwadrat, p < 0,001; V Craméra ≈ 0,24). Wśród zmiennych jakościowych największe znaczenie mają poziom wykształcenia, status właściciela domu oraz region zamieszkania, co dobrze widać na macierzy Craméra. Wynika z tego, że na zachowania zakupowe w sklepie rowerowym silnie wpływają zarówno cechy demograficzne, jak i szeroko rozumiany styl życia oraz pozycja społeczno‑ekonomiczna klienta.
 
-# Testowanie statystyczne
+# TESTOWANIE STATYSTYCZNE
 
 ## Zmienne ilościowe a zakup roweru
 
@@ -761,7 +755,9 @@ wyniki_zbiorcze %>%
   column_spec(1, bold = TRUE) # Pogrubienie nazw zmiennych
 ```
 
-# Regresja logistyczna - Modelowanie zakupu roweru
+Testy chi‑kwadrat potwierdziły istotny związek decyzji o zakupie z wykształceniem, stanem cywilnym i regionem (p < 0,001), a słabsze, lecz nadal widoczne zależności z dystansem do pracy. Z kolei płeć, status właściciela domu i typ zawodu uzyskały wysokie wartości p‑value, co oznacza brak istotnych różnic w odsetku kupujących między kategoriami tych zmiennych. Wyniki te są spójne z późniejszym modelem logitowym, w którym te same zmienne okazują się odpowiednio kluczowe lub nieistotne.
+
+# MODELOWANIE ZAKUPU ROWERU - REGRESJA LOGISTYCZNA
 
 ```{r include=FALSE}
 library(dplyr)
@@ -860,7 +856,7 @@ Macierz pomyłek pokazuje, że model lepiej radzi sobie z przewidywaniem braku z
 
 Sugeruje to, że w danych istnieją inne, nieuchwycone zmienne (np. zainteresowania, styl życia, odległość do ścieżek rowerowych), które mogłyby poprawić predykcję.
 
-# Podsumowanie i wnioski końcowe
+# PODSUMOWANIE I WNIOSKI KOŃCOWE
 
 ## Przebieg i cel analizy
 
